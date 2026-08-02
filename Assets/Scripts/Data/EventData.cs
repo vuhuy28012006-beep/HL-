@@ -5,6 +5,6 @@ public class EventData : ScriptableObject
 {
     public int id;
     public string eventName;
-    public int year;
+    public long year;
     public Sprite image;
 }
