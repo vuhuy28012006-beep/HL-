@@ -2,31 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-// Dat file nay vao: Assets/Scripts/GamePlay/Board/BoardManager.cs
-//
-// QUY UOC QUAN TRONG: field "year" trong EventData phai nhap la SO AM ung voi
-// "so nam truoc hien tai", cang co xua cang am nhieu.
-// Vi du: LUCA (4.2 ty nam truoc) -> year = -4200000000
-//        Homo sapiens (300 nghin nam truoc) -> year = -300000
-// Nhu vay sap xep TANG DAN theo year se ra dung thu tu tien hoa (co -> moi).
+// Ghi de toan bo file: Assets/Scripts/GamePlay/Board/BoardManager.cs
 
 public class BoardManager : MonoBehaviour
 {
     public static BoardManager Instance;
 
     [Header("References")]
-    [SerializeField] private Transform cardRow;      // Keo object CardRow vao day
-    [SerializeField] private GameObject cardPrefab;  // Keo Card.prefab vao day
-    [SerializeField] private LevelData currentLevel; // Keo LevelData cua man nay vao day
+    [SerializeField] private Transform cardRow;
+    [SerializeField] private GameObject cardPrefab;
+    [SerializeField] private LevelData currentLevel;
 
     [Header("UI (khong bat buoc, co the de trong)")]
     [SerializeField] private TMP_Text movesLeftText;
+
+    [Header("Animation")]
+    [SerializeField] private float swapDuration = 0.25f;
 
     private List<EventCard> boardCards = new List<EventCard>();
     private EventCard firstSelected;
     private int movesLeft;
     private bool gameEnded;
+    private bool isAnimating;
 
     private Stack<(int indexA, int indexB)> history = new Stack<(int, int)>();
 
@@ -35,10 +34,8 @@ public class BoardManager : MonoBehaviour
         Instance = this;
     }
 
-        private void Start()
+    private void Start()
     {
-        // Neu co level duoc chon tu Level Select (qua LevelSession) -> dung level do
-        // Neu khong (dang test truc tiep trong scene Gameplay) -> dung currentLevel gan tay trong Inspector
         if (LevelSession.SelectedLevel != null)
             currentLevel = LevelSession.SelectedLevel;
 
@@ -48,26 +45,23 @@ public class BoardManager : MonoBehaviour
             Debug.LogError("BoardManager: chua co Current Level nao duoc gan!");
     }
 
-
     // ---------------- SETUP ----------------
 
     public void SetupLevel(LevelData level)
     {
         currentLevel = level;
         gameEnded = false;
+        isAnimating = false;
         history.Clear();
         firstSelected = null;
         boardCards.Clear();
 
-        // Xoa card cu (neu co) trong CardRow
         for (int i = cardRow.childCount - 1; i >= 0; i--)
             Destroy(cardRow.GetChild(i).gameObject);
 
-        // Xao tron danh sach EventData (khong sua list goc trong LevelData)
         List<EventData> shuffled = new List<EventData>(level.events);
         Shuffle(shuffled);
 
-        // Neu vo tinh xao ra dung thu tu -> xao lai (tranh man vo lam da thang san)
         int safety = 0;
         while (IsSorted(shuffled) && safety < 10)
         {
@@ -108,12 +102,13 @@ public class BoardManager : MonoBehaviour
 
     public void OnCardClicked(EventCard card)
     {
-        if (gameEnded) return;
+        if (gameEnded || isAnimating) return;
 
         if (firstSelected == null)
         {
             firstSelected = card;
             card.Select();
+            AudioManager.Instance?.PlayClick();
             return;
         }
 
@@ -124,30 +119,59 @@ public class BoardManager : MonoBehaviour
             return;
         }
 
-        SwapCards(firstSelected, card);
-        firstSelected.Deselect();
-        card.Deselect();
+        EventCard a = firstSelected;
+        EventCard b = card;
         firstSelected = null;
+
+        a.Deselect();
+        b.Deselect();
+
+        StartCoroutine(AnimateSwap(a, b));
     }
 
-    private void SwapCards(EventCard a, EventCard b)
+    private IEnumerator AnimateSwap(EventCard a, EventCard b)
     {
+        isAnimating = true;
+        AudioManager.Instance?.PlaySwap();
+
+        RectTransform ra = a.GetComponent<RectTransform>();
+        RectTransform rb = b.GetComponent<RectTransform>();
+
+        HorizontalLayoutGroup layout = cardRow.GetComponent<HorizontalLayoutGroup>();
+        if (layout != null) layout.enabled = false;
+
+        Vector3 posA = ra.position;
+        Vector3 posB = rb.position;
+
+        float t = 0f;
+        while (t < swapDuration)
+        {
+            t += Time.deltaTime;
+            float k = Mathf.Clamp01(t / swapDuration);
+            k = k * k * (3f - 2f * k); // ease in-out
+
+            ra.position = Vector3.Lerp(posA, posB, k);
+            rb.position = Vector3.Lerp(posB, posA, k);
+            yield return null;
+        }
+
         int ia = boardCards.IndexOf(a);
         int ib = boardCards.IndexOf(b);
-        if (ia < 0 || ib < 0) return;
-
         (boardCards[ia], boardCards[ib]) = (boardCards[ib], boardCards[ia]);
         RefreshOrder();
+
+        if (layout != null) layout.enabled = true;
 
         history.Push((ia, ib));
 
         movesLeft--;
         UpdateMovesUI();
 
+        isAnimating = false;
+
         CheckGameEnd();
     }
 
-    // Dat lai vi tri hien thi (sibling index) khop voi thu tu trong list boardCards
     private void RefreshOrder()
     {
         for (int i = 0; i < boardCards.Count; i++)
@@ -161,13 +185,13 @@ public class BoardManager : MonoBehaviour
 
     public void Undo()
     {
-        if (gameEnded || history.Count == 0) return;
+        if (gameEnded || history.Count == 0 || isAnimating) return;
 
         var (ia, ib) = history.Pop();
         (boardCards[ia], boardCards[ib]) = (boardCards[ib], boardCards[ia]);
         RefreshOrder();
 
-        movesLeft++; // tra lai 1 luot vi vua hoan tac
+        movesLeft++;
         UpdateMovesUI();
     }
 
@@ -175,7 +199,7 @@ public class BoardManager : MonoBehaviour
 
     public void ShowHint()
     {
-        if (gameEnded) return;
+        if (gameEnded || isAnimating) return;
 
         for (int i = 0; i < boardCards.Count - 1; i++)
         {
@@ -215,13 +239,15 @@ public class BoardManager : MonoBehaviour
         if (correct)
         {
             gameEnded = true;
-            GameManager.Instance?.WinGame();
+            AudioManager.Instance?.PlayWin();
+            GameManager.Instance?.WinGame(movesLeft, currentLevel.maxMoves, currentLevel.levelNumber);
             return;
         }
 
         if (movesLeft <= 0)
         {
             gameEnded = true;
+            AudioManager.Instance?.PlayLose();
             GameManager.Instance?.LoseGame();
         }
     }

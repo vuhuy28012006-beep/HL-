@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12f7587fdc4da154894b5e8afcb5c5ea, type: 3}
-  m_Name: LevelData
+  m_Name: LevelData2
   m_EditorClassIdentifier: 
   levelNumber: 1
   levelName: 1
@@ -18,6 +18,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4e34ddec57e6ab14a8465f02945ed769, type: 2}
   - {fileID: 11400000, guid: 8e8ece63985b6854999c073790a22f93, type: 2}
   - {fileID: 11400000, guid: 2123caa9bd99e774da4f036e685214ac, type: 2}
-  - {fileID: 11400000, guid: e30d7bc68bbd244469ba5dc1f5ae2486, type: 2}
+  - {fileID: 11400000, guid: 7e07a2eeca37d6747af3fa9af3e53451, type: 2}
   - {fileID: 11400000, guid: c1d5cd9f0880d3f4e9f552f72c9302d1, type: 2}
   maxMoves: 5

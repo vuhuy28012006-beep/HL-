@@ -13,6 +13,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
 
+    [Header("Win Panel - hien thi ket qua (khong bat buoc)")]
+    [SerializeField] private TMPro.TMP_Text starsText; // vd: hien "3 sao", co the de trong
+
+    private int lastStarsEarned;
+
     private void Awake()
     {
         if (Instance == null)
@@ -34,11 +39,29 @@ public class GameManager : MonoBehaviour
         if (losePanel != null) losePanel.SetActive(false);
     }
 
-    public void WinGame()
+    // movesLeft: so luot con du luc thang, dung de tinh sao
+    public void WinGame(int movesLeft, int maxMoves, int levelNumber)
     {
         CurrentState = GameState.Win;
 
+        lastStarsEarned = CalculateStars(movesLeft, maxMoves);
+
+        SaveManager.SetStars(levelNumber, lastStarsEarned);
+        SaveManager.UnlockLevel(levelNumber + 1);
+
+        if (starsText != null)
+            starsText.text = lastStarsEarned + " sao";
+
         if (winPanel != null) winPanel.SetActive(true);
+    }
+
+    private int CalculateStars(int movesLeft, int maxMoves)
+    {
+        if (maxMoves <= 0) return 3;
+
+        if (movesLeft >= maxMoves / 2f) return 3;
+        if (movesLeft >= 1) return 2;
+        return 1;
     }
 
     public void LoseGame()
@@ -53,10 +76,8 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    // Goi tam thoi khi chua co Chapter Map / Level Select that
     public void BackToMenu()
     {
-        Debug.Log("Back to menu - chua co scene menu, can lam sau");
-        // Sau nay thay bang: SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("LevelSelect");
     }
 }
