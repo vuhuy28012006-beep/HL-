@@ -383,6 +383,7 @@ MonoBehaviour:
   winPanel: {fileID: 75455821}
   losePanel: {fileID: 389059877}
   starsText: {fileID: 1585553455}
+  allLevels: []
 --- !u!1 &235673312
 GameObject:
   m_ObjectHideFlags: 0
@@ -1675,6 +1676,10 @@ MonoBehaviour:
   currentLevel: {fileID: 11400000, guid: 0420558e03cba0f448fbaf2cbac5ae21, type: 2}
   movesLeftText: {fileID: 537701956}
   swapDuration: 0.25
+  maxHints: 2
+  maxUndos: 1
+  hintsLeftText: {fileID: 0}
+  undosLeftText: {fileID: 0}
 --- !u!4 &839988026
 Transform:
   m_ObjectHideFlags: 0
@@ -2754,7 +2759,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 193384829}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: RestartLevel
+        m_MethodName: GoToNextLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

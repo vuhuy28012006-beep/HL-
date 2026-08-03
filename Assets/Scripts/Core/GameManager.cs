@@ -81,6 +81,8 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("LevelSelect");
     }
 
+
+    
     // Goi tu nut "Man tiep theo" tren Win Panel
     public void GoToNextLevel()
     {
@@ -98,5 +100,13 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Chua co level tiep theo (level " + nextNumber + ") - quay ve menu");
         BackToMenu();
+    }
+        public void QuitGame()
+    {
+    #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false; // de test duoc trong Editor
+    #else
+        Application.Quit(); // chi hoat dong tren may that (APK), khong co tac dung trong Editor
+    #endif
     }
 }
