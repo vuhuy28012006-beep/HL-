@@ -9,14 +9,17 @@ public class GameManager : MonoBehaviour
 
     public GameState CurrentState { get; private set; }
 
-    [Header("Panels (keo Panel Thang/Thua vao day)")]
+    [Header("Panels")]
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
 
     [Header("Win Panel - hien thi ket qua (khong bat buoc)")]
-    [SerializeField] private TMPro.TMP_Text starsText; // vd: hien "3 sao", co the de trong
+    [SerializeField] private TMPro.TMP_Text starsText;
 
-    private int lastStarsEarned;
+    [Header("Danh sach TOAN BO LevelData trong game (keo het vao day, thu tu tuy y)")]
+    [SerializeField] private LevelData[] allLevels;
+
+    private int currentLevelNumber;
 
     private void Awake()
     {
@@ -34,23 +37,22 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         CurrentState = GameState.Playing;
-
         if (winPanel != null) winPanel.SetActive(false);
         if (losePanel != null) losePanel.SetActive(false);
     }
 
-    // movesLeft: so luot con du luc thang, dung de tinh sao
     public void WinGame(int movesLeft, int maxMoves, int levelNumber)
     {
         CurrentState = GameState.Win;
+        currentLevelNumber = levelNumber;
 
-        lastStarsEarned = CalculateStars(movesLeft, maxMoves);
+        int stars = CalculateStars(movesLeft, maxMoves);
 
-        SaveManager.SetStars(levelNumber, lastStarsEarned);
+        SaveManager.SetStars(levelNumber, stars);
         SaveManager.UnlockLevel(levelNumber + 1);
 
         if (starsText != null)
-            starsText.text = lastStarsEarned + " sao";
+            starsText.text = stars + " sao";
 
         if (winPanel != null) winPanel.SetActive(true);
     }
@@ -58,7 +60,6 @@ public class GameManager : MonoBehaviour
     private int CalculateStars(int movesLeft, int maxMoves)
     {
         if (maxMoves <= 0) return 3;
-
         if (movesLeft >= maxMoves / 2f) return 3;
         if (movesLeft >= 1) return 2;
         return 1;
@@ -67,7 +68,6 @@ public class GameManager : MonoBehaviour
     public void LoseGame()
     {
         CurrentState = GameState.Lose;
-
         if (losePanel != null) losePanel.SetActive(true);
     }
 
@@ -79,5 +79,24 @@ public class GameManager : MonoBehaviour
     public void BackToMenu()
     {
         SceneManager.LoadScene("LevelSelect");
+    }
+
+    // Goi tu nut "Man tiep theo" tren Win Panel
+    public void GoToNextLevel()
+    {
+        int nextNumber = currentLevelNumber + 1;
+
+        foreach (LevelData level in allLevels)
+        {
+            if (level != null && level.levelNumber == nextNumber)
+            {
+                LevelSession.SelectedLevel = level;
+                LevelSession.LoadGameplayScene();
+                return;
+            }
+        }
+
+        Debug.Log("Chua co level tiep theo (level " + nextNumber + ") - quay ve menu");
+        BackToMenu();
     }
 }

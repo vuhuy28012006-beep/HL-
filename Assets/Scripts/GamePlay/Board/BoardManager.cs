@@ -21,9 +21,17 @@ public class BoardManager : MonoBehaviour
     [Header("Animation")]
     [SerializeField] private float swapDuration = 0.25f;
 
+    [Header("Gioi han (theo mockup: Goi y (2), Hoan tac (1))")]
+    [SerializeField] private int maxHints = 2;
+    [SerializeField] private int maxUndos = 1;
+    [SerializeField] private TMP_Text hintsLeftText;  // khong bat buoc
+    [SerializeField] private TMP_Text undosLeftText;  // khong bat buoc
+
     private List<EventCard> boardCards = new List<EventCard>();
     private EventCard firstSelected;
     private int movesLeft;
+    private int hintsUsed;
+    private int undosUsed;
     private bool gameEnded;
     private bool isAnimating;
 
@@ -56,6 +64,9 @@ public class BoardManager : MonoBehaviour
         firstSelected = null;
         boardCards.Clear();
 
+        hintsUsed = 0;
+        undosUsed = 0;
+
         for (int i = cardRow.childCount - 1; i >= 0; i--)
             Destroy(cardRow.GetChild(i).gameObject);
 
@@ -79,6 +90,7 @@ public class BoardManager : MonoBehaviour
 
         movesLeft = level.maxMoves;
         UpdateMovesUI();
+        UpdateLimitsUI();
     }
 
     private void Shuffle(List<EventData> list)
@@ -186,13 +198,16 @@ public class BoardManager : MonoBehaviour
     public void Undo()
     {
         if (gameEnded || history.Count == 0 || isAnimating) return;
+        if (undosUsed >= maxUndos) return;
 
         var (ia, ib) = history.Pop();
         (boardCards[ia], boardCards[ib]) = (boardCards[ib], boardCards[ia]);
         RefreshOrder();
 
         movesLeft++;
+        undosUsed++;
         UpdateMovesUI();
+        UpdateLimitsUI();
     }
 
     // ---------------- GOI Y ----------------
@@ -200,11 +215,14 @@ public class BoardManager : MonoBehaviour
     public void ShowHint()
     {
         if (gameEnded || isAnimating) return;
+        if (hintsUsed >= maxHints) return;
 
         for (int i = 0; i < boardCards.Count - 1; i++)
         {
             if (boardCards[i].Data.year > boardCards[i + 1].Data.year)
             {
+                hintsUsed++;
+                UpdateLimitsUI();
                 StartCoroutine(FlashHint(boardCards[i], boardCards[i + 1]));
                 return;
             }
@@ -258,5 +276,14 @@ public class BoardManager : MonoBehaviour
     {
         if (movesLeftText != null)
             movesLeftText.text = movesLeft.ToString();
+    }
+
+    private void UpdateLimitsUI()
+    {
+        if (hintsLeftText != null)
+            hintsLeftText.text = (maxHints - hintsUsed).ToString();
+
+        if (undosLeftText != null)
+            undosLeftText.text = (maxUndos - undosUsed).ToString();
     }
 }
