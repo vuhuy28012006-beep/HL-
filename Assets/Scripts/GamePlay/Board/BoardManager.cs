@@ -35,11 +35,19 @@ public class BoardManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
+        private void Start()
     {
+        // Neu co level duoc chon tu Level Select (qua LevelSession) -> dung level do
+        // Neu khong (dang test truc tiep trong scene Gameplay) -> dung currentLevel gan tay trong Inspector
+        if (LevelSession.SelectedLevel != null)
+            currentLevel = LevelSession.SelectedLevel;
+
         if (currentLevel != null)
             SetupLevel(currentLevel);
+        else
+            Debug.LogError("BoardManager: chua co Current Level nao duoc gan!");
     }
+
 
     // ---------------- SETUP ----------------
 
