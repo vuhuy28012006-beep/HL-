@@ -5,23 +5,42 @@ using UnityEngine.UI;
 
 public class LevelSelectButton : MonoBehaviour
 {
-    [SerializeField] private LevelData levelData;
+    [SerializeField] private LevelData levelData; // co the gan tay (cach cu) hoac de trong, cho Setup() gan luc chay
 
-    [Header("Hien thi trang thai (khong bat buoc, co the de trong)")]
-    [SerializeField] private GameObject lockIcon;       // hien khi level bi khoa
-    [SerializeField] private TMPro.TMP_Text starsText;  // hien so sao da dat, vd "2/3"
+    [Header("Hien thi trang thai (khong bat buoc)")]
+    [SerializeField] private GameObject lockIcon;
+    [SerializeField] private TMPro.TMP_Text starsText;
+    [SerializeField] private TMPro.TMP_Text levelNumberText; // hien so thu tu man, dung khi sinh dong
 
     private Button button;
 
-    private void Start()
+    private void Awake()
     {
         button = GetComponent<Button>();
+    }
+
+    private void Start()
+    {
+        // Neu da gan san levelData qua Inspector (cach cu, nut tao tay) -> chay luon
+        if (levelData != null)
+            RefreshState();
+    }
+
+    // Goi tu LevelListPopulator khi tao nut luc chay (cach moi, cho danh sach dong)
+    public void Setup(LevelData data)
+    {
+        levelData = data;
+
+        if (levelNumberText != null)
+            levelNumberText.text = data.levelNumber.ToString();
+
         RefreshState();
     }
 
     private void RefreshState()
     {
         if (levelData == null) return;
+        if (button == null) button = GetComponent<Button>();
 
         bool unlocked = SaveManager.IsLevelUnlocked(levelData.levelNumber);
 
@@ -38,11 +57,12 @@ public class LevelSelectButton : MonoBehaviour
         }
     }
 
+    // Goi tu Button > On Click ()
     public void LoadLevel()
     {
         if (levelData == null)
         {
-            Debug.LogError("LevelSelectButton: chua gan LevelData cho nut nay!");
+            Debug.LogError("LevelSelectButton: chua co LevelData!");
             return;
         }
 

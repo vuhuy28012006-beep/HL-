@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
 
     public void BackToMenu()
     {
-        SceneManager.LoadScene("LevelSelect");
+        SceneManager.LoadScene("Map");
     }
 
 
@@ -101,6 +101,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("Chua co level tiep theo (level " + nextNumber + ") - quay ve menu");
         BackToMenu();
     }
+        public void GoToMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+ 
         public void QuitGame()
     {
     #if UNITY_EDITOR
