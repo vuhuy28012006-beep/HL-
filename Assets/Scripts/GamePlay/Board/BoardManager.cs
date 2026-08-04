@@ -27,6 +27,9 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private TMP_Text hintsLeftText;  // khong bat buoc
     [SerializeField] private TMP_Text undosLeftText;  // khong bat buoc
 
+    [Header("Popup lua chon Hint (khong bat buoc)")]
+    [SerializeField] private GameObject hintOptionsPanel; // panel co 2 nut: "Goi y 1 cap" / "Xem thu tu toan bo"
+
     private List<EventCard> boardCards = new List<EventCard>();
     private EventCard firstSelected;
     private int movesLeft;
@@ -40,10 +43,26 @@ public class BoardManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-    }
 
+        // Dam bao popup Hint luon an luc bat dau, khong phu thuoc trang thai Active
+        // duoc set san trong Scene/Inspector.
+        if (hintOptionsPanel != null)
+            hintOptionsPanel.SetActive(false);
+    }
     private void Start()
     {
+        if (cardRow == null)
+        {
+            Debug.LogError("BoardManager: chua gan Card Row trong Inspector!", this);
+            return;
+        }
+
+        if (cardPrefab == null)
+        {
+            Debug.LogError("BoardManager: chua gan Card Prefab trong Inspector!", this);
+            return;
+        }
+
         if (LevelSession.SelectedLevel != null)
             currentLevel = LevelSession.SelectedLevel;
 
@@ -52,6 +71,16 @@ public class BoardManager : MonoBehaviour
         else
             Debug.LogError("BoardManager: chua co Current Level nao duoc gan!");
     }
+    // private void Start()
+    // {
+    //     if (LevelSession.SelectedLevel != null)
+    //         currentLevel = LevelSession.SelectedLevel;
+
+    //     if (currentLevel != null)
+    //         SetupLevel(currentLevel);
+    //     else
+    //         Debug.LogError("BoardManager: chua co Current Level nao duoc gan!");
+    // }
 
     // ---------------- SETUP ----------------
 
@@ -212,8 +241,27 @@ public class BoardManager : MonoBehaviour
 
     // ---------------- GOI Y ----------------
 
+    // Nut Hint ngoai man hinh nen goi ham nay (thay vi goi thang ShowHint).
+    // Mo popup cho nguoi choi chon: "Goi y 1 cap" hoac "Xem thu tu toan bo".
+    public void OpenHintOptions()
+    {
+        if (gameEnded || isAnimating) return;
+        if (hintsUsed >= maxHints) return; // het luot hint thi khong mo popup
+
+        if (hintOptionsPanel != null)
+            hintOptionsPanel.SetActive(true);
+    }
+
+    public void CloseHintOptions()
+    {
+        if (hintOptionsPanel != null)
+            hintOptionsPanel.SetActive(false);
+    }
+
     public void ShowHint()
     {
+        CloseHintOptions();
+
         if (gameEnded || isAnimating) return;
         if (hintsUsed >= maxHints) return;
 
@@ -238,6 +286,40 @@ public class BoardManager : MonoBehaviour
             a.Deselect(); b.Deselect();
             yield return new WaitForSeconds(0.25f);
         }
+    }
+
+    // Xem thu tu dung toan bo (ton het so hint con lai).
+    // Khong tu sap xep lai the: chi chop lan luot tung the theo dung thu tu nam,
+    // nguoi choi van phai tu keo/doi cho de hoan thanh.
+    public void ShowFullOrderHint()
+    {
+        CloseHintOptions();
+
+        if (gameEnded || isAnimating) return;
+        if (hintsUsed >= maxHints) return; // het luot hint, khong the xem toan bo
+
+        hintsUsed = maxHints; // tieu toan bo so hint con lai
+        UpdateLimitsUI();
+
+        StartCoroutine(FlashFullOrder());
+    }
+
+    private IEnumerator FlashFullOrder()
+    {
+        isAnimating = true;
+
+        List<EventCard> sortedByYear = new List<EventCard>(boardCards);
+        sortedByYear.Sort((x, y) => x.Data.year.CompareTo(y.Data.year));
+
+        foreach (EventCard card in sortedByYear)
+        {
+            card.Select();
+            yield return new WaitForSeconds(0.5f);
+            card.Deselect();
+            yield return new WaitForSeconds(0.15f);
+        }
+
+        isAnimating = false;
     }
 
     // ---------------- THANG / THUA ----------------
