@@ -1,37 +1,47 @@
 using UnityEngine;
 
 // Ghi de vao: Assets/Scripts/Core/AudioManager.cs
+//
+// Thay doi quan trong: dung [RuntimeInitializeOnLoadMethod] de TU DONG tao ra
+// AudioManager ngay khi game chay, bat ke ban bam Play tu scene nao (MainMenu,
+// LevelSelect hay thang vao Gameplay de test nhanh). Khong can dat san object
+// AudioManager trong tung scene nua.
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-    [Header("Clips (keo file am thanh vao day, co the de trong neu chua co)")]
+    [Header("Clips - se tu tim trong Resources/Audio (xem huong dan wiring)")]
     [SerializeField] private AudioClip clickSound;
     [SerializeField] private AudioClip swapSound;
     [SerializeField] private AudioClip winSound;
     [SerializeField] private AudioClip loseSound;
 
     private AudioSource source;
-    private const string VolumeKey = "SoundVolume";
+    private const string MutedKey = "SoundMuted";
+    private bool isMuted;
+    public bool IsMuted => isMuted;
 
-    private void Awake()
-{
-    if (Instance == null)
+    // Tu dong chay 1 lan duy nhat truoc ca scene dau tien duoc load
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void AutoCreate()
     {
-        Instance = this;
-        DontDestroyOnLoad(gameObject); // giu AudioManager song xuyen suot moi scene
-    }
-    else
-    {
-        Destroy(gameObject);
-        return;
-    }
+        if (Instance != null) return;
 
-    source = gameObject.AddComponent<AudioSource>();
-    source.playOnAwake = false;
-    source.volume = PlayerPrefs.GetFloat(VolumeKey, 1f);
-}
+        GameObject go = new GameObject("AudioManager");
+        Instance = go.AddComponent<AudioManager>();
+        DontDestroyOnLoad(go);
+
+        // Tu load am thanh tu Resources (xem huong dan wiring ben duoi)
+        Instance.clickSound = Resources.Load<AudioClip>("Audio/click");
+        Instance.swapSound = Resources.Load<AudioClip>("Audio/swap");
+        Instance.winSound = Resources.Load<AudioClip>("Audio/win");
+        Instance.loseSound = Resources.Load<AudioClip>("Audio/lose");
+
+        Instance.source = go.AddComponent<AudioSource>();
+        Instance.source.playOnAwake = false;
+        Instance.isMuted = PlayerPrefs.GetInt(MutedKey, 0) == 1;
+    }
 
     public void PlayClick() => Play(clickSound);
     public void PlaySwap() => Play(swapSound);
@@ -40,20 +50,14 @@ public class AudioManager : MonoBehaviour
 
     private void Play(AudioClip clip)
     {
-        if (clip == null) return;
+        if (isMuted || clip == null || source == null) return;
         source.PlayOneShot(clip);
     }
 
-    // Goi tu Slider trong Settings (0 = tat, 1 = full)
-    public void SetVolume(float value)
+    public void SetMuted(bool muted)
     {
-        source.volume = value;
-        PlayerPrefs.SetFloat(VolumeKey, value);
+        isMuted = muted;
+        PlayerPrefs.SetInt(MutedKey, muted ? 1 : 0);
         PlayerPrefs.Save();
-    }
-
-    public float GetVolume()
-    {
-        return PlayerPrefs.GetFloat(VolumeKey, 1f);
     }
 }
