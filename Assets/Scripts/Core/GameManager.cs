@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 // Ghi de vao: Assets/Scripts/Core/GameManager.cs
 
@@ -12,6 +14,12 @@ public class GameManager : MonoBehaviour
     [Header("Panels")]
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
+    [Header("Stars")]
+    [SerializeField] private Image[] starImages;
+
+    [SerializeField] private Sprite filledStar;
+
+    [SerializeField] private Sprite emptyStar;
 
     [Header("Win Panel - hien thi ket qua (khong bat buoc)")]
     [SerializeField] private TMPro.TMP_Text starsText;
@@ -46,7 +54,15 @@ public class GameManager : MonoBehaviour
         CurrentState = GameState.Win;
         currentLevelNumber = levelNumber;
 
-        int stars = CalculateStars(movesLeft, maxMoves);
+        BoardManager board = BoardManager.Instance;
+
+        int stars = StarCalculator.CalculateStars(
+                                    board.MovesLeft,
+                                    board.MaxMoves,
+                                    board.HintsUsed,
+                                    board.UndosUsed);
+
+        UpdateStarUI(stars);
 
         SaveManager.SetStars(levelNumber, stars);
         SaveManager.UnlockLevel(levelNumber + 1);
@@ -56,15 +72,6 @@ public class GameManager : MonoBehaviour
 
         if (winPanel != null) winPanel.SetActive(true);
     }
-
-    private int CalculateStars(int movesLeft, int maxMoves)
-    {
-        if (maxMoves <= 0) return 3;
-        if (movesLeft >= maxMoves / 2f) return 3;
-        if (movesLeft >= 1) return 2;
-        return 1;
-    }
-
     public void LoseGame()
     {
         CurrentState = GameState.Lose;
@@ -100,5 +107,13 @@ public class GameManager : MonoBehaviour
     #else
         Application.Quit(); // chi hoat dong tren may that (APK), khong co tac dung trong Editor
     #endif
+    }
+        private void UpdateStarUI(int stars)
+    {
+        for (int i = 0; i < starImages.Length; i++)
+        {
+            starImages[i].sprite =
+                i < stars ? filledStar : emptyStar;
+        }
     }
 }

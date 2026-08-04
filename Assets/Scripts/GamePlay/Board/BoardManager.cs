@@ -35,6 +35,11 @@ public class BoardManager : MonoBehaviour
     private int movesLeft;
     private int hintsUsed;
     private int undosUsed;
+
+    public int MovesLeft => movesLeft;
+    public int HintsUsed => hintsUsed;
+    public int UndosUsed => undosUsed;
+    public int MaxMoves => currentLevel.maxMoves;
     private bool gameEnded;
     private bool isAnimating;
 
@@ -269,7 +274,7 @@ public class BoardManager : MonoBehaviour
         {
             if (boardCards[i].Data.year > boardCards[i + 1].Data.year)
             {
-                hintsUsed++;
+                hintsUsed++;                
                 UpdateLimitsUI();
                 StartCoroutine(FlashHint(boardCards[i], boardCards[i + 1]));
                 return;
@@ -368,4 +373,5 @@ public class BoardManager : MonoBehaviour
         if (undosLeftText != null)
             undosLeftText.text = (maxUndos - undosUsed).ToString();
     }
+    
 }
