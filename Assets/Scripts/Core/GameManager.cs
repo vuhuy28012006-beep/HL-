@@ -86,20 +86,7 @@ public class GameManager : MonoBehaviour
     // Goi tu nut "Man tiep theo" tren Win Panel
     public void GoToNextLevel()
     {
-        int nextNumber = currentLevelNumber + 1;
-
-        foreach (LevelData level in allLevels)
-        {
-            if (level != null && level.levelNumber == nextNumber)
-            {
-                LevelSession.SelectedLevel = level;
-                LevelSession.LoadGameplayScene();
-                return;
-            }
-        }
-
-        Debug.Log("Chua co level tiep theo (level " + nextNumber + ") - quay ve menu");
-        BackToMenu();
+        SceneManager.LoadScene("LevelSelect");
     }
         public void GoToMenu()
     {
