@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec4d376e448d3454c81d63c5541c3e3d, type: 3}
-  m_Name: Bangiomorpha
+  m_Name: Hylonomus
   m_EditorClassIdentifier: 
-  id: 114
-  eventName: "\u0110a b\xE0o"
-  year: -1050000000
-  image: {fileID: 21300000, guid: becb7e5ecf011f34b994487fb15abf55, type: 3}
+  id: 115
+  eventName: Hylonomus
+  year: 315000000
+  image: {fileID: 21300000, guid: 7a25384081471b54f8eb4ec114bd4d2b, type: 3}

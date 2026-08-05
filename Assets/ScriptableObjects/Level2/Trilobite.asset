@@ -15,4 +15,4 @@ MonoBehaviour:
   id: 121
   eventName: Trilobite
   year: -521000000
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: b8addbfc60b519e4c85600de1e2be302, type: 3}
