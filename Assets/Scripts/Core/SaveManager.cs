@@ -1,5 +1,6 @@
 using UnityEngine;
 
+
 // Dat file nay vao: Assets/Scripts/Core/SaveManager.cs
 //
 // Dung PlayerPrefs (luu tren may, khong can server) de nho:
@@ -32,6 +33,21 @@ public static class SaveManager
             PlayerPrefs.Save();
         }
     }
+    // Them vao SaveManager.cs (dat canh cac ham khac, vd sau UnlockLevel)
+ 
+    private const string TutorialCompletedKey = "TutorialCompleted";
+    
+    public static bool HasCompletedTutorial()
+    {
+        return PlayerPrefs.GetInt(TutorialCompletedKey, 0) == 1;
+    }
+    
+    public static void SetTutorialCompleted()
+    {
+        PlayerPrefs.SetInt(TutorialCompletedKey, 1);
+        PlayerPrefs.Save();
+    }
+    
 
     // Sao dat duoc o 1 level (0 neu chua choi lan nao)
     public static int GetStars(int levelNumber)

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Cyanobactera
   m_EditorClassIdentifier: 
   id: 112
-  eventName: Cyanobactera
+  eventName: "Vi khu\u1EA9n lam"
   year: -3500000000
   image: {fileID: 21300000, guid: 9d573ab7ae160f74ab781f6c194bb750, type: 3}

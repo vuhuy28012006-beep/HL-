@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using TMPro;
 
 // Ghi de vao: Assets/Scripts/Core/GameManager.cs
 
@@ -14,17 +12,11 @@ public class GameManager : MonoBehaviour
     [Header("Panels")]
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
-    [Header("Stars")]
-    [SerializeField] private Image[] starImages;
-
-    [SerializeField] private Sprite filledStar;
-
-    [SerializeField] private Sprite emptyStar;
 
     [Header("Win Panel - hien thi ket qua (khong bat buoc)")]
     [SerializeField] private TMPro.TMP_Text starsText;
 
-    [Header("Danh sach TOAN BO LevelData trong game (keo het vao day, thu tu tuy y)")]
+    [Header("Danh sach TOAN BO LevelData trong game (keo het vao day)")]
     [SerializeField] private LevelData[] allLevels;
 
     private int currentLevelNumber;
@@ -54,15 +46,7 @@ public class GameManager : MonoBehaviour
         CurrentState = GameState.Win;
         currentLevelNumber = levelNumber;
 
-        BoardManager board = BoardManager.Instance;
-
-        int stars = StarCalculator.CalculateStars(
-                                    board.MovesLeft,
-                                    board.MaxMoves,
-                                    board.HintsUsed,
-                                    board.UndosUsed);
-
-        UpdateStarUI(stars);
+        int stars = CalculateStars(movesLeft, maxMoves);
 
         SaveManager.SetStars(levelNumber, stars);
         SaveManager.UnlockLevel(levelNumber + 1);
@@ -72,6 +56,15 @@ public class GameManager : MonoBehaviour
 
         if (winPanel != null) winPanel.SetActive(true);
     }
+
+    private int CalculateStars(int movesLeft, int maxMoves)
+    {
+        if (maxMoves <= 0) return 3;
+        if (movesLeft >= maxMoves / 2f) return 3;
+        if (movesLeft >= 1) return 2;
+        return 1;
+    }
+
     public void LoseGame()
     {
         CurrentState = GameState.Lose;
@@ -85,35 +78,38 @@ public class GameManager : MonoBehaviour
 
     public void BackToMenu()
     {
+        SceneManager.LoadScene("LevelSelect");
+    }
+
+    public void GoToMap()
+    {
         SceneManager.LoadScene("Map");
     }
 
-
-    
-    // Goi tu nut "Man tiep theo" tren Win Panel
     public void GoToNextLevel()
     {
-        SceneManager.LoadScene("LevelSelect");
-    }
-        public void GoToMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
-    }
- 
-        public void QuitGame()
-    {
-    #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false; // de test duoc trong Editor
-    #else
-        Application.Quit(); // chi hoat dong tren may that (APK), khong co tac dung trong Editor
-    #endif
-    }
-        private void UpdateStarUI(int stars)
-    {
-        for (int i = 0; i < starImages.Length; i++)
+        int nextNumber = currentLevelNumber + 1;
+
+        foreach (LevelData level in allLevels)
         {
-            starImages[i].sprite =
-                i < stars ? filledStar : emptyStar;
+            if (level != null && level.levelNumber == nextNumber)
+            {
+                LevelSession.SelectedLevel = level;
+                LevelSession.LoadGameplayScene();
+                return;
+            }
         }
+
+        Debug.Log("Chua co level tiep theo (level " + nextNumber + ") - quay ve menu");
+        BackToMenu();
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

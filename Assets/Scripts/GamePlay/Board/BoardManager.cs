@@ -40,6 +40,7 @@ public class BoardManager : MonoBehaviour
     public int HintsUsed => hintsUsed;
     public int UndosUsed => undosUsed;
     public int MaxMoves => currentLevel.maxMoves;
+
     private bool gameEnded;
     private bool isAnimating;
 
@@ -54,6 +55,7 @@ public class BoardManager : MonoBehaviour
         if (hintOptionsPanel != null)
             hintOptionsPanel.SetActive(false);
     }
+
     private void Start()
     {
         if (cardRow == null)
@@ -76,16 +78,6 @@ public class BoardManager : MonoBehaviour
         else
             Debug.LogError("BoardManager: chua co Current Level nao duoc gan!");
     }
-    // private void Start()
-    // {
-    //     if (LevelSession.SelectedLevel != null)
-    //         currentLevel = LevelSession.SelectedLevel;
-
-    //     if (currentLevel != null)
-    //         SetupLevel(currentLevel);
-    //     else
-    //         Debug.LogError("BoardManager: chua co Current Level nao duoc gan!");
-    // }
 
     // ---------------- SETUP ----------------
 
@@ -263,6 +255,7 @@ public class BoardManager : MonoBehaviour
             hintOptionsPanel.SetActive(false);
     }
 
+    // Hint loai 2: goi y dung 1 cap the sai gan nhat (nhap nhay)
     public void ShowHint()
     {
         CloseHintOptions();
@@ -274,7 +267,7 @@ public class BoardManager : MonoBehaviour
         {
             if (boardCards[i].Data.year > boardCards[i + 1].Data.year)
             {
-                hintsUsed++;                
+                hintsUsed++;
                 UpdateLimitsUI();
                 StartCoroutine(FlashHint(boardCards[i], boardCards[i + 1]));
                 return;
@@ -293,7 +286,7 @@ public class BoardManager : MonoBehaviour
         }
     }
 
-    // Xem thu tu dung toan bo (ton het so hint con lai).
+    // Hint loai 1: xem thu tu dung toan bo (ton het so hint con lai).
     // Khong tu sap xep lai the: chi chop lan luot tung the theo dung thu tu nam,
     // nguoi choi van phai tu keo/doi cho de hoan thanh.
     public void ShowFullOrderHint()
@@ -373,5 +366,4 @@ public class BoardManager : MonoBehaviour
         if (undosLeftText != null)
             undosLeftText.text = (maxUndos - undosUsed).ToString();
     }
-    
 }
