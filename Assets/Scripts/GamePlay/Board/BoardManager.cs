@@ -36,10 +36,14 @@ public class BoardManager : MonoBehaviour
     private EventCard primedCard;   //thẻ được đánh dấu đã mở trong MemoryMode
     private EventCard insertionCard; //thẻ được rút trong insertionSort
     private int movesLeft;
+    private float timeLeft;
+    private bool timerRunning;
+
     private int hintsUsed;
     private int undosUsed;
 
     public int MovesLeft => movesLeft;
+    public float TimeLeft => timeLeft;
     public int HintsUsed => hintsUsed;
     public int UndosUsed => undosUsed;
     public int MaxMoves => currentLevel.maxMoves;
@@ -82,6 +86,29 @@ public class BoardManager : MonoBehaviour
             SetupLevel(currentLevel);
         else
             Debug.LogError("BoardManager: chua co Current Level nao duoc gan!");
+    }
+    private void Update()
+    {
+        if (!timerRunning || gameEnded)
+            return;
+
+        timeLeft -= Time.deltaTime;
+
+        if (timeLeft <= 0f)
+        {
+            timeLeft = 0f;
+            timerRunning = false;
+            gameEnded = true;
+
+            UpdateMovesUI();
+
+            AudioManager.Instance?.PlayLose();
+            GameManager.Instance?.LoseGame();
+
+            return;
+        }
+
+        UpdateMovesUI();
     }
 
     // ---------------- SETUP ----------------
@@ -142,6 +169,15 @@ public class BoardManager : MonoBehaviour
             }
         }
         movesLeft = level.maxMoves;
+        timeLeft = level.timeLimitSeconds;
+        /*
+        * Level thường: đồng hồ chạy ngay.
+        * Level Memory: đợi xem trước và úp thẻ xong mới chạy.
+        */
+        timerRunning =
+            level.limitType == LevelLimitType.Time &&
+            !level.useMemoryMode;
+
         UpdateMovesUI();
         UpdateLimitsUI();
     }
@@ -170,6 +206,10 @@ public class BoardManager : MonoBehaviour
 
         memoryCardsHidden = true;
         isAnimating = false;
+        if (currentLevel.limitType == LevelLimitType.Time)
+        {
+            timerRunning = true;
+        }
     }
     private void Shuffle(List<EventData> list)
     {
@@ -376,8 +416,7 @@ public class BoardManager : MonoBehaviour
         RefreshOrder();
 
         // Chèn đúng hoặc sai đều mất 1 lượt
-        movesLeft--;
-        UpdateMovesUI();
+        ConsumeMove();
 
         AudioManager.Instance?.PlaySwap();
 
@@ -419,8 +458,7 @@ public class BoardManager : MonoBehaviour
 
         history.Push((ia, ib));
 
-        movesLeft--;
-        UpdateMovesUI();
+        ConsumeMove();
 
         isAnimating = false;
 
@@ -517,7 +555,11 @@ public class BoardManager : MonoBehaviour
         }
 
         // Hoàn lại lượt
-        movesLeft++;
+        // Chỉ hoàn lại lượt đối với level giới hạn Moves
+        if (currentLevel.limitType == LevelLimitType.Moves)
+        {
+            movesLeft++;
+        }
 
         // Tính một lần sử dụng Undo
         undosUsed++;
@@ -631,7 +673,8 @@ public class BoardManager : MonoBehaviour
             return;
         }
 
-        if (movesLeft <= 0)
+        if (currentLevel.limitType == LevelLimitType.Moves &&
+            movesLeft <= 0)
         {
             gameEnded = true;
             AudioManager.Instance?.PlayLose();
@@ -640,11 +683,34 @@ public class BoardManager : MonoBehaviour
     }
 
     // ---------------- UI ----------------
+    private void ConsumeMove()
+    {
+        if (currentLevel.limitType == LevelLimitType.Moves)
+        {
+            movesLeft--;
+        }
 
+        UpdateMovesUI();
+    }
     private void UpdateMovesUI()
     {
-        if (movesLeftText != null)
+        if (movesLeftText == null || currentLevel == null)
+            return;
+
+        if (currentLevel.limitType == LevelLimitType.Time)
+        {
+            int totalSeconds = Mathf.CeilToInt(timeLeft);
+            int minutes = totalSeconds / 60;
+            int seconds = totalSeconds % 60;
+
+            movesLeftText.text =
+                minutes.ToString("00") + ":" +
+                seconds.ToString("00");
+        }
+        else
+        {
             movesLeftText.text = movesLeft.ToString();
+        }
     }
 
     private void UpdateLimitsUI()
@@ -704,8 +770,7 @@ public class BoardManager : MonoBehaviour
             pivotCard.Deselect();
             pivotCard = null;
 
-            movesLeft--;
-            UpdateMovesUI();
+            ConsumeMove();
 
             CheckGameEnd();
             return;

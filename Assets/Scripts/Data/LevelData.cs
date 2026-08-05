@@ -8,6 +8,11 @@ public enum SortMode
     SelectionSort,
     InsertionSort
 }
+public enum LevelLimitType
+{
+    Moves,
+    Time
+}
 
 [CreateAssetMenu(
     fileName = "New Level",
@@ -23,8 +28,17 @@ public class LevelData : ScriptableObject
     public List<EventData> events = new List<EventData>();
 
     [Header("Rules")]
-    public int maxMoves = 5;
     public SortMode sortMode = SortMode.FreeSwap;
+
+    [Header("Level Limit")]
+    public LevelLimitType limitType = LevelLimitType.Moves;
+
+    [Tooltip("Số lượt tối đa nếu Limit Type là Moves")]
+    public int maxMoves = 5;
+
+    [Tooltip("Thời gian tối đa tính bằng giây nếu Limit Type là Time")]
+    [Min(1f)]
+    public float timeLimitSeconds = 60f;
 
     [Header("Memory Mode")]
     public bool useMemoryMode = false;
