@@ -42,11 +42,13 @@ public static class SaveManager
     // Chi ghi de neu sao moi cao hon sao cu (choi lai diem thap hon khong bi mat thanh tich cu)
     public static void SetStars(int levelNumber, int stars)
     {
+        stars = Mathf.Clamp(stars, 0, 3);
         int current = GetStars(levelNumber);
+
         if (stars > current)
         {
-            PlayerPrefs.SetInt(StarsKeyPrefix + levelNumber, stars);
-            PlayerPrefs.Save();
+        PlayerPrefs.SetInt(StarsKeyPrefix + levelNumber, stars);
+        PlayerPrefs.Save();
         }
     }
 
@@ -54,5 +56,6 @@ public static class SaveManager
     public static void ResetAllProgress()
     {
         PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
     }
 }
