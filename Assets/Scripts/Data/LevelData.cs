@@ -5,7 +5,8 @@ public enum SortMode
 {
     FreeSwap,
     BubbleSort,
-    SelectionSort
+    SelectionSort,
+    InsertionSort
 }
 
 [CreateAssetMenu(

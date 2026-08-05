@@ -33,7 +33,8 @@ public class BoardManager : MonoBehaviour
     private List<EventCard> boardCards = new List<EventCard>();
     private EventCard firstSelected;
     private EventCard pivotCard;    //thẻ chốt
-    private EventCard primedCard;
+    private EventCard primedCard;   //thẻ được đánh dấu đã mở trong MemoryMode
+    private EventCard insertionCard; //thẻ được rút trong insertionSort
     private int movesLeft;
     private int hintsUsed;
     private int undosUsed;
@@ -48,6 +49,7 @@ public class BoardManager : MonoBehaviour
     private bool memoryCardsHidden;
 
     private Stack<(int indexA, int indexB)> history = new Stack<(int, int)>();
+    private Stack<(int oldIndex, int insertedIndex)> insertionHistory = new Stack<(int, int)>();
 
     private void Awake()
     {
@@ -94,10 +96,12 @@ public class BoardManager : MonoBehaviour
         memoryCardsHidden = false;
 
         history.Clear();
+        insertionHistory.Clear();
 
         firstSelected = null;
         pivotCard = null;
         primedCard = null;
+        insertionCard = null;
 
         boardCards.Clear();
 
@@ -262,6 +266,12 @@ public class BoardManager : MonoBehaviour
     // Logic chọn và đổi thẻ bình thường
     private void HandleNormalCardClick(EventCard card)
     {
+        // Insertion Sort có luật chèn thẻ riêng
+        if (currentLevel.sortMode == SortMode.InsertionSort)
+        {
+            HandleInsertionSort(card);
+            return;
+        }
         // Selection Sort có luật riêng
         if (currentLevel.sortMode == SortMode.SelectionSort)
         {
@@ -313,6 +323,66 @@ public class BoardManager : MonoBehaviour
         b.Deselect();
 
         StartCoroutine(AnimateSwap(a, b));
+    }
+    private void HandleInsertionSort(EventCard card)
+    {
+        // Chưa chọn thẻ cần rút
+        if (insertionCard == null)
+        {
+            insertionCard = card;
+            insertionCard.Select();
+
+            AudioManager.Instance?.PlayClick();
+            return;
+        }
+
+        // Bấm lại chính thẻ đã chọn: hủy chọn, không mất lượt
+        if (insertionCard == card)
+        {
+            insertionCard.Deselect();
+            insertionCard = null;
+
+            AudioManager.Instance?.PlayClick();
+            return;
+        }
+
+        EventCard movingCard = insertionCard;
+        EventCard targetCard = card;
+
+        int sourceIndex = boardCards.IndexOf(movingCard);
+        int targetIndex = boardCards.IndexOf(targetCard);
+
+        // Xóa đánh dấu và kết thúc lượt chọn
+        movingCard.Deselect();
+        insertionCard = null;
+
+        /*
+        * Rút thẻ khỏi vị trí cũ.
+        * Sau khi rút, nếu nó vốn nằm trước thẻ đích
+        * thì chỉ số của thẻ đích sẽ giảm đi 1.
+        */
+        boardCards.RemoveAt(sourceIndex);
+
+        if (sourceIndex < targetIndex)
+        {
+            targetIndex--;
+        }
+
+        // Chèn thẻ được rút ngay trước thẻ đích
+        boardCards.Insert(targetIndex, movingCard);
+        // Lưu vị trí cũ và vị trí sau khi chèn để Undo
+        insertionHistory.Push((sourceIndex, targetIndex));
+        // Cập nhật thứ tự hiển thị và CurrentIndex
+        RefreshOrder();
+
+        // Chèn đúng hoặc sai đều mất 1 lượt
+        movesLeft--;
+        UpdateMovesUI();
+
+        AudioManager.Instance?.PlaySwap();
+
+        // Kiểm tra thắng hoặc hết lượt
+        CheckGameEnd();
     }
     private IEnumerator AnimateSwap(EventCard a, EventCard b)
     {
@@ -370,19 +440,91 @@ public class BoardManager : MonoBehaviour
 
     public void Undo()
     {
-        if (gameEnded || history.Count == 0 || isAnimating) return;
-        if (undosUsed >= maxUndos) return;
+        if (gameEnded || isAnimating)
+            return;
 
-        var (ia, ib) = history.Pop();
-        (boardCards[ia], boardCards[ib]) = (boardCards[ib], boardCards[ia]);
-        RefreshOrder();
+        if (undosUsed >= maxUndos)
+            return;
 
+        bool isInsertionMode =
+            currentLevel.sortMode == SortMode.InsertionSort;
+
+        // Không có thao tác để Undo
+        if (isInsertionMode)
+        {
+            if (insertionHistory.Count == 0)
+                return;
+        }
+        else
+        {
+            if (history.Count == 0)
+                return;
+        }
+
+        // Hủy mọi thao tác chọn thẻ đang làm dở
+        if (firstSelected != null)
+        {
+            firstSelected.Deselect();
+            firstSelected = null;
+        }
+
+        if (pivotCard != null)
+        {
+            pivotCard.Deselect();
+            pivotCard = null;
+        }
+
+        if (insertionCard != null)
+        {
+            insertionCard.Deselect();
+            insertionCard = null;
+        }
+
+        if (primedCard != null)
+        {
+            primedCard.SetMemoryMarked(false);
+            primedCard = null;
+        }
+
+        if (isInsertionMode)
+        {
+            var action = insertionHistory.Pop();
+
+            int oldIndex = action.oldIndex;
+            int insertedIndex = action.insertedIndex;
+
+            EventCard movedCard = boardCards[insertedIndex];
+
+            // Rút khỏi vị trí sau khi chèn
+            boardCards.RemoveAt(insertedIndex);
+
+            // Trả lại vị trí ban đầu
+            boardCards.Insert(oldIndex, movedCard);
+
+            RefreshOrder();
+        }
+        else
+        {
+            var action = history.Pop();
+
+            int indexA = action.indexA;
+            int indexB = action.indexB;
+
+            (boardCards[indexA], boardCards[indexB]) =
+                (boardCards[indexB], boardCards[indexA]);
+
+            RefreshOrder();
+        }
+
+        // Hoàn lại lượt
         movesLeft++;
+
+        // Tính một lần sử dụng Undo
         undosUsed++;
+
         UpdateMovesUI();
         UpdateLimitsUI();
     }
-
     // ---------------- GOI Y ----------------
 
     // Nut Hint ngoai man hinh nen goi ham nay (thay vi goi thang ShowHint).
