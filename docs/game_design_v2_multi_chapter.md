@@ -22,15 +22,15 @@
 | Tính năng | Mô tả | Trạng thái |
 |---|---|---|
 | Free Swap | Đổi chỗ tự do 2 thẻ bất kỳ (cơ chế mặc định hiện tại) | Đã có |
-| Bubble Swap | Chỉ được đổi chỗ 2 thẻ liền kề nhau (mô phỏng Bubble Sort) | Đã làm |
-| Selection Swap | Mỗi lượt chọn 1 vị trí "chốt", đổi phần tử nhỏ nhất trong phần còn lại vào đó | Đã làm |
-| Insertion Swap | Rút 1 thẻ, chèn vào đúng vị trí trong dãy đã sắp 1 phần | Chưa làm |
+| Bubble Swap | Chỉ được đổi chỗ 2 thẻ liền kề nhau (mô phỏng Bubble Sort) | Đã có |
+| Selection Swap | Mỗi lượt chọn 1 vị trí "chốt", đổi phần tử nhỏ nhất trong phần còn lại vào đó | Đã có |
+| Insertion Swap | Rút 1 thẻ, chèn vào đúng vị trí trong dãy đã sắp 1 phần | Đã có |
 | Tháp Hà Nội | Biến thể đặc biệt, mượn cơ chế 3 cột, cần thiết kế luật riêng | Chưa làm |
 | Ẩn thẻ | Không hiện ảnh/tên cho tới khi chọn, buộc suy luận thay vì nhớ mặt | Chưa làm|
-| Time Rush | Giới hạn thời gian thay vì/thêm giới hạn lượt | Chưa làm |
+| Time Rush | Giới hạn thời gian thay vì/thêm giới hạn lượt | Đã có |
 | Limited Swaps | Giới hạn số lượt đổi (maxMoves) | Đã có |
 | Fog Mode | Chỉ hiện rõ 2-3 thẻ gần vị trí thao tác, còn lại mờ | Chưa làm — để dành, ghi nhận ý tưởng, làm sau |
-| Memory Mode | Hiện đúng thứ tự/ảnh trong X giây đầu rồi úp lại, chơi theo trí nhớ | đã làm |
+| Memory Mode | Hiện đúng thứ tự/ảnh trong X giây đầu rồi úp lại, chơi theo trí nhớ | Đã có |
 
 ---
 
