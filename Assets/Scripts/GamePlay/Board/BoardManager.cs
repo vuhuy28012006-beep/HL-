@@ -32,6 +32,8 @@ public class BoardManager : MonoBehaviour
 
     private List<EventCard> boardCards = new List<EventCard>();
     private EventCard firstSelected;
+    private EventCard pivotCard;    //thẻ chốt
+    private EventCard primedCard;
     private int movesLeft;
     private int hintsUsed;
     private int undosUsed;
@@ -43,6 +45,7 @@ public class BoardManager : MonoBehaviour
 
     private bool gameEnded;
     private bool isAnimating;
+    private bool memoryCardsHidden;
 
     private Stack<(int indexA, int indexB)> history = new Stack<(int, int)>();
 
@@ -83,11 +86,19 @@ public class BoardManager : MonoBehaviour
 
     public void SetupLevel(LevelData level)
     {
+        StopAllCoroutines();
+
         currentLevel = level;
         gameEnded = false;
         isAnimating = false;
+        memoryCardsHidden = false;
+
         history.Clear();
+
         firstSelected = null;
+        pivotCard = null;
+        primedCard = null;
+
         boardCards.Clear();
 
         hintsUsed = 0;
@@ -113,12 +124,49 @@ public class BoardManager : MonoBehaviour
             card.Initialize(shuffled[i], i);
             boardCards.Add(card);
         }
-
+            // Chỉ úp thẻ ở những level bật Memory Mode
+        if (currentLevel.useMemoryMode)
+        {
+            StartCoroutine(PreviewThenHideCards());
+        }
+        else
+        {
+            // Các level bình thường luôn để thẻ ngửa
+            foreach (EventCard card in boardCards)
+            {
+                card.FlipUp();
+            }
+        }
         movesLeft = level.maxMoves;
         UpdateMovesUI();
         UpdateLimitsUI();
     }
+    // Hàm đặt ngửa thẻ sau x(s) thì úp xuống
+    private IEnumerator PreviewThenHideCards()
+    {
+        isAnimating = true;
+        memoryCardsHidden = false;
 
+        // Ban đầu cho tất cả thẻ ngửa
+        foreach (EventCard card in boardCards)
+        {
+            card.Deselect();
+            card.FlipUp();
+        }
+
+        // Chờ 3–5 giây theo thiết lập của LevelData
+        yield return new WaitForSeconds(currentLevel.previewTime);
+
+        // Hết thời gian: úp tất cả thẻ xuống
+        foreach (EventCard card in boardCards)
+        {
+            card.Deselect();
+            card.FlipDown();
+        }
+
+        memoryCardsHidden = true;
+        isAnimating = false;
+    }
     private void Shuffle(List<EventData> list)
     {
         for (int i = list.Count - 1; i > 0; i--)
@@ -140,16 +188,98 @@ public class BoardManager : MonoBehaviour
 
     public void OnCardClicked(EventCard card)
     {
-        if (gameEnded || isAnimating) return;
+        if (gameEnded || isAnimating)
+            return;
 
-        if (firstSelected == null)
+        // Level bình thường: chọn thẻ giống như trước
+        if (!currentLevel.useMemoryMode || !memoryCardsHidden)
         {
-            firstSelected = card;
-            card.Select();
+            HandleNormalCardClick(card);
+            return;
+        }
+
+        // Level thẻ ẩn: phải bấm hai lần
+        HandleMemoryCardClick(card);
+    }
+
+    // Xử lý khi chơi level thẻ ẩn
+    private void HandleMemoryCardClick(EventCard card)
+    {
+        // Lần bấm thứ nhất: đánh dấu thẻ
+        if (primedCard == null)
+        {
+            primedCard = card;
+            primedCard.SetMemoryMarked(true);
+
             AudioManager.Instance?.PlayClick();
             return;
         }
 
+        // Bấm sang một thẻ khác: chuyển dấu sang thẻ mới
+        if (primedCard != card)
+        {
+            primedCard.SetMemoryMarked(false);
+
+            primedCard = card;
+            primedCard.SetMemoryMarked(true);
+
+            AudioManager.Instance?.PlayClick();
+            return;
+        }
+
+        // Bấm lần thứ hai vào đúng thẻ đang được đánh dấu
+        EventCard confirmedCard = primedCard;
+        primedCard = null;
+
+        StartCoroutine(RevealAndConfirmCard(confirmedCard));
+    }
+
+    // Lật thẻ lên, chờ 1.2 giây, sau đó úp và cố định
+    private IEnumerator RevealAndConfirmCard(EventCard card)
+    {
+        isAnimating = true;
+
+        // Bỏ màu đánh dấu tạm thời
+        card.SetMemoryMarked(false);
+
+        // Lật thẻ lên
+        card.FlipUp();
+
+        AudioManager.Instance?.PlayClick();
+
+        // Chờ theo Reveal Time trong LevelData
+        yield return new WaitForSeconds(currentLevel.revealTime);
+
+        // Úp thẻ lại
+        card.FlipDown();
+
+        isAnimating = false;
+
+        // Cố định thẻ vào lượt đổi chỗ
+        HandleNormalCardClick(card);
+    }
+
+    // Logic chọn và đổi thẻ bình thường
+    private void HandleNormalCardClick(EventCard card)
+    {
+        // Selection Sort có luật riêng
+        if (currentLevel.sortMode == SortMode.SelectionSort)
+        {
+            HandleSelectionSort(card);
+            return;
+        }
+
+        // Chưa chọn thẻ thứ nhất
+        if (firstSelected == null)
+        {
+            firstSelected = card;
+            card.Select();
+
+            AudioManager.Instance?.PlayClick();
+            return;
+        }
+
+        // Bấm lại thẻ đã cố định: bỏ chọn
         if (firstSelected == card)
         {
             card.Deselect();
@@ -159,14 +289,31 @@ public class BoardManager : MonoBehaviour
 
         EventCard a = firstSelected;
         EventCard b = card;
+
         firstSelected = null;
+
+        // Kiểm tra luật Bubble Sort
+        if (currentLevel.sortMode == SortMode.BubbleSort)
+        {
+            int indexA = boardCards.IndexOf(a);
+            int indexB = boardCards.IndexOf(b);
+
+            // Chỉ cho phép đổi hai thẻ liền kề
+            if (Mathf.Abs(indexA - indexB) != 1)
+            {
+                a.Deselect();
+                b.Deselect();
+
+                AudioManager.Instance?.PlayClick();
+                return;
+            }
+        }
 
         a.Deselect();
         b.Deselect();
 
         StartCoroutine(AnimateSwap(a, b));
     }
-
     private IEnumerator AnimateSwap(EventCard a, EventCard b)
     {
         isAnimating = true;
@@ -366,4 +513,70 @@ public class BoardManager : MonoBehaviour
         if (undosLeftText != null)
             undosLeftText.text = (maxUndos - undosUsed).ToString();
     }
+    // ----- Luật chơi SelectionSort -----
+    private void HandleSelectionSort(EventCard card)
+    {
+        // Chưa chọn chốt
+        if (pivotCard == null)
+        {
+            pivotCard = card;
+            pivotCard.Select();
+
+            AudioManager.Instance?.PlayClick();
+            return;
+        }
+
+        // Bấm lại thẻ chốt: bỏ chọn, không mất lượt
+        if (pivotCard == card)
+        {
+            pivotCard.Deselect();
+            pivotCard = null;
+
+            AudioManager.Instance?.PlayClick();
+            return;
+        }
+
+        int pivotIndex = boardCards.IndexOf(pivotCard);
+        int minIndex = pivotIndex;
+
+        // Tìm thẻ có năm nhỏ nhất từ vị trí chốt đến cuối
+        for (int i = pivotIndex + 1; i < boardCards.Count; i++)
+        {
+            if (boardCards[i].Data.year <
+                boardCards[minIndex].Data.year)
+            {
+                minIndex = i;
+            }
+        }
+
+        bool isWrongSelection =
+            minIndex == pivotIndex ||
+            boardCards[minIndex] != card;
+
+        if (isWrongSelection)
+        {
+            Debug.Log("Sai! Bạn đã mất 1 lượt.");
+
+            AudioManager.Instance?.PlayClick();
+
+            pivotCard.Deselect();
+            pivotCard = null;
+
+            movesLeft--;
+            UpdateMovesUI();
+
+            CheckGameEnd();
+            return;
+        }
+
+        // Người chơi chọn đúng thẻ nhỏ nhất
+        EventCard a = pivotCard;
+        EventCard b = card;
+
+        pivotCard.Deselect();
+        pivotCard = null;
+
+        // AnimateSwap sẽ tự trừ 1 lượt và gọi CheckGameEnd()
+        StartCoroutine(AnimateSwap(a, b));
+    }   
 }

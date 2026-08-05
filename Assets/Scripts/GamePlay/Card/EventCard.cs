@@ -15,6 +15,11 @@ public class EventCard : MonoBehaviour, IPointerClickHandler
     public bool IsSelected;
 
     private CardVisual visual;
+    [Header("Memory Mode")]
+    [SerializeField] private GameObject frontSide;
+    [SerializeField] private GameObject backSide;
+
+    public bool IsFaceUp { get; private set; } = true;
 
     private void Awake()
     {
@@ -49,11 +54,38 @@ public class EventCard : MonoBehaviour, IPointerClickHandler
     {
         CurrentIndex = newIndex;
     }
+    // không thay đổi onpointerclick
+    public void SetMemoryMarked(bool marked)
+    {
+        visual?.SetMemoryMarked(marked);
+    }
 
     // Duoc goi tu dong khi nguoi choi bam/cham vao card (nho co EventSystem + Graphic Raycaster tren Canvas)
     public void OnPointerClick(PointerEventData eventData)
     {
         if (BoardManager.Instance != null)
             BoardManager.Instance.OnCardClicked(this);
+    }
+    // Úp mở các thẻ trong cách chơi chọn mù
+    public void FlipUp()
+    {
+        IsFaceUp = true;
+
+        if (frontSide != null)
+            frontSide.SetActive(true);
+
+        if (backSide != null)
+            backSide.SetActive(false);
+    }
+
+    public void FlipDown()
+    {
+        IsFaceUp = false;
+
+        if (frontSide != null)
+            frontSide.SetActive(false);
+
+        if (backSide != null)
+            backSide.SetActive(true);
     }
 }

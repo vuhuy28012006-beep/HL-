@@ -1,10 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Dat file nay vao: Assets/Scripts/Data/LevelData.cs
-// Dinh nghia du lieu cho 1 man choi: danh sach 5 EventData (sinh vat) + so luot doi toi da
+public enum SortMode
+{
+    FreeSwap,
+    BubbleSort,
+    SelectionSort
+}
 
-[CreateAssetMenu(fileName = "New Level", menuName = "Timeline Sort/Level Data")]
+[CreateAssetMenu(
+    fileName = "New Level",
+    menuName = "Timeline Sort/Level Data"
+)]
 public class LevelData : ScriptableObject
 {
     [Header("Level Info")]
@@ -16,4 +23,16 @@ public class LevelData : ScriptableObject
 
     [Header("Rules")]
     public int maxMoves = 5;
+    public SortMode sortMode = SortMode.FreeSwap;
+
+    [Header("Memory Mode")]
+    public bool useMemoryMode = false;
+
+    [Tooltip("Thời gian xem tất cả thẻ trước khi úp")]
+    [Range(3f, 5f)]
+    public float previewTime = 4f;
+
+    [Tooltip("Thời gian xem một thẻ sau khi lật")]
+    [Range(0.5f, 3f)]
+    public float revealTime = 2f;
 }
