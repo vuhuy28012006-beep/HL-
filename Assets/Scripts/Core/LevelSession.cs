@@ -18,7 +18,7 @@ public static class LevelSession
 {
     public static LevelData SelectedLevel;
 
-    public const string GameplaySceneName = "Gameplay";
+    public const string GameplaySceneName = "GamePlay";
 
     public static void LoadGameplayScene()
     {

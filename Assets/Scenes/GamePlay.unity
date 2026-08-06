@@ -249,7 +249,9 @@ MonoBehaviour:
   winPanel: {fileID: 75455821}
   losePanel: {fileID: 389059877}
   starsText: {fileID: 0}
-  allLevels: []
+  allLevels:
+  - {fileID: 11400000, guid: 0420558e03cba0f448fbaf2cbac5ae21, type: 2}
+  - {fileID: 11400000, guid: a6125937553dc164590b09469ee78209, type: 2}
 --- !u!1 &201976238
 GameObject:
   m_ObjectHideFlags: 0
