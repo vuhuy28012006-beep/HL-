@@ -50,4 +50,17 @@ public class LevelData : ScriptableObject
     [Tooltip("Thời gian xem một thẻ sau khi lật")]
     [Range(0.5f, 3f)]
     public float revealTime = 2f;
+    
+    [Header("Level Tutorial")]
+    public bool showLevelTutorial = true;
+
+    [Tooltip("Tiêu đề hướng dẫn riêng của màn")]
+    public string tutorialTitle = "HƯỚNG DẪN";
+
+    [TextArea(3, 10)]
+    [Tooltip("Nội dung hướng dẫn riêng của màn")]
+    public string tutorialText;
+
+    [Tooltip("Ảnh minh họa hướng dẫn riêng của màn")]
+    public Sprite tutorialImage;
 }

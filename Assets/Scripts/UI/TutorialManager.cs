@@ -1,84 +1,171 @@
+using TMPro;
 using UnityEngine;
-
-// Dat file nay vao: Assets/Scripts/UI/TutorialManager.cs
-//
-// CACH GAN TRONG UNITY EDITOR:
-// 1. Trong Canvas cua scene GamePlay, tao 1 Panel full-man-hinh, dat ten "Panel_Tutorial"
-//    (nen la 1 Image mau den mo, Raycast Target = true, de chan click xuyen xuong board o duoi).
-//    Panel nay nen nam duoi cung cua Canvas (sibling index cuoi) de luon ve tren het.
-// 2. Ben trong Panel_Tutorial, tao 2 panel con:
-//      - "Page1_CachSapXep"  : anh/text huong dan cach chon 2 the de doi cho, muc tieu sap
-//                              xep theo dung thu tu. Co 1 nut "Tiep theo".
-//      - "Page2_CachDungHint": anh/text huong dan nut Hint + popup 2 lua chon
-//                              (Goi y 1 cap / Xem thu tu toan bo). Co 1 nut "Bat dau choi".
-// 3. Tao 1 GameObject rong (hoac gan thang vao BoardManager/Canvas), them component
-//    TutorialManager nay vao, keo:
-//      - Tutorial Panel   = Panel_Tutorial
-//      - Page 1           = Page1_CachSapXep
-//      - Page 2           = Page2_CachDungHint
-// 4. Nut "Tiep theo" (o Page1) -> OnClick goi TutorialManager.NextPage
-//    Nut "Bat dau choi" (o Page2) -> OnClick goi TutorialManager.CloseTutorial
-//    (Neu muon co nut "Bo qua" o Page1 -> goi TutorialManager.CloseTutorial luon cung duoc)
-//
-// Neu sau nay muon them nut "?" o man GamePlay de nguoi choi xem lai huong dan bat ky luc nao,
-// gan nut do OnClick -> TutorialManager.OpenTutorialManually.
+using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
-    [Header("References")]
+    [Header("Tutorial UI")]
     [SerializeField] private GameObject tutorialPanel;
-    [SerializeField] private GameObject page1;
-    [SerializeField] private GameObject page2;
+    [SerializeField] private TMP_Text titleText;
+    [SerializeField] private TMP_Text tutorialText;
+    [SerializeField] private Image tutorialImage;
+    [SerializeField] private TMP_Text continueButtonText;
 
-    [Header("Chi hien 1 lan duy nhat")]
-    [SerializeField] private string prefsKey = "Tutorial_GamePlay_Seen";
+    [Header("Huong dan chung")]
+    [SerializeField] private string generalTitle = "HƯỚNG DẪN CHUNG";
 
-    private void Start()
+    [TextArea(3, 10)]
+    [SerializeField] private string generalText =
+        "Chọn các thẻ để đổi vị trí.\n" +
+        "Sắp xếp các sự kiện theo đúng thứ tự thời gian.";
+
+    [SerializeField] private Sprite generalImage;
+
+    [Header("Luu trang thai")]
+    [SerializeField] private string generalTutorialPrefsKey =
+        "General_Tutorial_Seen";
+
+    private LevelData currentLevel;
+
+    // True khi đang hiển thị hướng dẫn chung.
+    private bool isShowingGeneralTutorial;
+
+    /// <summary>
+    /// Gọi khi bắt đầu một màn chơi.
+    /// </summary>
+    public void StartTutorial(LevelData level)
     {
-        bool daXem = PlayerPrefs.GetInt(prefsKey, 0) == 1;
+        currentLevel = level;
 
-        if (!daXem)
-            ShowFromStart();
-        else
-            HideTutorial();
+        bool hasSeenGeneralTutorial =
+            PlayerPrefs.GetInt(generalTutorialPrefsKey, 0) == 1;
+
+        if (!hasSeenGeneralTutorial)
+        {
+            ShowGeneralTutorial();
+            return;
+        }
+
+        ShowCurrentLevelTutorial();
     }
 
-    // Goi ham nay tu nut "?" (neu co) de xem lai huong dan bat ky luc nao,
-    // khong quan tam da xem hay chua.
+    private void ShowGeneralTutorial()
+    {
+        isShowingGeneralTutorial = true;
+
+        SetTutorialContent(
+            generalTitle,
+            generalText,
+            generalImage,
+            "TIẾP TỤC"
+        );
+
+        ShowPanel();
+    }
+
+    private void ShowCurrentLevelTutorial()
+    {
+        isShowingGeneralTutorial = false;
+
+        if (currentLevel == null || !currentLevel.showLevelTutorial)
+        {
+            HideTutorial();
+            return;
+        }
+
+        SetTutorialContent(
+            currentLevel.tutorialTitle,
+            currentLevel.tutorialText,
+            currentLevel.tutorialImage,
+            "BẮT ĐẦU"
+        );
+
+        ShowPanel();
+    }
+
+    /// <summary>
+    /// Gắn hàm này vào nút BtnContinue.
+    /// </summary>
+    public void ContinueTutorial()
+    {
+        if (isShowingGeneralTutorial)
+        {
+            PlayerPrefs.SetInt(generalTutorialPrefsKey, 1);
+            PlayerPrefs.Save();
+
+            ShowCurrentLevelTutorial();
+            return;
+        }
+
+        HideTutorial();
+    }
+
+    /// <summary>
+    /// Dùng cho nút dấu hỏi để xem lại hướng dẫn màn hiện tại.
+    /// </summary>
     public void OpenTutorialManually()
     {
-        ShowFromStart();
-    }
-
-    private void ShowFromStart()
-    {
-        if (tutorialPanel != null) tutorialPanel.SetActive(true);
-        if (page1 != null) page1.SetActive(true);
-        if (page2 != null) page2.SetActive(false);
-    }
-
-    public void NextPage()
-    {
-        if (page1 != null) page1.SetActive(false);
-        if (page2 != null) page2.SetActive(true);
-    }
-
-    public void PrevPage()
-    {
-        if (page2 != null) page2.SetActive(false);
-        if (page1 != null) page1.SetActive(true);
+        ShowCurrentLevelTutorial();
     }
 
     public void CloseTutorial()
     {
         HideTutorial();
+    }
 
-        PlayerPrefs.SetInt(prefsKey, 1);
-        PlayerPrefs.Save();
+    private void SetTutorialContent(
+        string title,
+        string content,
+        Sprite image,
+        string buttonText)
+    {
+        if (titleText != null)
+            titleText.text = title;
+
+        if (tutorialText != null)
+            tutorialText.text = content;
+
+        if (continueButtonText != null)
+            continueButtonText.text = buttonText;
+
+        if (tutorialImage != null)
+        {
+            bool hasImage = image != null;
+
+            tutorialImage.gameObject.SetActive(hasImage);
+
+            if (hasImage)
+            {
+                tutorialImage.sprite = image;
+                tutorialImage.preserveAspect = true;
+            }
+        }
+    }
+
+    private void ShowPanel()
+    {
+        Time.timeScale = 0f;    // Dừng đếm giờ khi đọc hướng dẫn
+
+        if (tutorialPanel != null)
+            tutorialPanel.SetActive(true);
     }
 
     private void HideTutorial()
     {
-        if (tutorialPanel != null) tutorialPanel.SetActive(false);
+        if (tutorialPanel != null)
+            tutorialPanel.SetActive(false);
+
+        Time.timeScale = 1f;
     }
+
+    // Dùng để thử lại hướng dẫn chung trong Unity.
+    [ContextMenu("Reset General Tutorial")]
+    private void ResetGeneralTutorial()
+    {
+        PlayerPrefs.DeleteKey(generalTutorialPrefsKey);
+        PlayerPrefs.Save();
+
+        Debug.Log("Da reset huong dan chung.");
+    }
+    private void OnDestroy(){   Time.timeScale = 1f;       } 
 }

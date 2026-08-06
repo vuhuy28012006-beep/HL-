@@ -14,6 +14,7 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private Transform cardRow;
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private LevelData currentLevel;
+    [SerializeField] private TutorialManager tutorialManager;
 
     [Header("UI (khong bat buoc, co the de trong)")]
     [SerializeField] private TMP_Text movesLeftText;
@@ -180,6 +181,10 @@ public class BoardManager : MonoBehaviour
 
         UpdateMovesUI();
         UpdateLimitsUI();
+        if (tutorialManager != null)
+        {
+            tutorialManager.StartTutorial(currentLevel);
+        }
     }
     // Hàm đặt ngửa thẻ sau x(s) thì úp xuống
     private IEnumerator PreviewThenHideCards()
