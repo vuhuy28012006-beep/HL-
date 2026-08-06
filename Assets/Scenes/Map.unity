@@ -401,9 +401,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   winPanel: {fileID: 0}
   losePanel: {fileID: 0}
-  starImages: []
-  filledStar: {fileID: 0}
-  emptyStar: {fileID: 0}
   starsText: {fileID: 0}
   allLevels: []
 --- !u!4 &340153266
@@ -652,7 +649,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 340153265}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: GoToMenu
+        m_MethodName: GoToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

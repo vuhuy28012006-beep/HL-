@@ -15,9 +15,15 @@ MonoBehaviour:
   levelNumber: 2
   levelName: 2
   events:
-  - {fileID: 11400000, guid: 4e34ddec57e6ab14a8465f02945ed769, type: 2}
-  - {fileID: 11400000, guid: 8e8ece63985b6854999c073790a22f93, type: 2}
-  - {fileID: 11400000, guid: 2123caa9bd99e774da4f036e685214ac, type: 2}
+  - {fileID: 11400000, guid: 02dea6f3e82403044818ebf9c5d96222, type: 2}
+  - {fileID: 11400000, guid: 0253b1c1d4ba9b24dad00613fe9dfbc4, type: 2}
+  - {fileID: 11400000, guid: c362aa1425cefdf42bd8e6d02140a020, type: 2}
   - {fileID: 11400000, guid: 7e07a2eeca37d6747af3fa9af3e53451, type: 2}
-  - {fileID: 11400000, guid: c1d5cd9f0880d3f4e9f552f72c9302d1, type: 2}
+  - {fileID: 11400000, guid: d27db6c783746b241a400739e675519c, type: 2}
+  sortMode: 0
+  limitType: 0
   maxMoves: 5
+  timeLimitSeconds: 60
+  useMemoryMode: 0
+  previewTime: 4
+  revealTime: 2

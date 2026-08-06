@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec4d376e448d3454c81d63c5541c3e3d, type: 3}
-  m_Name: Haikouichthys
+  m_Name: human2
   m_EditorClassIdentifier: 
-  id: 123
-  eventName: Haikouichthys
-  year: 3
-  image: {fileID: 21300000, guid: bef20b2b0945af5409e633c664664a80, type: 3}
+  id: 112
+  eventName: Homo habilis
+  year: 2
+  image: {fileID: 21300000, guid: b20693eeabb25a443b53da9e3a2e0991, type: 3}

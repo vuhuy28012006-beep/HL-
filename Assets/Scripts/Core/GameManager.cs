@@ -85,6 +85,16 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Map");
     }
+    
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+    
+    public void CompleteTutorial()
+    {
+        SaveManager.SetTutorialCompleted();
+    }
 
     public void GoToNextLevel()
     {

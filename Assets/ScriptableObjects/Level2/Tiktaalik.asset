@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec4d376e448d3454c81d63c5541c3e3d, type: 3}
-  m_Name: Haikouichthys
+  m_Name: Tiktaalik
   m_EditorClassIdentifier: 
-  id: 123
-  eventName: Haikouichthys
-  year: 3
-  image: {fileID: 21300000, guid: bef20b2b0945af5409e633c664664a80, type: 3}
+  id: 124
+  eventName: Tiktaalik
+  year: 5
+  image: {fileID: 21300000, guid: d9f683b0419aabc42a150be70aef6dc3, type: 3}
