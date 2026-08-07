@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 // Ghi de vao: Assets/Scripts/Core/GameManager.cs
 
@@ -13,10 +14,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
 
-    [Header("Win Panel - hien thi ket qua (khong bat buoc)")]
+    [Header("Win Panel - hien thi ket qua")]
     [SerializeField] private TMPro.TMP_Text starsText;
 
-    [Header("Danh sach TOAN BO LevelData trong game (keo het vao day)")]
+    [Header("Win Panel - Stars")]
+    [SerializeField] private Image[] starImages;
+    [SerializeField] private Sprite filledStar;
+    [SerializeField] private Sprite emptyStar;
+
+    [Header("Danh sach TOAN BO LevelData trong game")]
     [SerializeField] private LevelData[] allLevels;
 
     private int currentLevelNumber;
@@ -24,9 +30,13 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+        }
         else
+        {
             Destroy(gameObject);
+        }
     }
 
     private void Start()
@@ -37,8 +47,12 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         CurrentState = GameState.Playing;
-        if (winPanel != null) winPanel.SetActive(false);
-        if (losePanel != null) losePanel.SetActive(false);
+
+        if (winPanel != null)
+            winPanel.SetActive(false);
+
+        if (losePanel != null)
+            losePanel.SetActive(false);
     }
 
     public void WinGame(int movesLeft, int maxMoves, int levelNumber)
@@ -54,64 +68,118 @@ public class GameManager : MonoBehaviour
         if (starsText != null)
             starsText.text = stars + " sao";
 
-        if (winPanel != null) winPanel.SetActive(true);
+        // Bật panel trước để các Image ngôi sao hoạt động.
+        if (winPanel != null)
+            winPanel.SetActive(true);
+
+        ShowStars(stars);
     }
 
     private int CalculateStars(int movesLeft, int maxMoves)
     {
-        if (maxMoves <= 0) return 3;
-        if (movesLeft >= maxMoves / 2f) return 3;
-        if (movesLeft >= 1) return 2;
+        if (maxMoves <= 0)
+            return 3;
+
+        if (movesLeft >= maxMoves / 2f)
+            return 3;
+
+        if (movesLeft >= 1)
+            return 2;
+
         return 1;
+    }
+
+    private void ShowStars(int earnedStars)
+    {
+        if (starImages == null || starImages.Length == 0)
+        {
+            Debug.LogWarning("Chua gan Star Images trong GameManager.");
+            return;
+        }
+
+        if (filledStar == null || emptyStar == null)
+        {
+            Debug.LogWarning("Chua gan Filled Star hoac Empty Star.");
+            return;
+        }
+
+        earnedStars = Mathf.Clamp(earnedStars, 0, starImages.Length);
+
+        for (int i = 0; i < starImages.Length; i++)
+        {
+            if (starImages[i] == null)
+                continue;
+
+            starImages[i].sprite =
+                i < earnedStars ? filledStar : emptyStar;
+
+            starImages[i].color = Color.white;
+            starImages[i].enabled = true;
+        }
     }
 
     public void LoseGame()
     {
         CurrentState = GameState.Lose;
-        if (losePanel != null) losePanel.SetActive(true);
+
+        if (losePanel != null)
+            losePanel.SetActive(true);
     }
 
     public void RestartLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1f;
+        LevelSession.SkipTutorialOnce = true;
+
+        SceneManager.LoadScene(
+            SceneManager.GetActiveScene().buildIndex
+        );
     }
 
     public void BackToMenu()
     {
+        Time.timeScale = 1f;
+        LevelSession.SkipTutorialOnce = false;
+
         SceneManager.LoadScene("LevelSelect");
     }
 
     public void GoToMap()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Map");
-    }
-    
-    public void GoToMainMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
-    }
-    
-    public void CompleteTutorial()
-    {
-        SaveManager.SetTutorialCompleted();
     }
 
     public void GoToNextLevel()
     {
-        int nextNumber = currentLevelNumber + 1;
+        int nextLevelNumber = currentLevelNumber + 1;
+
+        if (allLevels == null || allLevels.Length == 0)
+        {
+            Debug.LogError(
+                "Chua gan All Levels trong Inspector cua GameManager."
+            );
+            return;
+        }
 
         foreach (LevelData level in allLevels)
         {
-            if (level != null && level.levelNumber == nextNumber)
+            if (level == null)
+                continue;
+
+            if (level.levelNumber == nextLevelNumber)
             {
+                Time.timeScale = 1f;
+                LevelSession.SkipTutorialOnce = false;
                 LevelSession.SelectedLevel = level;
                 LevelSession.LoadGameplayScene();
                 return;
             }
         }
 
-        Debug.Log("Chua co level tiep theo (level " + nextNumber + ") - quay ve menu");
-        BackToMenu();
+        Debug.LogWarning(
+            "Khong tim thay LevelData cua level " + nextLevelNumber
+        );
     }
 
     public void QuitGame()
