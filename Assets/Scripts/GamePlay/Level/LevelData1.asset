@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LevelData1
   m_EditorClassIdentifier: 
   levelNumber: 1
-  levelName: 1
+  levelName: 01
   events:
   - {fileID: 11400000, guid: e30d7bc68bbd244469ba5dc1f5ae2486, type: 2}
   - {fileID: 11400000, guid: 8e8ece63985b6854999c073790a22f93, type: 2}
