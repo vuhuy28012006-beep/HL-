@@ -402,6 +402,9 @@ MonoBehaviour:
   winPanel: {fileID: 0}
   losePanel: {fileID: 0}
   starsText: {fileID: 0}
+  starImages: []
+  filledStar: {fileID: 0}
+  emptyStar: {fileID: 0}
   allLevels: []
 --- !u!4 &340153266
 Transform:
@@ -471,6 +474,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chapter: {fileID: 11400000, guid: 3b1010c69732bf04da207c824c8e7423, type: 2}
+  levelsInChapter: []
+  starsText: {fileID: 0}
 --- !u!114 &530702337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,7 +654,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 340153265}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: GoToMainMenu
+        m_MethodName: BackToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -913,10 +918,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PopupToggle, Assembly-CSharp
-        m_MethodName: Close
-        m_Mode: 1
+      - m_Target: {fileID: 1531881500}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
