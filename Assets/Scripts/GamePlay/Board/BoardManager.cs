@@ -32,6 +32,9 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private GameObject hintOptionsPanel; // panel co 2 nut: "Goi y 1 cap" / "Xem thu tu toan bo"
 
     private List<EventCard> boardCards = new List<EventCard>();
+    // Lưu thứ tự thẻ lúc màn chơi bắt đầu.
+    // Reset sẽ khôi phục đúng thứ tự này, không random lại.
+    private List<EventData> initialCardOrder = new List<EventData>();
     private EventCard firstSelected;
     private EventCard pivotCard;    //thẻ chốt
     private EventCard primedCard;   //thẻ được đánh dấu đã mở trong MemoryMode
@@ -116,6 +119,12 @@ public class BoardManager : MonoBehaviour
 
     public void SetupLevel(LevelData level)
     {
+        // Khi bắt đầu màn lần đầu: tạo thứ tự ngẫu nhiên mới.
+        SetupLevelInternal(level, true);
+    }
+
+    private void SetupLevelInternal(LevelData level, bool createNewOrder)
+    {
         StopAllCoroutines();
 
         currentLevel = level;
@@ -136,55 +145,85 @@ public class BoardManager : MonoBehaviour
         hintsUsed = 0;
         undosUsed = 0;
 
+        CloseHintOptions();
+
+        // Xóa các thẻ hiện tại.
         for (int i = cardRow.childCount - 1; i >= 0; i--)
-            Destroy(cardRow.GetChild(i).gameObject);
-
-        List<EventData> shuffled = new List<EventData>(level.events);
-        Shuffle(shuffled);
-
-        int safety = 0;
-        while (IsSorted(shuffled) && safety < 10)
         {
-            Shuffle(shuffled);
-            safety++;
+            cardRow.GetChild(i).gameObject.SetActive(false);
+            Destroy(cardRow.GetChild(i).gameObject);
         }
 
-        for (int i = 0; i < shuffled.Count; i++)
+        List<EventData> cardOrder;
+
+        if (createNewOrder || initialCardOrder.Count == 0)
+        {
+            // Chỉ random khi bắt đầu màn lần đầu.
+            cardOrder = new List<EventData>(level.events);
+            Shuffle(cardOrder);
+
+            int safety = 0;
+
+            while (IsSorted(cardOrder) && safety < 10)
+            {
+                Shuffle(cardOrder);
+                safety++;
+            }
+
+            // Ghi nhớ thứ tự ban đầu.
+            initialCardOrder = new List<EventData>(cardOrder);
+        }
+        else
+        {
+            // Reset: sử dụng lại đúng thứ tự ban đầu.
+            cardOrder = new List<EventData>(initialCardOrder);
+        }
+
+        for (int i = 0; i < cardOrder.Count; i++)
         {
             GameObject go = Instantiate(cardPrefab, cardRow);
             EventCard card = go.GetComponent<EventCard>();
-            card.Initialize(shuffled[i], i);
+
+            card.Initialize(cardOrder[i], i);
             boardCards.Add(card);
         }
-            // Chỉ úp thẻ ở những level bật Memory Mode
+
+        movesLeft = level.maxMoves;
+        timeLeft = level.timeLimitSeconds;
+
         if (currentLevel.useMemoryMode)
         {
             StartCoroutine(PreviewThenHideCards());
         }
         else
         {
-            // Các level bình thường luôn để thẻ ngửa
             foreach (EventCard card in boardCards)
             {
+                card.Deselect();
                 card.FlipUp();
             }
         }
-        movesLeft = level.maxMoves;
-        timeLeft = level.timeLimitSeconds;
-        /*
-        * Level thường: đồng hồ chạy ngay.
-        * Level Memory: đợi xem trước và úp thẻ xong mới chạy.
-        */
+
         timerRunning =
             level.limitType == LevelLimitType.Time &&
             !level.useMemoryMode;
 
         UpdateMovesUI();
         UpdateLimitsUI();
-        if (tutorialManager != null)
+
+        // Chỉ hiện hướng dẫn khi bắt đầu màn lần đầu.
+        // Reset sẽ không mở lại hướng dẫn.
+        if (createNewOrder && tutorialManager != null)
         {
             tutorialManager.StartTutorial(currentLevel);
         }
+    }
+    public void ResetLevel()
+    {
+        if (currentLevel == null)
+            return;
+
+        SetupLevelInternal(currentLevel, false);
     }
     // Hàm đặt ngửa thẻ sau x(s) thì úp xuống
     private IEnumerator PreviewThenHideCards()
