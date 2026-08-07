@@ -101,11 +101,26 @@ public class TutorialManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Dùng cho nút dấu hỏi để xem lại hướng dẫn màn hiện tại.
+    /// Dùng cho nút chấm than để xem lại hướng dẫn màn hiện tại.
     /// </summary>
     public void OpenTutorialManually()
     {
-        ShowCurrentLevelTutorial();
+        if (currentLevel == null)
+        {
+            Debug.LogWarning("Chua co LevelData de hien thi huong dan.");
+            return;
+        }
+
+        isShowingGeneralTutorial = false;
+
+        SetTutorialContent(
+            currentLevel.tutorialTitle,
+            currentLevel.tutorialText,
+            currentLevel.tutorialImage,
+            "ĐÓNG"
+        );
+
+        ShowPanel();
     }
 
     public void CloseTutorial()

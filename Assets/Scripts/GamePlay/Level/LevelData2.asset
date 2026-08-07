@@ -27,3 +27,7 @@ MonoBehaviour:
   useMemoryMode: 0
   previewTime: 4
   revealTime: 2
+  showLevelTutorial: 1
+  tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN M\xC0N 1"
+  tutorialText: "Ch\u1ECDn l\u1EA7n l\u01B0\u1EE3t 2 th\u1EBB s\u1EF1 ki\u1EC7n"
+  tutorialImage: {fileID: 0}
