@@ -63,4 +63,11 @@ public class LevelData : ScriptableObject
 
     [Tooltip("Ảnh minh họa hướng dẫn riêng của màn")]
     public Sprite tutorialImage;
+
+    [Header("Scene GamePlay rieng cho man nay")]
+    [Tooltip("Ten scene GamePlay rieng cho man nay (phai duoc them vao " +
+        "File > Build Settings > Scenes In Build). De trong hoac giu " +
+        "\"GamePlay\" se dung scene GamePlay chung mac dinh, khong pha vo " +
+        "cac man cu.")]
+    public string gameplaySceneName = "GamePlay";
 }

@@ -158,17 +158,9 @@ public class BoardManager : MonoBehaviour
 
         if (createNewOrder || initialCardOrder.Count == 0)
         {
-            // Chỉ random khi bắt đầu màn lần đầu.
+            // Khong random nua: luon dung dung thu tu the da khai bao san
+            // trong danh sach "events" cua LevelData (co dinh moi lan choi).
             cardOrder = new List<EventData>(level.events);
-            Shuffle(cardOrder);
-
-            int safety = 0;
-
-            while (IsSorted(cardOrder) && safety < 10)
-            {
-                Shuffle(cardOrder);
-                safety++;
-            }
 
             // Ghi nhớ thứ tự ban đầu.
             initialCardOrder = new List<EventData>(cardOrder);

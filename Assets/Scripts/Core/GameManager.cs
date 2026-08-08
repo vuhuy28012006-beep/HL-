@@ -149,6 +149,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("Map");
     }
+    public void GoToMainMap()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMap");
+    }
 
     public void GoToNextLevel()
     {
@@ -172,7 +177,7 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1f;
                 LevelSession.SkipTutorialOnce = false;
                 LevelSession.SelectedLevel = level;
-                LevelSession.LoadGameplayScene();
+                LevelSession.LoadGameplayScene(level.gameplaySceneName);
                 return;
             }
         }

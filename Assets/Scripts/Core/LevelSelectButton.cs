@@ -73,6 +73,6 @@ public class LevelSelectButton : MonoBehaviour
         }
 
         LevelSession.SelectedLevel = levelData;
-        LevelSession.LoadGameplayScene();
+        LevelSession.LoadGameplayScene(levelData.gameplaySceneName);
     }
 }

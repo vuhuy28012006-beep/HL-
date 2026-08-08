@@ -22,8 +22,18 @@ public static class LevelSession
 
     public const string GameplaySceneName = "GamePlay";
 
+    // Giu lai ham cu, khong pha vo noi nao dang goi.
     public static void LoadGameplayScene()
     {
         SceneManager.LoadScene(GameplaySceneName);
+    }
+
+    // Overload moi: load dung scene GamePlay rieng cua man (neu co khai bao).
+    public static void LoadGameplayScene(string sceneName)
+    {
+        if (string.IsNullOrEmpty(sceneName))
+            sceneName = GameplaySceneName;
+
+        SceneManager.LoadScene(sceneName);
     }
 }
