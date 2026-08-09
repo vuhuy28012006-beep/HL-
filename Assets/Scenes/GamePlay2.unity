@@ -390,7 +390,7 @@ MonoBehaviour:
   filledStar: {fileID: 21300000, guid: c57c24cd6b09fd141b785664ec792ee1, type: 3}
   emptyStar: {fileID: 21300000, guid: d75c90c7d4acbe74e95442c25bf4d541, type: 3}
   allLevels:
-  - {fileID: 11400000, guid: 52627b7761d0aec4cad444ab1ddfe0b3, type: 2}
+  - {fileID: 11400000, guid: c7161a9ce535e784180625b88be96032, type: 2}
 --- !u!1 &201976238
 GameObject:
   m_ObjectHideFlags: 0
@@ -1426,7 +1426,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9879c597bc8e63142b54109535059bda, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 505ee12ec45420f4eacc537f26a30f44, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

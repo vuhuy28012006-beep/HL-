@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12f7587fdc4da154894b5e8afcb5c5ea, type: 3}
-  m_Name: LevelData1
+  m_Name: LevelData2.1
   m_EditorClassIdentifier: 
   levelNumber: 1
-  levelName: 01
+  levelName: 
   events:
-  - {fileID: 11400000, guid: e30d7bc68bbd244469ba5dc1f5ae2486, type: 2}
-  - {fileID: 11400000, guid: c1d5cd9f0880d3f4e9f552f72c9302d1, type: 2}
-  - {fileID: 11400000, guid: 8e8ece63985b6854999c073790a22f93, type: 2}
-  - {fileID: 11400000, guid: 2123caa9bd99e774da4f036e685214ac, type: 2}
-  - {fileID: 11400000, guid: 4e34ddec57e6ab14a8465f02945ed769, type: 2}
-  sortMode: 0
-  limitType: 1
-  maxMoves: 5
+  - {fileID: 11400000, guid: e9de66eedd7de274b83f7af417f96fe7, type: 2}
+  - {fileID: 11400000, guid: 743e61d705937124bae245fa4c417783, type: 2}
+  - {fileID: 11400000, guid: e8b77aa1fc6d5c3479f4138edba0a129, type: 2}
+  - {fileID: 11400000, guid: a1e347254cd54a042ad614655dfbafae, type: 2}
+  - {fileID: 11400000, guid: 4066e1fbabe72fc4da1b1ccf468084d4, type: 2}
+  - {fileID: 11400000, guid: ca98fe46339734e4b97075b8fb1fb9cf, type: 2}
+  sortMode: 1
+  limitType: 0
+  maxMoves: 12
   timeLimitSeconds: 60
   useMemoryMode: 0
   previewTime: 4
@@ -31,3 +32,4 @@ MonoBehaviour:
   tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN"
   tutorialText: 
   tutorialImage: {fileID: 0}
+  gameplaySceneName: GamePlay2

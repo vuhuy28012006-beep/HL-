@@ -1435,7 +1435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chapter: {fileID: 11400000, guid: 4c0a58a76bf83be468a54987beea191e, type: 2}
   levelsInChapter:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 52627b7761d0aec4cad444ab1ddfe0b3, type: 2}
   starsText: {fileID: 2048255930}
 --- !u!114 &1772977574
 MonoBehaviour:
@@ -1812,8 +1812,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdb0566e9739f974895068b916543fef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chapter: {fileID: 0}
-  levelsInChapter: []
+  chapter: {fileID: 11400000, guid: b8fb7e21c5d89c8409be0b81eecd02d4, type: 2}
+  levelsInChapter:
+  - {fileID: 11400000, guid: c7161a9ce535e784180625b88be96032, type: 2}
   starsText: {fileID: 1156502206}
 --- !u!1 &2135283145
 GameObject:
