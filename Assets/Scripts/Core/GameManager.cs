@@ -65,6 +65,13 @@ public class GameManager : MonoBehaviour
         SaveManager.SetStars(levelNumber, stars);
         SaveManager.UnlockLevel(levelNumber + 1);
 
+        // Neu scene hien tai la scene Tutorial_Swap thi danh dau da hoc xong
+        // tutorial, de lan sau bam Play se vao thang Map, khong hien lai nua.
+        if (SceneManager.GetActiveScene().name == "Tutorial_Swap")
+        {
+            SaveManager.SetTutorialCompleted();
+        }
+
         if (starsText != null)
             starsText.text = stars + " sao";
 
@@ -149,10 +156,10 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("Map");
     }
-    public void GoToMainMap()
+    public void GoToMainMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMap");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void GoToNextLevel()
