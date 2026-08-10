@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec4d376e448d3454c81d63c5541c3e3d, type: 3}
+  m_Name: Hg
+  m_EditorClassIdentifier: 
+  id: 425
+  eventName: "Th\u1EE7y ng\xE2n"
+  year: 5
+  image: {fileID: 21300000, guid: e1d0dd4c1d9efe14b8b3544ca090fbe9, type: 3}

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f7587fdc4da154894b5e8afcb5c5ea, type: 3}
+  m_Name: LevelData4.2
+  m_EditorClassIdentifier: 
+  levelNumber: 2
+  levelName: 4.2
+  events:
+  - {fileID: 11400000, guid: fc99638132dd2e44aa794d893fb18935, type: 2}
+  - {fileID: 11400000, guid: efdcc6917b04007419bada2a890e1fac, type: 2}
+  - {fileID: 11400000, guid: 8a294fd913c9253429665e1ddcd5e4c9, type: 2}
+  - {fileID: 11400000, guid: 7c61267793ead0f4fab491355fb2dca3, type: 2}
+  - {fileID: 11400000, guid: 760ec1286370cbf4d8c069fdd8396d0d, type: 2}
+  sortMode: 1
+  limitType: 0
+  maxMoves: 9
+  timeLimitSeconds: 60
+  useMemoryMode: 0
+  previewTime: 4
+  revealTime: 2
+  showLevelTutorial: 1
+  tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN"
+  tutorialText: Bubble Sort
+  tutorialImage: {fileID: 0}
+  gameplaySceneName: GamePlay4

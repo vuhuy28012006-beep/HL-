@@ -16,6 +16,11 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private LevelData currentLevel;
     [SerializeField] private TutorialManager tutorialManager;
 
+    [Header("Vi tri tuy chinh cho tung the (thay cho HorizontalLayoutGroup)")]
+    [Tooltip("Keo cac Empty GameObject (RectTransform) danh dau vi tri vao day, theo dung thu tu tu trai sang phai. " +
+             "So luong slot phai >= so the toi da trong level. Neu de trong, code se fallback ve HorizontalLayoutGroup (neu co).")]
+    [SerializeField] private RectTransform[] cardSlots;
+
     [Header("UI (khong bat buoc, co the de trong)")]
     [SerializeField] private TMP_Text movesLeftText;
 
@@ -179,6 +184,8 @@ public class BoardManager : MonoBehaviour
             card.Initialize(cardOrder[i], i);
             boardCards.Add(card);
         }
+
+        PositionCards();
 
         movesLeft = level.maxMoves;
         timeLeft = level.timeLimitSeconds;
@@ -467,6 +474,8 @@ public class BoardManager : MonoBehaviour
         RectTransform ra = a.GetComponent<RectTransform>();
         RectTransform rb = b.GetComponent<RectTransform>();
 
+        // Neu cardRow van con HorizontalLayoutGroup (chua go trong Inspector) thi tam tat
+        // trong luc dang tween, tranh no tu dong keo the ve vi tri "giao deu".
         HorizontalLayoutGroup layout = cardRow.GetComponent<HorizontalLayoutGroup>();
         if (layout != null) layout.enabled = false;
 
@@ -508,6 +517,88 @@ public class BoardManager : MonoBehaviour
             boardCards[i].transform.SetSiblingIndex(i);
             boardCards[i].SetIndex(i);
         }
+
+        // Dat lai vi tri theo slot tu chinh (khong con giao cho HorizontalLayoutGroup tu giai đeu).
+        PositionCards();
+    }
+
+    // Gan vi tri tung the theo dung slot (RectTransform) da duoc keo tay trong Inspector,
+    // theo thu tu hien tai trong boardCards. Neu khong co du slot, giu nguyen vi tri hien tai.
+    private void PositionCards()
+    {
+        if (cardSlots == null || cardSlots.Length == 0)
+            return; // khong co slot tuy chinh -> giu hanh vi cu (vd: HorizontalLayoutGroup neu con gan)
+
+        for (int i = 0; i < boardCards.Count; i++)
+        {
+            if (i >= cardSlots.Length || cardSlots[i] == null)
+                continue;
+
+            RectTransform rt = boardCards[i].GetComponent<RectTransform>();
+            if (rt == null)
+                continue;
+
+            rt.anchoredPosition = cardSlots[i].anchoredPosition;
+
+            // Dong bo luon kich thuoc: Slot to thi the to, Slot nho thi the nho.
+            rt.sizeDelta = cardSlots[i].sizeDelta;
+        }
+    }
+
+    // === TIEN ICH: click phai vao component BoardManager trong Inspector -> chon muc nay ===
+    // Tu dong tao san N slot (Empty GameObject co RectTransform) duoi cardRow, xep deu
+    // giong nhu HorizontalLayoutGroup dang lam, de ban co diem bat dau roi tu keo chinh lai.
+    // So luong slot = so the toi da trong cac LevelData da gan (hoac tu nhap slotCountToGenerate).
+    [Header("Tao slot tu dong (chi dung trong Editor)")]
+    [SerializeField] private int slotCountToGenerate = 6;
+    [SerializeField] private float slotSpacingX = 200f;
+    [SerializeField] private float slotWidth = 170f;
+    [SerializeField] private float slotHeight = 240f;
+
+    [ContextMenu("Auto Tao Slot Vi Tri (deu nhau, roi tu chinh tay)")]
+    private void AutoGenerateSlots()
+    {
+        if (cardRow == null)
+        {
+            Debug.LogError("Chua gan Card Row!", this);
+            return;
+        }
+
+        // Xoa cac slot cu (neu co) truoc khi tao lai, tranh trung lap.
+        var oldSlots = new List<Transform>();
+        foreach (Transform child in cardRow)
+        {
+            if (child.name.StartsWith("Slot_"))
+                oldSlots.Add(child);
+        }
+        foreach (var t in oldSlots)
+        {
+#if UNITY_EDITOR
+            DestroyImmediate(t.gameObject);
+#else
+            Destroy(t.gameObject);
+#endif
+        }
+
+        cardSlots = new RectTransform[slotCountToGenerate];
+
+        // Tinh diem bat dau de ca day the nam giua cardRow (can giua theo truc X).
+        float totalWidth = (slotCountToGenerate - 1) * slotSpacingX;
+        float startX = -totalWidth / 2f;
+
+        for (int i = 0; i < slotCountToGenerate; i++)
+        {
+            GameObject slotGO = new GameObject($"Slot_{i}", typeof(RectTransform));
+            RectTransform rt = slotGO.GetComponent<RectTransform>();
+            rt.SetParent(cardRow, false);
+            rt.sizeDelta = new Vector2(slotWidth, slotHeight);
+            rt.anchoredPosition = new Vector2(startX + i * slotSpacingX, 0f);
+
+            cardSlots[i] = rt;
+        }
+
+        Debug.Log($"Da tao {slotCountToGenerate} slot duoi cardRow. Vao Hierarchy, mo cardRow, " +
+                   "keo tung Slot_i toi vi tri ban muon (Scene view), roi luu Scene.", this);
     }
 
     // ---------------- HOAN TAC ----------------

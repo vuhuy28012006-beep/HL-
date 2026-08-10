@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: AuLac
   m_EditorClassIdentifier: 
   id: 212
-  eventName: "\xC2u C\u01A1"
+  eventName: "\xC2u L\u1EA1c"
   year: 2
   image: {fileID: 21300000, guid: 7f2539a9098414c45a6a63849be25cc8, type: 3}
