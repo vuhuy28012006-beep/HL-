@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 2
   levelName: 02
+  backgroundImage: {fileID: 21300000, guid: 3c313b1b91c6cba4fb537e18394dc8af, type: 3}
   events:
   - {fileID: 11400000, guid: 02dea6f3e82403044818ebf9c5d96222, type: 2}
   - {fileID: 11400000, guid: 0253b1c1d4ba9b24dad00613fe9dfbc4, type: 2}
@@ -31,3 +32,4 @@ MonoBehaviour:
   tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN M\xC0N 1"
   tutorialText: "Ch\u1ECDn l\u1EA7n l\u01B0\u1EE3t 2 th\u1EBB s\u1EF1 ki\u1EC7n"
   tutorialImage: {fileID: 0}
+  gameplaySceneName: GamePlay

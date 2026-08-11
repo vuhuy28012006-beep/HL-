@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 1
   levelName: 4.1
+  backgroundImage: {fileID: 21300000, guid: 6b87261f5cdf2c44c8c5b3989dd410fe, type: 3}
   events:
-  - {fileID: 11400000, guid: d5fbd24b7df26c644bc88c377e983ef7, type: 2}
-  - {fileID: 11400000, guid: d4078631715fac946a6c80e83e5c0ecc, type: 2}
-  - {fileID: 11400000, guid: abaedbe4448ffed4cb804deadaf798fa, type: 2}
-  - {fileID: 11400000, guid: 414ea83e3334d3c4cac1d88444402b7c, type: 2}
   - {fileID: 11400000, guid: 43d888fde51068643807e9917f6d3869, type: 2}
+  - {fileID: 11400000, guid: d4078631715fac946a6c80e83e5c0ecc, type: 2}
+  - {fileID: 11400000, guid: d5fbd24b7df26c644bc88c377e983ef7, type: 2}
+  - {fileID: 11400000, guid: 414ea83e3334d3c4cac1d88444402b7c, type: 2}
   sortMode: 3
   limitType: 0
   maxMoves: 6
@@ -31,4 +31,4 @@ MonoBehaviour:
   tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN"
   tutorialText: Insertion Sort
   tutorialImage: {fileID: 0}
-  gameplaySceneName: GamePlay4
+  gameplaySceneName: GamePlay

@@ -29,6 +29,13 @@ public class BoardManager : MonoBehaviour
     [Header("UI (khong bat buoc, co the de trong)")]
     [SerializeField] private TMP_Text movesLeftText;
 
+    [Header("Background")]
+    [Tooltip("Keo Image nen (GameObject 'Background' trong Canvas) vao day. " +
+        "Neu LevelData.backgroundImage co gan anh, no se duoc dung thay cho " +
+        "sprite mac dinh dang gan san trong Inspector cua Image nay.")]
+    [SerializeField] private Image background;
+    private Sprite defaultBackgroundSprite;
+
     [Header("Animation")]
     [SerializeField] private float swapDuration = 0.25f;
 
@@ -77,6 +84,11 @@ public class BoardManager : MonoBehaviour
         // duoc set san trong Scene/Inspector.
         if (hintOptionsPanel != null)
             hintOptionsPanel.SetActive(false);
+
+        // Nho lai sprite nen mac dinh (dang gan san trong Inspector) de dung
+        // lam fallback cho nhung level khong co backgroundImage rieng.
+        if (background != null)
+            defaultBackgroundSprite = background.sprite;
     }
 
     private void Start()
@@ -141,6 +153,8 @@ public class BoardManager : MonoBehaviour
         gameEnded = false;
         isAnimating = false;
         memoryCardsHidden = false;
+
+        ApplyBackground(level);
 
         history.Clear();
         insertionHistory.Clear();
@@ -819,6 +833,21 @@ public class BoardManager : MonoBehaviour
             AudioManager.Instance?.PlayLose();
             GameManager.Instance?.LoseGame();
         }
+    }
+
+    // ---------------- BACKGROUND ----------------
+
+    // Ap dung anh nen rieng cua LevelData (neu co). Neu LevelData khong gan
+    // backgroundImage, tu dong quay lai sprite mac dinh cua scene GamePlay
+    // (khong lam vo cac man cu chua khai bao anh nen rieng).
+    private void ApplyBackground(LevelData level)
+    {
+        if (background == null || level == null)
+            return;
+
+        background.sprite = level.backgroundImage != null
+            ? level.backgroundImage
+            : defaultBackgroundSprite;
     }
 
     // ---------------- UI ----------------

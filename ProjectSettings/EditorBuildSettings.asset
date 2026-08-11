@@ -27,7 +27,7 @@ EditorBuildSettings:
     path: Assets/Scenes/GamePlay2.unity
     guid: ac09c724881dbc44eaa8179c57b0dff9
   - enabled: 1
-    path: Assets/Scenes/GamePlay3.unity
+    path: Assets/Scenes/GamePlaySolarSystem.unity
     guid: b70b28325c5c68846b70c56f77994fbb
   - enabled: 1
     path: Assets/Scenes/GamePlay4.unity

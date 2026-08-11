@@ -24,6 +24,11 @@ public class LevelData : ScriptableObject
     public int levelNumber;
     public string levelName;
 
+    [Header("Background")]
+    [Tooltip("Anh nen rieng cho man nay. Neu de trong (null), se dung " +
+        "anh nen mac dinh dang duoc gan san trong scene GamePlay.")]
+    public Sprite backgroundImage;
+
     [Header("Cards")]
     public List<EventData> events = new List<EventData>();
 

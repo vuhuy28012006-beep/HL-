@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 2
   levelName: 4.2
+  backgroundImage: {fileID: 21300000, guid: 6b87261f5cdf2c44c8c5b3989dd410fe, type: 3}
   events:
   - {fileID: 11400000, guid: fc99638132dd2e44aa794d893fb18935, type: 2}
   - {fileID: 11400000, guid: efdcc6917b04007419bada2a890e1fac, type: 2}
@@ -31,4 +32,4 @@ MonoBehaviour:
   tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN"
   tutorialText: Bubble Sort
   tutorialImage: {fileID: 0}
-  gameplaySceneName: GamePlay4
+  gameplaySceneName: GamePlay
