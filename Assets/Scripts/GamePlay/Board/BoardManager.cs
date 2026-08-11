@@ -17,6 +17,11 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private TutorialManager tutorialManager;
 
     [Header("Vi tri tuy chinh cho tung the (thay cho HorizontalLayoutGroup)")]
+    [Tooltip("QUAN TRONG: object nay PHAI la mot GameObject rieng, KHONG nam trong cardRow. " +
+             "Vi moi lan Restart, code se xoa toan bo con cua cardRow (de xoa the cu), " +
+             "neu Slot nam trong cardRow no se bi xoa theo va mat vi tri tuy chinh.")]
+    [SerializeField] private Transform slotsContainer;
+
     [Tooltip("Keo cac Empty GameObject (RectTransform) danh dau vi tri vao day, theo dung thu tu tu trai sang phai. " +
              "So luong slot phai >= so the toi da trong level. Neu de trong, code se fallback ve HorizontalLayoutGroup (neu co).")]
     [SerializeField] private RectTransform[] cardSlots;
@@ -564,9 +569,16 @@ public class BoardManager : MonoBehaviour
             return;
         }
 
+        if (slotsContainer == null)
+        {
+            Debug.LogError("Chua gan Slots Container! Tao 1 GameObject rieng (VD ten 'CardSlots'), " +
+                            "de NGANG HANG voi cardRow (KHONG nam trong cardRow), roi gan vao field 'Slots Container'.", this);
+            return;
+        }
+
         // Xoa cac slot cu (neu co) truoc khi tao lai, tranh trung lap.
         var oldSlots = new List<Transform>();
-        foreach (Transform child in cardRow)
+        foreach (Transform child in slotsContainer)
         {
             if (child.name.StartsWith("Slot_"))
                 oldSlots.Add(child);
@@ -582,7 +594,7 @@ public class BoardManager : MonoBehaviour
 
         cardSlots = new RectTransform[slotCountToGenerate];
 
-        // Tinh diem bat dau de ca day the nam giua cardRow (can giua theo truc X).
+        // Tinh diem bat dau de ca day the nam giua (can giua theo truc X).
         float totalWidth = (slotCountToGenerate - 1) * slotSpacingX;
         float startX = -totalWidth / 2f;
 
@@ -590,14 +602,14 @@ public class BoardManager : MonoBehaviour
         {
             GameObject slotGO = new GameObject($"Slot_{i}", typeof(RectTransform));
             RectTransform rt = slotGO.GetComponent<RectTransform>();
-            rt.SetParent(cardRow, false);
+            rt.SetParent(slotsContainer, false);
             rt.sizeDelta = new Vector2(slotWidth, slotHeight);
             rt.anchoredPosition = new Vector2(startX + i * slotSpacingX, 0f);
 
             cardSlots[i] = rt;
         }
 
-        Debug.Log($"Da tao {slotCountToGenerate} slot duoi cardRow. Vao Hierarchy, mo cardRow, " +
+        Debug.Log($"Da tao {slotCountToGenerate} slot trong '{slotsContainer.name}'. Mo object do trong Hierarchy, " +
                    "keo tung Slot_i toi vi tri ban muon (Scene view), roi luu Scene.", this);
     }
 
