@@ -424,9 +424,7 @@ MonoBehaviour:
   - {fileID: 1818302732}
   filledStar: {fileID: 21300000, guid: c57c24cd6b09fd141b785664ec792ee1, type: 3}
   emptyStar: {fileID: 21300000, guid: d75c90c7d4acbe74e95442c25bf4d541, type: 3}
-  allLevels:
-  - {fileID: 11400000, guid: 0420558e03cba0f448fbaf2cbac5ae21, type: 2}
-  - {fileID: 11400000, guid: a6125937553dc164590b09469ee78209, type: 2}
+  allLevels: []
 --- !u!1 &201976238
 GameObject:
   m_ObjectHideFlags: 0
@@ -4724,7 +4722,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 193384829}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: GoToNextLevel
+        m_MethodName: BackToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

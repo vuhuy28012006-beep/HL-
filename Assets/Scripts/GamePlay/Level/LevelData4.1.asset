@@ -16,12 +16,14 @@ MonoBehaviour:
   levelName: 4.1
   backgroundImage: {fileID: 21300000, guid: 6b87261f5cdf2c44c8c5b3989dd410fe, type: 3}
   events:
+  - {fileID: 11400000, guid: efdcc6917b04007419bada2a890e1fac, type: 2}
   - {fileID: 11400000, guid: 43d888fde51068643807e9917f6d3869, type: 2}
   - {fileID: 11400000, guid: d4078631715fac946a6c80e83e5c0ecc, type: 2}
+  - {fileID: 11400000, guid: 8a294fd913c9253429665e1ddcd5e4c9, type: 2}
   - {fileID: 11400000, guid: d5fbd24b7df26c644bc88c377e983ef7, type: 2}
-  - {fileID: 11400000, guid: 414ea83e3334d3c4cac1d88444402b7c, type: 2}
+  - {fileID: 11400000, guid: fc99638132dd2e44aa794d893fb18935, type: 2}
   sortMode: 3
-  limitType: 0
+  limitType: 1
   maxMoves: 6
   timeLimitSeconds: 60
   useMemoryMode: 0

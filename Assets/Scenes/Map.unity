@@ -177,8 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chapter: {fileID: 11400000, guid: dc67a334d4c71b64bbd7b42add0448a4, type: 2}
   levelsInChapter:
-  - {fileID: 11400000, guid: 2c3216602f5634d46a085275baba1f41, type: 2}
-  - {fileID: 11400000, guid: 7449fe432f2ec5746ae85e0a1c1a6bf2, type: 2}
+  - {fileID: 11400000, guid: 57af36a702fd3a7489c8922adcbca504, type: 2}
   starsText: {fileID: 1980337639}
 --- !u!114 &89193466
 MonoBehaviour:

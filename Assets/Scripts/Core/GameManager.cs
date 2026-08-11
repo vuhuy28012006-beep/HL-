@@ -171,7 +171,9 @@ public class GameManager : MonoBehaviour
             Debug.LogError(
                 "Chua gan All Levels trong Inspector cua GameManager."
             );
+
             return;
+            
         }
 
         foreach (LevelData level in allLevels)
