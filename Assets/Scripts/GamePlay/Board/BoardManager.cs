@@ -15,6 +15,8 @@ public class BoardManager : MonoBehaviour
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] private LevelData currentLevel;
     [SerializeField] private TutorialManager tutorialManager;
+    [SerializeField] private TMP_Text chapterTitleText;
+    [SerializeField] private TMP_Text levelTitleText;
 
     [Header("Vi tri tuy chinh cho tung the (thay cho HorizontalLayoutGroup)")]
     [Tooltip("QUAN TRONG: object nay PHAI la mot GameObject rieng, KHONG nam trong cardRow. " +
@@ -150,6 +152,8 @@ public class BoardManager : MonoBehaviour
         StopAllCoroutines();
 
         currentLevel = level;
+        UpdateChapterTitle();
+
         gameEnded = false;
         isAnimating = false;
         memoryCardsHidden = false;
@@ -954,4 +958,21 @@ public class BoardManager : MonoBehaviour
         // AnimateSwap sẽ tự trừ 1 lượt và gọi CheckGameEnd()
         StartCoroutine(AnimateSwap(a, b));
     }   
+    private void UpdateChapterTitle()
+    {
+        if (currentLevel == null)
+            return;
+
+        if (chapterTitleText != null)
+        {
+            chapterTitleText.text =
+                $"Chương {currentLevel.chapterNumber}: {currentLevel.chapterName}";
+        }
+
+        if (levelTitleText != null)
+        {
+            levelTitleText.text =
+                $"Màn {currentLevel.levelNumber}";
+        }
+    }
 }

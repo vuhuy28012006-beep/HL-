@@ -23,6 +23,9 @@ public class LevelData : ScriptableObject
     [Header("Level Info")]
     public int levelNumber;
     public string levelName;
+    [Header("Chapter Information")]
+    public int chapterNumber = 1;
+    public string chapterName = "Sinh vật";
 
     [Header("Background")]
     [Tooltip("Anh nen rieng cho man nay. Neu de trong (null), se dung " +
