@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 1
   levelName: 
+  chapterNumber: 2
+  chapterName: "L\u1ECBch S\u1EED"
   backgroundImage: {fileID: 21300000, guid: 3c313b1b91c6cba4fb537e18394dc8af, type: 3}
   events:
   - {fileID: 11400000, guid: e9de66eedd7de274b83f7af417f96fe7, type: 2}
