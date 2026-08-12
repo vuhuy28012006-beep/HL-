@@ -57,7 +57,9 @@ public class ChapterSelectButton : MonoBehaviour
         int maximumStars = levelCount * 3;
 
         if (starsText != null)
-            starsText.text = earnedStars + "/" + maximumStars;
+        {
+            starsText.text = earnedStars + "/" + maximumStars ;
+        }
     }
 
 }
