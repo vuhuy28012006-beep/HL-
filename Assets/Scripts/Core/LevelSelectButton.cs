@@ -1,16 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
-
-// Ghi de vao: Assets/Scripts/Core/LevelSelectButton.cs
+using TMPro;
 
 public class LevelSelectButton : MonoBehaviour
 {
-    [SerializeField] private LevelData levelData; // co the gan tay (cach cu) hoac de trong, cho Setup() gan luc chay
+    [SerializeField] private LevelData levelData;
 
-    [Header("Hien thi trang thai (khong bat buoc)")]
+    [Header("Hien thi trang thai")]
     [SerializeField] private GameObject lockIcon;
-    [SerializeField] private TMPro.TMP_Text starsText;
-    [SerializeField] private TMPro.TMP_Text levelNumberText; // hien so thu tu man, dung khi sinh dong
+    [SerializeField] private TMP_Text starsText;
+    [SerializeField] private TMP_Text levelNumberText;
+
+    [Header("Ba ngoi sao tren Level")]
+    [SerializeField] private Image[] starImages;
+    [SerializeField] private Sprite filledStar;
+    [SerializeField] private Sprite emptyStar;
 
     private Button button;
 
@@ -21,12 +25,12 @@ public class LevelSelectButton : MonoBehaviour
 
     private void Start()
     {
-        // Neu da gan san levelData qua Inspector (cach cu, nut tao tay) -> chay luon
+        // Dung cho nut duoc gan LevelData san trong Inspector
         if (levelData != null)
             RefreshState();
     }
 
-    // Goi tu LevelListPopulator khi tao nut luc chay (cach moi, cho danh sach dong)
+    // Duoc LevelListPopulator goi khi tao nut
     public void Setup(LevelData data)
     {
         levelData = data;
@@ -39,10 +43,14 @@ public class LevelSelectButton : MonoBehaviour
 
     private void RefreshState()
     {
-        if (levelData == null) return;
-        if (button == null) button = GetComponent<Button>();
+        if (levelData == null)
+            return;
 
-        bool unlocked = SaveManager.IsLevelUnlocked(levelData.levelNumber);
+        if (button == null)
+            button = GetComponent<Button>();
+
+        bool unlocked =
+            SaveManager.IsLevelUnlocked(levelData.levelNumber);
 
         if (button != null)
             button.interactable = unlocked;
@@ -50,19 +58,54 @@ public class LevelSelectButton : MonoBehaviour
         if (lockIcon != null)
             lockIcon.SetActive(!unlocked);
 
+        int earnedStars =
+            SaveManager.GetStars(levelData.levelNumber);
+
+        // Neu van muon hien chu 2/3
         if (starsText != null)
+            starsText.text = unlocked ? earnedStars + "/3" : "";
+
+        RefreshStarImages(earnedStars);
+    }
+
+    private void RefreshStarImages(int earnedStars)
+    {
+        if (starImages == null || starImages.Length == 0)
+            return;
+
+        if (filledStar == null || emptyStar == null)
         {
-            int stars = SaveManager.GetStars(levelData.levelNumber);
-            starsText.text = unlocked ? stars + "/3" : "";
+            Debug.LogWarning(
+                "LevelSelectButton: Chua gan Filled Star hoac Empty Star.",
+                this
+            );
+
+            return;
+        }
+
+        earnedStars = Mathf.Clamp(earnedStars, 0, 3);
+
+        for (int i = 0; i < starImages.Length; i++)
+        {
+            if (starImages[i] == null)
+                continue;
+
+            starImages[i].sprite =
+                i < earnedStars ? filledStar : emptyStar;
+
+            starImages[i].color = Color.white;
+            starImages[i].enabled = true;
         }
     }
 
-    // Goi tu Button > On Click ()
     public void LoadLevel()
     {
         if (levelData == null)
         {
-            Debug.LogError("LevelSelectButton: chua co LevelData!");
+            Debug.LogError(
+                "LevelSelectButton: chua co LevelData!"
+            );
+
             return;
         }
 
@@ -73,6 +116,8 @@ public class LevelSelectButton : MonoBehaviour
         }
 
         LevelSession.SelectedLevel = levelData;
-        LevelSession.LoadGameplayScene(levelData.gameplaySceneName);
+        LevelSession.LoadGameplayScene(
+            levelData.gameplaySceneName
+        );
     }
 }
