@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 739cc9e82a30c24488246d3eca75f02e, type: 3}
+  m_Name: Chapter6
+  m_EditorClassIdentifier: 
+  chapterName: "sinh h\u1ECDc"
+  description: 
+  chapterIcon: {fileID: 0}
+  levels:
+  - {fileID: 11400000, guid: 715a4d76c8afd824dad44b25d3397d85, type: 2}
+  - {fileID: 11400000, guid: f20d031613b70e24bb78db5c063b98b5, type: 2}
+  - {fileID: 11400000, guid: 0859ba72510722a48822fcc6087fe36d, type: 2}
