@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 1
   levelName: 01
+  chapterNumber: 1
+  chapterName: "Sinh v\u1EADt"
   backgroundImage: {fileID: 21300000, guid: 3c313b1b91c6cba4fb537e18394dc8af, type: 3}
   events:
   - {fileID: 11400000, guid: e30d7bc68bbd244469ba5dc1f5ae2486, type: 2}
@@ -22,6 +24,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2123caa9bd99e774da4f036e685214ac, type: 2}
   - {fileID: 11400000, guid: 4e34ddec57e6ab14a8465f02945ed769, type: 2}
   sortMode: 0
+  lockFirstCard: 0
   limitType: 1
   maxMoves: 5
   timeLimitSeconds: 60

@@ -38,6 +38,11 @@ public class LevelData : ScriptableObject
     [Header("Rules")]
     public SortMode sortMode = SortMode.FreeSwap;
 
+    [Header("Khoa co dinh the dau tien")]
+    [Tooltip("Neu bat: rieng man nay, the o vi tri dau tien (index 0) se bi khoa co dinh, " +
+        "khong the chon/doi cho. Man khac khong bat van choi binh thuong.")]
+    public bool lockFirstCard = false;
+
     [Header("Level Limit")]
     public LevelLimitType limitType = LevelLimitType.Moves;
 

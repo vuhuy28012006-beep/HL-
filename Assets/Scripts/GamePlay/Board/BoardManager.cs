@@ -50,6 +50,11 @@ public class BoardManager : MonoBehaviour
     [Header("Popup lua chon Hint (khong bat buoc)")]
     [SerializeField] private GameObject hintOptionsPanel; // panel co 2 nut: "Goi y 1 cap" / "Xem thu tu toan bo"
 
+    // The dang bi khoa co dinh hien tai (thuong la boardCards[0] luc setup).
+    // KHONG con la cong tac chung nua: viec co khoa hay khong do LevelData.lockFirstCard
+    // cua tung man quyet dinh (xem SetupLevelInternal), nen man nao bat thi khoa, man khac thi khong.
+    private EventCard lockedCard;
+
     private List<EventCard> boardCards = new List<EventCard>();
     // Lưu thứ tự thẻ lúc màn chơi bắt đầu.
     // Reset sẽ khôi phục đúng thứ tự này, không random lại.
@@ -167,6 +172,7 @@ public class BoardManager : MonoBehaviour
         pivotCard = null;
         primedCard = null;
         insertionCard = null;
+        lockedCard = null;
 
         boardCards.Clear();
 
@@ -206,6 +212,14 @@ public class BoardManager : MonoBehaviour
 
             card.Initialize(cardOrder[i], i);
             boardCards.Add(card);
+        }
+
+        // Khoa co dinh the dau tien (neu LevelData cua man nay bat tuy chon nay).
+        // Moi man co the bat/tat rieng: man nao lockFirstCard = true thi khoa, man khac thi khong.
+        if (level.lockFirstCard && boardCards.Count > 0)
+        {
+            lockedCard = boardCards[0];
+            lockedCard.SetLocked(true);
         }
 
         PositionCards();
@@ -300,6 +314,13 @@ public class BoardManager : MonoBehaviour
     {
         if (gameEnded || isAnimating)
             return;
+
+        // The bi khoa co dinh (vd: the dau tien): khong phan hoi click o bat ky che do nao.
+        if (card.IsLocked)
+        {
+            AudioManager.Instance?.PlayClick();
+            return;
+        }
 
         // Level bình thường: chọn thẻ giống như trước
         if (!currentLevel.useMemoryMode || !memoryCardsHidden)
@@ -631,6 +652,29 @@ public class BoardManager : MonoBehaviour
                    "keo tung Slot_i toi vi tri ban muon (Scene view), roi luu Scene.", this);
     }
 
+    // ---------------- KHOA THE ----------------
+
+    // Goi ham nay tu Inspector/UI Button neu muon bat khoa the dau tien ngay trong luc dang choi
+    // (khong can Reset). The dang o vi tri index 0 tai thoi diem goi se bi khoa.
+    public void LockFirstCard()
+    {
+        if (boardCards.Count == 0)
+            return;
+
+        lockedCard = boardCards[0];
+        lockedCard.SetLocked(true);
+    }
+
+    // Mo khoa the dang bi khoa (neu co).
+    public void UnlockFirstCard()
+    {
+        if (lockedCard == null)
+            return;
+
+        lockedCard.SetLocked(false);
+        lockedCard = null;
+    }
+
     // ---------------- HOAN TAC ----------------
 
     public void Undo()
@@ -920,8 +964,12 @@ public class BoardManager : MonoBehaviour
         int minIndex = pivotIndex;
 
         // Tìm thẻ có năm nhỏ nhất từ vị trí chốt đến cuối
+        // (bo qua the dang bi khoa co dinh, vi nguoi choi khong the chon no).
         for (int i = pivotIndex + 1; i < boardCards.Count; i++)
         {
+            if (boardCards[i].IsLocked)
+                continue;
+
             if (boardCards[i].Data.year <
                 boardCards[minIndex].Data.year)
             {

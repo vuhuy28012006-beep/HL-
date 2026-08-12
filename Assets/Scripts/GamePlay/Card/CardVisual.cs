@@ -22,10 +22,17 @@ public class CardVisual : MonoBehaviour
     [SerializeField] private float selectedZoomAmount = 0.2f;
     [SerializeField] private float zoomAnimDuration = 0.15f;
 
+    [Header("Locked (the bi khoa co dinh)")]
+    [Tooltip("Mau phu len the khi bi khoa (mac dinh: xam nhat).")]
+    [SerializeField] private Color lockedColor = new Color(0.55f, 0.55f, 0.55f);
+    [Tooltip("Icon o khoa hien thi tren the khi bi khoa. Co the de trong neu khong can.")]
+    [SerializeField] private GameObject lockIcon;
+
     private EventCard eventCard;
     private RectTransform rectTransform;
     private Coroutine zoomRoutine;
     private bool memoryMarked;
+    private bool isLocked;
 
     private void Awake()
     {
@@ -45,6 +52,11 @@ public class CardVisual : MonoBehaviour
             cardImage.sprite = eventCard.Data.image;
 
         memoryMarked = false;
+        isLocked = false;
+
+        if (lockIcon != null)
+            lockIcon.SetActive(false);
+
         UpdateHighlight();
     }
 
@@ -60,8 +72,32 @@ public class CardVisual : MonoBehaviour
         UpdateHighlight();
     }
 
+    // Hien thi trang thai khoa co dinh (vd: thẻ đầu tiên bị khóa).
+    public void SetLocked(bool locked)
+    {
+        isLocked = locked;
+
+        if (lockIcon != null)
+            lockIcon.SetActive(locked);
+
+        UpdateHighlight();
+    }
+
     private void UpdateHighlight()
     {
+        // The bi khoa luon uu tien hien mau khoa, khong bi de len boi mau chon/mau thuong.
+        if (isLocked)
+        {
+            if (cardImage != null)
+                cardImage.color = lockedColor;
+
+            if (backImage != null)
+                backImage.color = lockedColor;
+
+            AnimateZoom(1f);
+            return;
+        }
+
         bool highlighted =
             memoryMarked ||
             (eventCard != null && eventCard.IsSelected);
