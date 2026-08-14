@@ -15,8 +15,4 @@ MonoBehaviour:
   id: 622
   eventName: "H\u1EA1t n\u1EA3y m\u1EA7m"
   year: 2
-<<<<<<< HEAD:Assets/ScriptableObjects/Chapter6/Level6.2/NayMam.asset
-  image: {fileID: 21300000, guid: c79ab503fc77a0046832600475557b97, type: 3}
-=======
   image: {fileID: 21300000, guid: 86535b75a12511149b0d29fea2da515b, type: 3}
->>>>>>> 50053badc3e5fc6466c66167dd1a9e8db0a63110:Assets/ScriptableObjects/Chapter6/Level6.3/Tho.asset
