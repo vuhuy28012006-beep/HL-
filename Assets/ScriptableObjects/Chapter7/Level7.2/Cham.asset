@@ -15,4 +15,8 @@ MonoBehaviour:
   id: 722
   eventName: "Ch\xE0m"
   year: 2
+<<<<<<< HEAD:Assets/ScriptableObjects/Chapter7/Level7.2/Cham.asset
   image: {fileID: 21300000, guid: 30234ebc3f6d63b40b25091bfa818884, type: 3}
+=======
+  image: {fileID: 21300000, guid: d1939f36f5b01fc408138513b53ddb99, type: 3}
+>>>>>>> 50053badc3e5fc6466c66167dd1a9e8db0a63110:Assets/ScriptableObjects/Chapter6/Level6.1/HoiNươc.asset

@@ -15,4 +15,8 @@ MonoBehaviour:
   id: 623
   eventName: "C\xE2y non"
   year: 3
+<<<<<<< HEAD:Assets/ScriptableObjects/Chapter6/Level6.2/CayNon.asset
   image: {fileID: 21300000, guid: 46bdfcd343e5ce4428b9dd48e6586d2c, type: 3}
+=======
+  image: {fileID: 21300000, guid: 7f6959963ec19134289ff8242cdc2019, type: 3}
+>>>>>>> 50053badc3e5fc6466c66167dd1a9e8db0a63110:Assets/ScriptableObjects/Chapter6/Level6.3/Cao.asset

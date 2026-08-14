@@ -18,12 +18,19 @@ MonoBehaviour:
   chapterName: "Sinh h\u1ECDc"
   backgroundImage: {fileID: 21300000, guid: 675859abb4ed6aa43bd77af60ff6bd8e, type: 3}
   events:
+<<<<<<< HEAD
   - {fileID: 11400000, guid: b98101dbf689d5a4d97d8d928fb0e5ef, type: 2}
   - {fileID: 11400000, guid: ffe753409e4e27646a8fb442c666b1c6, type: 2}
   - {fileID: 11400000, guid: 7d762006ded5a2a40ad4df65cd979584, type: 2}
   - {fileID: 11400000, guid: d2f3f331003e0734ead96dc21b2d7c66, type: 2}
   - {fileID: 11400000, guid: 65bc0235fb14e064a96fddbcd3c17ab5, type: 2}
   - {fileID: 11400000, guid: 7551107bfe43d864c9da6adb936c017c, type: 2}
+=======
+  - {fileID: 11400000, guid: 88d594e334d5feb46b40b87a5eb09b84, type: 2}
+  - {fileID: 11400000, guid: 83a30ec44ece1d74f95858b5380c5136, type: 2}
+  - {fileID: 11400000, guid: b746b5364d94a59408af62be8826e0c6, type: 2}
+  - {fileID: 11400000, guid: 7b63cfb8cdca3414ca9d7a3e3f4333a4, type: 2}
+>>>>>>> 50053badc3e5fc6466c66167dd1a9e8db0a63110
   sortMode: 0
   lockFirstCard: 1
   limitType: 0

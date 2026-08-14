@@ -15,4 +15,8 @@ MonoBehaviour:
   id: 734
   eventName: TV
   year: 4
+<<<<<<< HEAD:Assets/ScriptableObjects/Chapter7/Level7.3/TV.asset
   image: {fileID: 21300000, guid: 4f6c4bcde64cda741bcbf558dc555a18, type: 3}
+=======
+  image: {fileID: 21300000, guid: 9eca4d4c09182474b86cb97eb38e3c66, type: 3}
+>>>>>>> 50053badc3e5fc6466c66167dd1a9e8db0a63110:Assets/ScriptableObjects/Chapter6/Level6.3/ViKhuan.asset

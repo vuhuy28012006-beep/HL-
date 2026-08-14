@@ -15,4 +15,8 @@ MonoBehaviour:
   id: 621
   eventName: "H\u1EA1t"
   year: 1
+<<<<<<< HEAD:Assets/ScriptableObjects/Chapter6/Level6.2/Hat.asset
   image: {fileID: 21300000, guid: ae5311561df185d4a96c84ce5c0764a8, type: 3}
+=======
+  image: {fileID: 21300000, guid: 82dc0b283087ba64aaded25e908e666d, type: 3}
+>>>>>>> 50053badc3e5fc6466c66167dd1a9e8db0a63110:Assets/ScriptableObjects/Chapter6/Level6.3/Co.asset

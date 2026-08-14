@@ -18,12 +18,19 @@ MonoBehaviour:
   chapterName: "V\u1EADt L\xFD"
   backgroundImage: {fileID: 0}
   events:
+<<<<<<< HEAD:Assets/Scripts/GamePlay/Level/LevelData7.3.asset
   - {fileID: 11400000, guid: f3f94a96b61e7a540b11cc8d49f113ae, type: 2}
   - {fileID: 11400000, guid: 6980a34c9c570e24aa8874a885469430, type: 2}
   - {fileID: 11400000, guid: f0a9a5a416e88ba4da8a4d84f8c3a912, type: 2}
   - {fileID: 11400000, guid: f695ca2692cab72489c51479af7bce81, type: 2}
   - {fileID: 11400000, guid: 7654407df3f595949a246d0b24544143, type: 2}
   - {fileID: 11400000, guid: 2a9285fb4068f054a9c0ec10cf12f695, type: 2}
+=======
+  - {fileID: 11400000, guid: cd04118d8027ba74a9aa831cff253ba7, type: 2}
+  - {fileID: 11400000, guid: ec7c8aad6254cfa40a4461f73ce2996e, type: 2}
+  - {fileID: 11400000, guid: 09a16b0ce6b643147ada18c445c0c106, type: 2}
+  - {fileID: 11400000, guid: db7b42c3c0b6d43479d6beba72f2fe11, type: 2}
+>>>>>>> 50053badc3e5fc6466c66167dd1a9e8db0a63110:Assets/Scripts/GamePlay/Level/LevelData6.3.asset
   sortMode: 0
   lockFirstCard: 0
   limitType: 0

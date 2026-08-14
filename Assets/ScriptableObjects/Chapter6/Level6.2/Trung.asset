@@ -10,14 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec4d376e448d3454c81d63c5541c3e3d, type: 3}
-  m_Name: May
+  m_Name: Trung
   m_EditorClassIdentifier: 
-  id: 614
-  eventName: "M\xE2y"
-<<<<<<< HEAD
-  year: 4
-  image: {fileID: 21300000, guid: cbd6b0feb0dc07e408f0ec02fed10b31, type: 3}
-=======
-  year: 3
-  image: {fileID: 21300000, guid: 9ba466da550c0134795a41c7705266eb, type: 3}
->>>>>>> 50053badc3e5fc6466c66167dd1a9e8db0a63110
+  id: 623
+  eventName: "Tr\u1EE9ng s\xE2u"
+  year: 1
+  image: {fileID: 21300000, guid: ae255cd215eb88948aaa15a3eae0004f, type: 3}
