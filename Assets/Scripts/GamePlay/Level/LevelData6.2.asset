@@ -18,10 +18,10 @@ MonoBehaviour:
   chapterName: "Sinh v\u1EADt"
   backgroundImage: {fileID: 0}
   events:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 88d594e334d5feb46b40b87a5eb09b84, type: 2}
+  - {fileID: 11400000, guid: 83a30ec44ece1d74f95858b5380c5136, type: 2}
+  - {fileID: 11400000, guid: b746b5364d94a59408af62be8826e0c6, type: 2}
+  - {fileID: 11400000, guid: 7b63cfb8cdca3414ca9d7a3e3f4333a4, type: 2}
   sortMode: 0
   lockFirstCard: 1
   limitType: 0

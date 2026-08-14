@@ -15,4 +15,4 @@ MonoBehaviour:
   id: 622
   eventName: "Th\u1ECF"
   year: 2
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 86535b75a12511149b0d29fea2da515b, type: 3}

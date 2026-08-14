@@ -15,4 +15,4 @@ MonoBehaviour:
   id: 623
   eventName: "C\xE1o"
   year: 3
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 7f6959963ec19134289ff8242cdc2019, type: 3}

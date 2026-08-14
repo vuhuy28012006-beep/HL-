@@ -15,4 +15,4 @@ MonoBehaviour:
   id: 624
   eventName: "Vi Kh\u1EA9n"
   year: 4
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 9eca4d4c09182474b86cb97eb38e3c66, type: 3}
