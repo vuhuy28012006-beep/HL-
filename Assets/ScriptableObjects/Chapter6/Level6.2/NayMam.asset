@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec4d376e448d3454c81d63c5541c3e3d, type: 3}
+  m_Name: NayMam
+  m_EditorClassIdentifier: 
+  id: 622
+  eventName: "H\u1EA1t n\u1EA3y m\u1EA7m"
+  year: 2
+  image: {fileID: 21300000, guid: c79ab503fc77a0046832600475557b97, type: 3}

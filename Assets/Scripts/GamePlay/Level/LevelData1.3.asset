@@ -18,15 +18,17 @@ MonoBehaviour:
   chapterName: "Sinh v\u1EADt"
   backgroundImage: {fileID: 21300000, guid: 3c313b1b91c6cba4fb537e18394dc8af, type: 3}
   events:
-  - {fileID: 11400000, guid: 02dea6f3e82403044818ebf9c5d96222, type: 2}
-  - {fileID: 11400000, guid: 0253b1c1d4ba9b24dad00613fe9dfbc4, type: 2}
-  - {fileID: 11400000, guid: c362aa1425cefdf42bd8e6d02140a020, type: 2}
-  - {fileID: 11400000, guid: 7e07a2eeca37d6747af3fa9af3e53451, type: 2}
-  - {fileID: 11400000, guid: d27db6c783746b241a400739e675519c, type: 2}
+  - {fileID: 11400000, guid: 60716c592bdd2e040967af498c49a192, type: 2}
+  - {fileID: 11400000, guid: 44aebfa70d535ef41978fb1a364ce6e2, type: 2}
+  - {fileID: 11400000, guid: 55c9ccd54d79e9f48996ced07f323725, type: 2}
+  - {fileID: 11400000, guid: 61ca9f3e38b28f84c91ea5ac99428edd, type: 2}
+  - {fileID: 11400000, guid: 0357baba186de9442b40d595892acf90, type: 2}
+  - {fileID: 11400000, guid: d92df63b343b90b498c3305bb896dd29, type: 2}
+  - {fileID: 11400000, guid: 6ac55386105d2864f99fd9b637ceffdf, type: 2}
   sortMode: 0
   lockFirstCard: 0
   limitType: 0
-  maxMoves: 5
+  maxMoves: 8
   timeLimitSeconds: 60
   useMemoryMode: 0
   previewTime: 4

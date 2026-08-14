@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f7587fdc4da154894b5e8afcb5c5ea, type: 3}
+  m_Name: LevelData7.3
+  m_EditorClassIdentifier: 
+  levelNumber: 3
+  levelName: "Ph\xE1t minh"
+  chapterNumber: 7
+  chapterName: "V\u1EADt L\xFD"
+  backgroundImage: {fileID: 0}
+  events:
+  - {fileID: 11400000, guid: f3f94a96b61e7a540b11cc8d49f113ae, type: 2}
+  - {fileID: 11400000, guid: 6980a34c9c570e24aa8874a885469430, type: 2}
+  - {fileID: 11400000, guid: f0a9a5a416e88ba4da8a4d84f8c3a912, type: 2}
+  - {fileID: 11400000, guid: f695ca2692cab72489c51479af7bce81, type: 2}
+  - {fileID: 11400000, guid: 7654407df3f595949a246d0b24544143, type: 2}
+  - {fileID: 11400000, guid: 2a9285fb4068f054a9c0ec10cf12f695, type: 2}
+  sortMode: 0
+  lockFirstCard: 0
+  limitType: 0
+  maxMoves: 6
+  timeLimitSeconds: 60
+  useMemoryMode: 0
+  previewTime: 4
+  revealTime: 2
+  showLevelTutorial: 1
+  tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN"
+  tutorialText: 
+  tutorialImage: {fileID: 0}
+  gameplaySceneName: GamePlay

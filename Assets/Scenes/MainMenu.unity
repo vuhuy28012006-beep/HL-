@@ -870,7 +870,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 585245756}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: BackToMenu
+        m_MethodName: GoToMap
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1422,6 +1422,9 @@ MonoBehaviour:
   winPanel: {fileID: 0}
   losePanel: {fileID: 0}
   starsText: {fileID: 0}
+  starImages: []
+  filledStar: {fileID: 0}
+  emptyStar: {fileID: 0}
   allLevels: []
 --- !u!4 &585245757
 Transform:

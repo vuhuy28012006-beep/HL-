@@ -84,10 +84,10 @@ public class GameManager : MonoBehaviour
 
     private int CalculateStars(int movesLeft, int maxMoves)
     {
-        if (maxMoves <= 0)
-            return 3;
+        // if (maxMoves <= 0)
+        //     return 3;
 
-        if (movesLeft >= maxMoves / 2f)
+        if (movesLeft >= 2)
             return 3;
 
         if (movesLeft >= 1)
