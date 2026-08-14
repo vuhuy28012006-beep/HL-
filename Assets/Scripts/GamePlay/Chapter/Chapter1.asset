@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739cc9e82a30c24488246d3eca75f02e, type: 3}
   m_Name: Chapter1
   m_EditorClassIdentifier: 
+  chapterNumber: 1
   chapterName: "Sinh v\u1EADt"
   description: "B\u1EA3n test chapter 1"
   chapterIcon: {fileID: 0}
+  levelSelectBackground: {fileID: 21300000, guid: 14aa272b50551ad48969049eb969a883, type: 3}
   levels:
   - {fileID: 11400000, guid: 0420558e03cba0f448fbaf2cbac5ae21, type: 2}
   - {fileID: 11400000, guid: a6125937553dc164590b09469ee78209, type: 2}
