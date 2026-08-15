@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 12f7587fdc4da154894b5e8afcb5c5ea, type: 3}
-  m_Name: LevelData7.3
+  m_Name: LevelData7.5
   m_EditorClassIdentifier: 
-  levelNumber: 3
-  levelName: "Ph\xE1t minh"
+  levelNumber: 5
+  levelName: "\u0111\u1EBFm s\u1ED1 ch\xE2n "
   chapterNumber: 7
   chapterName: "V\u1EADt L\xFD"
   backgroundImage: {fileID: 0}
   events:
-  - {fileID: 11400000, guid: f3f94a96b61e7a540b11cc8d49f113ae, type: 2}
-  - {fileID: 11400000, guid: 2a9285fb4068f054a9c0ec10cf12f695, type: 2}
-  - {fileID: 11400000, guid: f0a9a5a416e88ba4da8a4d84f8c3a912, type: 2}
-  - {fileID: 11400000, guid: 6980a34c9c570e24aa8874a885469430, type: 2}
-  - {fileID: 11400000, guid: 7654407df3f595949a246d0b24544143, type: 2}
-  - {fileID: 11400000, guid: f695ca2692cab72489c51479af7bce81, type: 2}
+  - {fileID: 11400000, guid: 6137bea941c3860429463970216460a0, type: 2}
+  - {fileID: 11400000, guid: ef0f451fa54bc9a4f802fd1a2483b502, type: 2}
+  - {fileID: 11400000, guid: 1be62314f304e994fa730f93df171680, type: 2}
+  - {fileID: 11400000, guid: 7754790bcfec20849bccb86e7b7ae286, type: 2}
+  - {fileID: 11400000, guid: 4ad5312d1677ba44fb73bfb9f5060e4e, type: 2}
+  - {fileID: 11400000, guid: 2ee3969049c734440a05a8545551e514, type: 2}
   sortMode: 0
   lockFirstCard: 0
   limitType: 0
@@ -34,6 +34,7 @@ MonoBehaviour:
   revealTime: 2
   showLevelTutorial: 1
   tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN"
-  tutorialText: 
+  tutorialText: "S\u1EAFp x\u1EBFp theo s\u1ED1 l\u01B0\u1EE3ng ch\xE2n t\u0103ng
+    d\u1EA7n"
   tutorialImage: {fileID: 0}
   gameplaySceneName: GamePlay
