@@ -19,3 +19,4 @@ MonoBehaviour:
   levelSelectBackground: {fileID: 21300000, guid: c842c9f2dd496e140bc85ad7aa41fe09, type: 3}
   levels:
   - {fileID: 11400000, guid: 52627b7761d0aec4cad444ab1ddfe0b3, type: 2}
+  - {fileID: 11400000, guid: e22cf339c27701f468559d372e2c04ae, type: 2}

@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f7587fdc4da154894b5e8afcb5c5ea, type: 3}
+  m_Name: LevelData3.2
+  m_EditorClassIdentifier: 
+  levelNumber: 2
+  levelName: "K\xEDch th\u01B0\u1EDBc"
+  chapterNumber: 3
+  chapterName: "V\u0169 tr\u1EE5"
+  backgroundImage: {fileID: 21300000, guid: 9879c597bc8e63142b54109535059bda, type: 3}
+  events:
+  - {fileID: 11400000, guid: 0e2ecfac829d9af4abdf3a046fcd648f, type: 2}
+  - {fileID: 11400000, guid: d2e3aeaa521ac6d4aa42fe0683df51f5, type: 2}
+  - {fileID: 11400000, guid: fa6b80bfeaaff75428c56223c07aa483, type: 2}
+  - {fileID: 11400000, guid: 9a5d8c8912a560043af8fe0a23922975, type: 2}
+  - {fileID: 11400000, guid: f2e68b36a93329644b5cd29156d7ee08, type: 2}
+  - {fileID: 11400000, guid: fea8f587c615c074fb781c0f52daa939, type: 2}
+  - {fileID: 11400000, guid: cade3168c24ee884a9113ab0545a9f6f, type: 2}
+  - {fileID: 11400000, guid: 63e78ada3854c90498a89096c1f3a8fa, type: 2}
+  sortMode: 0
+  lockFirstCard: 0
+  limitType: 0
+  maxMoves: 8
+  timeLimitSeconds: 60
+  useMemoryMode: 0
+  previewTime: 4
+  revealTime: 2
+  showLevelTutorial: 1
+  tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN"
+  tutorialText: "s\u1EAFp x\u1EBFp theo k\xEDch th\u01B0\u1EDBc h\xE0nh tinh"
+  tutorialImage: {fileID: 0}
+  gameplaySceneName: GamePlay
