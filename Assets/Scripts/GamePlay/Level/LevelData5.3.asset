@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f7587fdc4da154894b5e8afcb5c5ea, type: 3}
+  m_Name: LevelData5.3
+  m_EditorClassIdentifier: 
+  levelNumber: 3
+  levelName: 
+  chapterNumber: 5
+  chapterName: "To\xE1n h\u1ECDc"
+  backgroundImage: {fileID: 21300000, guid: e88f1f6a3e88ccc4b9072870cff60830, type: 3}
+  events:
+  - {fileID: 11400000, guid: cfeb6a190a44b4b4e88e1df7a8186c61, type: 2}
+  - {fileID: 11400000, guid: 959974cdafb5e50469b8ad0553014738, type: 2}
+  - {fileID: 11400000, guid: bde0cda3bd39fca44ba6c68341aa3ffc, type: 2}
+  - {fileID: 11400000, guid: 5d5a16fff4515b5479b6e938883cefa3, type: 2}
+  - {fileID: 11400000, guid: 28459cd75eb90ab47818a1866a21c0ee, type: 2}
+  - {fileID: 11400000, guid: 86befaad21109064db6c5be1df05bb0a, type: 2}
+  - {fileID: 11400000, guid: 632666bad1b0f1743b0d96c7e01f2f6a, type: 2}
+  sortMode: 1
+  lockFirstCard: 0
+  limitType: 1
+  maxMoves: 8
+  timeLimitSeconds: 30
+  useMemoryMode: 0
+  previewTime: 4
+  revealTime: 2
+  showLevelTutorial: 1
+  tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN"
+  tutorialText: "Bubble Sort\nC\xE1c h\xECnh c\xF3 b\xE1n k\xEDnh b\u1EB1ng nhau,
+    s\u1EAFp x\u1EBFp sao cho chu vi t\u0103ng d\u1EA7n"
+  tutorialImage: {fileID: 0}
+  gameplaySceneName: GamePlay
