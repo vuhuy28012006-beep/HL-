@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739cc9e82a30c24488246d3eca75f02e, type: 3}
   m_Name: Chapter6
   m_EditorClassIdentifier: 
+  chapterNumber: 1
   chapterName: "sinh h\u1ECDc"
   description: 
   chapterIcon: {fileID: 0}
+  levelSelectBackground: {fileID: 0}
   levels:
   - {fileID: 11400000, guid: 715a4d76c8afd824dad44b25d3397d85, type: 2}
   - {fileID: 11400000, guid: f20d031613b70e24bb78db5c063b98b5, type: 2}
-  - {fileID: 11400000, guid: 0859ba72510722a48822fcc6087fe36d, type: 2}
+  - {fileID: 11400000, guid: 48ee59626313410458fb3703616836c4, type: 2}
+  - {fileID: 11400000, guid: 22e5c7cd2245eca479644168efbe7644, type: 2}
+  - {fileID: 11400000, guid: 0878b0c9dec983246a3a068320dd1e6f, type: 2}

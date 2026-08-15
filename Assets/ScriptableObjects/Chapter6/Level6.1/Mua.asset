@@ -14,10 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 615
   eventName: "M\u01B0a"
-<<<<<<< HEAD
   year: 5
   image: {fileID: 21300000, guid: 93f9bff8880d8644c9d1695290ade92c, type: 3}
-=======
-  year: 4
-  image: {fileID: 21300000, guid: afd8d6c4c8d416540b04c71deb575b85, type: 3}
->>>>>>> 50053badc3e5fc6466c66167dd1a9e8db0a63110
