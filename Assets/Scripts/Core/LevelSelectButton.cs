@@ -10,6 +10,7 @@ public class LevelSelectButton : MonoBehaviour
     [SerializeField] private GameObject lockIcon;
     [SerializeField] private TMP_Text starsText;
     [SerializeField] private TMP_Text levelNumberText;
+    [SerializeField] private GameObject currentMarker;
 
     [Header("Ba ngoi sao tren Level")]
     [SerializeField] private Image[] starImages;
@@ -60,6 +61,15 @@ public class LevelSelectButton : MonoBehaviour
 
         int earnedStars =
             SaveManager.GetStars(levelData.levelNumber);
+
+        bool isCurrentLevel =
+            unlocked &&
+            earnedStars == 0 &&
+            levelData.levelNumber ==
+                SaveManager.GetHighestUnlockedLevel();
+
+        if (currentMarker != null)
+            currentMarker.SetActive(isCurrentLevel);
 
         // Neu van muon hien chu 2/3
         if (starsText != null)

@@ -595,6 +595,8 @@ GameObject:
   - component: {fileID: 1031060457}
   - component: {fileID: 1031060456}
   - component: {fileID: 1031060458}
+  - component: {fileID: 1031060459}
+  - component: {fileID: 1031060460}
   m_Layer: 0
   m_Name: LevelListPopulator
   m_TagString: Untagged
@@ -664,6 +666,34 @@ MonoBehaviour:
   dotSize: {x: 48, y: 26}
   dotSpacing: 42
   curveHeight: 120
+--- !u!114 &1031060459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031060455}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f74b7de9d9d175e48bd678af33b12523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  content: {fileID: 628393051}
+  backgroundLayer: {fileID: 703021844}
+  tileWidth: 1920
+  tileHeight: 1080
+--- !u!114 &1031060460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031060455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b377868152ea4774fbb9d16f77720c55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1057322022
 GameObject:
   m_ObjectHideFlags: 0

@@ -68,6 +68,30 @@ public static class SaveManager
         }
     }
 
+    public static void ResetLevelProgress(
+        int maxLevelToClear = 200
+    )
+    {
+        // Xóa level cao nhất đã mở.
+        PlayerPrefs.DeleteKey(HighestUnlockedKey);
+
+        // Xóa số sao của các level.
+        for (int level = 1;
+            level <= maxLevelToClear;
+            level++)
+        {
+            PlayerPrefs.DeleteKey(
+                StarsKeyPrefix + level
+            );
+        }
+
+        PlayerPrefs.Save();
+
+        Debug.Log(
+            "Đã reset tiến trình level. " +
+            "Level 1 mở, các level sau bị khóa."
+        );
+    }
     // Dung khi test, xoa het du lieu da luu
     public static void ResetAllProgress()
     {

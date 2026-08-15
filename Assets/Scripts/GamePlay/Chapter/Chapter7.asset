@@ -10,18 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 739cc9e82a30c24488246d3eca75f02e, type: 3}
-  m_Name: Chapter6
+  m_Name: Chapter7
   m_EditorClassIdentifier: 
   chapterNumber: 1
-  chapterName: "sinh h\u1ECDc"
+  chapterName: "V\u1EADt L\xFD"
   description: 
   chapterIcon: {fileID: 0}
-  levelSelectBackground: {fileID: 21300000, guid: 991a5a57e89ab7748abbc0bd52409644, type: 3}
+  levelSelectBackground: {fileID: 21300000, guid: c59f42d45897c884483f9027646e6266, type: 3}
   levels:
-  - {fileID: 11400000, guid: 715a4d76c8afd824dad44b25d3397d85, type: 2}
-  - {fileID: 11400000, guid: f20d031613b70e24bb78db5c063b98b5, type: 2}
   - {fileID: 11400000, guid: 48ee59626313410458fb3703616836c4, type: 2}
   - {fileID: 11400000, guid: 22e5c7cd2245eca479644168efbe7644, type: 2}
   - {fileID: 11400000, guid: 0878b0c9dec983246a3a068320dd1e6f, type: 2}
-  - {fileID: 11400000, guid: b002bd29e2cf8d64b8c939e40152d756, type: 2}
-  - {fileID: 11400000, guid: 104fcff8bc2c3eb48a493519f8269141, type: 2}
