@@ -18,16 +18,22 @@ MonoBehaviour:
   chapterName: "Sinh v\u1EADt"
   backgroundImage: {fileID: 0}
   events:
+  - {fileID: 11400000, guid: 19a73b9724372af408945006a043050c, type: 2}
   - {fileID: 11400000, guid: 87b519d1037e37a41b6e7ee1d97c7167, type: 2}
   - {fileID: 11400000, guid: ddbf1ecb3a4aa964fb410bc48a93d63a, type: 2}
+  - {fileID: 11400000, guid: 136c0dc9151f91f48bf0e44952e4ca6c, type: 2}
+  - {fileID: 11400000, guid: 15aa095acaab59d4a9812664c44001ef, type: 2}
+  - {fileID: 11400000, guid: c569c635b9650d84d9736622d15145bc, type: 2}
+  - {fileID: 11400000, guid: 25565b02caff58a4b92b3feeaa776070, type: 2}
+  - {fileID: 11400000, guid: 1a297fdc7ee473e45b044ebd241c7dfe, type: 2}
+  - {fileID: 11400000, guid: 4f21c0a4bf6314d4dbb1c8cd88affa06, type: 2}
+  - {fileID: 11400000, guid: 233ee3c698bb07f489556b58758c1850, type: 2}
   - {fileID: 11400000, guid: b133a11a4af55af4b96108ba0ac8d1b2, type: 2}
   - {fileID: 11400000, guid: 74e38bb27cdbec04c99aad027e662a8f, type: 2}
-  - {fileID: 11400000, guid: 25565b02caff58a4b92b3feeaa776070, type: 2}
-  - {fileID: 11400000, guid: c569c635b9650d84d9736622d15145bc, type: 2}
   sortMode: 0
   lockFirstCard: 0
   limitType: 0
-  maxMoves: 6
+  maxMoves: 10
   timeLimitSeconds: 60
   useMemoryMode: 0
   previewTime: 4
@@ -36,4 +42,4 @@ MonoBehaviour:
   tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN"
   tutorialText: 
   tutorialImage: {fileID: 0}
-  gameplaySceneName: GamePlay
+  gameplaySceneName: GamePlayConGiap
