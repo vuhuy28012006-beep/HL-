@@ -30,6 +30,7 @@ public class BoardManager : MonoBehaviour
 
     [Header("UI (khong bat buoc, co the de trong)")]
     [SerializeField] private TMP_Text movesLeftText;
+    [SerializeField] private TMP_Text limitModeText;
 
     [Header("Background")]
     [Tooltip("Keo Image nen (GameObject 'Background' trong Canvas) vao day. " +
@@ -910,22 +911,32 @@ public class BoardManager : MonoBehaviour
     }
     private void UpdateMovesUI()
     {
-        if (movesLeftText == null || currentLevel == null)
+        if (currentLevel == null)
             return;
 
         if (currentLevel.limitType == LevelLimitType.Time)
         {
-            int totalSeconds = Mathf.CeilToInt(timeLeft);
-            int minutes = totalSeconds / 60;
-            int seconds = totalSeconds % 60;
+            if (limitModeText != null)
+                limitModeText.text = "THỜI\nGIAN";
 
-            movesLeftText.text =
-                minutes.ToString("00") + ":" +
-                seconds.ToString("00");
+            if (movesLeftText != null)
+            {
+                int totalSeconds = Mathf.CeilToInt(timeLeft);
+                int minutes = totalSeconds / 60;
+                int seconds = totalSeconds % 60;
+
+                movesLeftText.text =
+                    minutes.ToString("00") + ":" +
+                    seconds.ToString("00");
+            }
         }
         else
         {
-            movesLeftText.text = movesLeft.ToString();
+            if (limitModeText != null)
+                limitModeText.text = "LƯỢT";
+
+            if (movesLeftText != null)
+                movesLeftText.text = movesLeft.ToString();
         }
     }
 
@@ -1013,14 +1024,19 @@ public class BoardManager : MonoBehaviour
 
         if (chapterTitleText != null)
         {
+            string chapterName =
+                string.IsNullOrWhiteSpace(currentLevel.chapterName)
+                    ? ""
+                    : currentLevel.chapterName.ToUpperInvariant();
+
             chapterTitleText.text =
-                $"Chương {currentLevel.chapterNumber}: {currentLevel.chapterName}";
+                $"CHƯƠNG {currentLevel.chapterNumber} • {chapterName}";
         }
 
         if (levelTitleText != null)
         {
             levelTitleText.text =
-                $"Màn {currentLevel.levelNumber}";
+                $"MÀN {currentLevel.levelNumber}";
         }
     }
 }
