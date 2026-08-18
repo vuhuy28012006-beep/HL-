@@ -161,13 +161,13 @@ public class BoardManager : MonoBehaviour
         Time.timeScale = 1f;
 
         // Nếu Reset xảy ra giữa animation thì Layout có thể đang bị tắt.
-        HorizontalLayoutGroup activeLayout =
-            cardRow != null
-            ? cardRow.GetComponent<HorizontalLayoutGroup>()
-            : null;
+        // HorizontalLayoutGroup activeLayout =
+        //     cardRow != null
+        //     ? cardRow.GetComponent<HorizontalLayoutGroup>()
+        //     : null;
 
-        if (activeLayout != null)
-            activeLayout.enabled = true;
+        // if (activeLayout != null)
+        //     activeLayout.enabled = true;
 
         currentLevel = level;
         UpdateChapterTitle();
@@ -237,13 +237,13 @@ public class BoardManager : MonoBehaviour
 
         PositionCards();
 
-        // Bắt Unity sắp xếp lại các thẻ vừa được tạo.
-        Canvas.ForceUpdateCanvases();
+        // // Bắt Unity sắp xếp lại các thẻ vừa được tạo.
+        // Canvas.ForceUpdateCanvases();
 
-        RectTransform rowRect = cardRow as RectTransform;
+        // RectTransform rowRect = cardRow as RectTransform;
 
-        if (rowRect != null)
-            LayoutRebuilder.ForceRebuildLayoutImmediate(rowRect);
+        // if (rowRect != null)
+        //     LayoutRebuilder.ForceRebuildLayoutImmediate(rowRect);
 
         movesLeft = level.maxMoves;
         timeLeft = level.timeLimitSeconds;
@@ -295,20 +295,20 @@ public class BoardManager : MonoBehaviour
 
         // Animation đổi thẻ có thể đã tắt Layout.
         // Phải bật lại trước khi tạo thẻ mới.
-        HorizontalLayoutGroup layout =
-            cardRow.GetComponent<HorizontalLayoutGroup>();
+        // HorizontalLayoutGroup layout =
+        //     cardRow.GetComponent<HorizontalLayoutGroup>();
 
-        if (layout != null)
-            layout.enabled = true;
+        // if (layout != null)
+        //     layout.enabled = true;
 
         SetupLevelInternal(currentLevel, false);
 
-        Canvas.ForceUpdateCanvases();
+        // Canvas.ForceUpdateCanvases();
 
-        RectTransform rowRect = cardRow as RectTransform;
+        // RectTransform rowRect = cardRow as RectTransform;
 
-        if (rowRect != null)
-            LayoutRebuilder.ForceRebuildLayoutImmediate(rowRect);
+        // if (rowRect != null)
+        //     LayoutRebuilder.ForceRebuildLayoutImmediate(rowRect);
 }
     // Hàm đặt ngửa thẻ sau x(s) thì úp xuống
     private IEnumerator PreviewThenHideCards()
@@ -619,32 +619,65 @@ public class BoardManager : MonoBehaviour
     // theo thu tu hien tai trong boardCards. Neu khong co du slot, giu nguyen vi tri hien tai.
     private void PositionCards()
     {
-        if (cardSlots == null || cardSlots.Length == 0)
-            return; // khong co slot tuy chinh -> giu hanh vi cu (vd: HorizontalLayoutGroup neu con gan)
+        if (cardRow == null || boardCards == null || boardCards.Count == 0)
+            return;
+
+        RectTransform rowRect = cardRow.GetComponent<RectTransform>();
+
+        float rowWidth = rowRect.rect.width;
+
+        // Khoảng cách giữa các card
+        float spacing = 15f;
+
+        // Chiều rộng card
+        float cardWidth = 170f;
+
+        // Nếu nhiều card thì tự giảm kích thước
+        int count = boardCards.Count;
+
+        if (count > 1)
+        {
+            float maxWidth = (rowWidth - spacing * (count - 1)) / count;
+
+            if (maxWidth < cardWidth)
+                cardWidth = maxWidth;
+        }
 
         for (int i = 0; i < boardCards.Count; i++)
         {
-            if (i >= cardSlots.Length || cardSlots[i] == null)
+            if (boardCards[i] == null)
                 continue;
 
             RectTransform rt = boardCards[i].GetComponent<RectTransform>();
+
             if (rt == null)
                 continue;
 
-            rt.anchoredPosition = cardSlots[i].anchoredPosition;
+            // Kích thước card
+            rt.sizeDelta = new Vector2(cardWidth, rt.sizeDelta.y);
 
-            // Dong bo luon kich thuoc: Slot to thi the to, Slot nho thi the nho.
-            rt.sizeDelta = cardSlots[i].sizeDelta;
+            // Tính vị trí X
+            float totalWidth =
+                count * cardWidth +
+                (count - 1) * spacing;
+
+            float startX = -totalWidth / 2f + cardWidth / 2f;
+
+            float x = startX + i * (cardWidth + spacing);
+
+            rt.anchoredPosition = new Vector2(
+                x,
+                rt.anchoredPosition.y
+            );
         }
     }
-
     // === TIEN ICH: click phai vao component BoardManager trong Inspector -> chon muc nay ===
     // Tu dong tao san N slot (Empty GameObject co RectTransform) duoi cardRow, xep deu
     // giong nhu HorizontalLayoutGroup dang lam, de ban co diem bat dau roi tu keo chinh lai.
     // So luong slot = so the toi da trong cac LevelData da gan (hoac tu nhap slotCountToGenerate).
     [Header("Tao slot tu dong (chi dung trong Editor)")]
-    [SerializeField] private int slotCountToGenerate = 6;
-    [SerializeField] private float slotSpacingX = 200f;
+    [SerializeField] private int slotCountToGenerate = 10;
+    [SerializeField] private float slotSpacingX = 190f;
     [SerializeField] private float slotWidth = 170f;
     [SerializeField] private float slotHeight = 240f;
 

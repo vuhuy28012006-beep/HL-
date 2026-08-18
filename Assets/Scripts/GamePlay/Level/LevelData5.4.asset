@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f7587fdc4da154894b5e8afcb5c5ea, type: 3}
+  m_Name: LevelData5.4
+  m_EditorClassIdentifier: 
+  levelNumber: 4
+  levelName: "S\u1ED1 la m\xE3"
+  chapterNumber: 5
+  chapterName: "To\xE1n h\u1ECDc"
+  backgroundImage: {fileID: 21300000, guid: e88f1f6a3e88ccc4b9072870cff60830, type: 3}
+  events:
+  - {fileID: 11400000, guid: d3ee5e809e7fbb347b0b950cabf06526, type: 2}
+  - {fileID: 11400000, guid: 06708f789859c2b488fcdfd2d149503b, type: 2}
+  - {fileID: 11400000, guid: 15bae0b199439b84081c6549c0407fbc, type: 2}
+  - {fileID: 11400000, guid: 5cbd1236e7d47bd4d8f2b47f2b2e773e, type: 2}
+  - {fileID: 11400000, guid: 62b274f7757d44940b0da494521d085b, type: 2}
+  - {fileID: 11400000, guid: b0aaa5a26b89f2e4088b2e8f79b11ecf, type: 2}
+  - {fileID: 11400000, guid: 0802dbdccb0eae249abd53c3c5978114, type: 2}
+  sortMode: 1
+  lockFirstCard: 0
+  limitType: 1
+  maxMoves: 8
+  timeLimitSeconds: 30
+  useMemoryMode: 0
+  previewTime: 4
+  revealTime: 2
+  showLevelTutorial: 1
+  tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN"
+  tutorialText: "Bubble Sort\nS\u1EAFp x\u1EBFp c\xE1c s\u1ED1 la m\xE3 theo th\u1EE9
+    t\u1EF1 t\u0103ng d\u1EA7n"
+  tutorialImage: {fileID: 0}
+  gameplaySceneName: GamePlay
