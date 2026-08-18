@@ -155,7 +155,19 @@ public class BoardManager : MonoBehaviour
 
     private void SetupLevelInternal(LevelData level, bool createNewOrder)
     {
-        StopAllCoroutines();
+            StopAllCoroutines();
+
+        // Tránh trạng thái pause còn sót lại.
+        Time.timeScale = 1f;
+
+        // Nếu Reset xảy ra giữa animation thì Layout có thể đang bị tắt.
+        HorizontalLayoutGroup activeLayout =
+            cardRow != null
+            ? cardRow.GetComponent<HorizontalLayoutGroup>()
+            : null;
+
+        if (activeLayout != null)
+            activeLayout.enabled = true;
 
         currentLevel = level;
         UpdateChapterTitle();
@@ -225,6 +237,14 @@ public class BoardManager : MonoBehaviour
 
         PositionCards();
 
+        // Bắt Unity sắp xếp lại các thẻ vừa được tạo.
+        Canvas.ForceUpdateCanvases();
+
+        RectTransform rowRect = cardRow as RectTransform;
+
+        if (rowRect != null)
+            LayoutRebuilder.ForceRebuildLayoutImmediate(rowRect);
+
         movesLeft = level.maxMoves;
         timeLeft = level.timeLimitSeconds;
 
@@ -257,11 +277,39 @@ public class BoardManager : MonoBehaviour
     }
     public void ResetLevel()
     {
-        if (currentLevel == null)
+        if (currentLevel == null || cardRow == null)
             return;
 
+        // Nếu Tutorial đang làm game dừng thì đóng đúng cách.
+        if (tutorialManager != null)
+            tutorialManager.CloseTutorial();
+
+        Time.timeScale = 1f;
+
+        // Dừng animation cũ và giải phóng trạng thái đang khóa thao tác.
+        StopAllCoroutines();
+
+        gameEnded = false;
+        isAnimating = false;
+        timerRunning = false;
+
+        // Animation đổi thẻ có thể đã tắt Layout.
+        // Phải bật lại trước khi tạo thẻ mới.
+        HorizontalLayoutGroup layout =
+            cardRow.GetComponent<HorizontalLayoutGroup>();
+
+        if (layout != null)
+            layout.enabled = true;
+
         SetupLevelInternal(currentLevel, false);
-    }
+
+        Canvas.ForceUpdateCanvases();
+
+        RectTransform rowRect = cardRow as RectTransform;
+
+        if (rowRect != null)
+            LayoutRebuilder.ForceRebuildLayoutImmediate(rowRect);
+}
     // Hàm đặt ngửa thẻ sau x(s) thì úp xuống
     private IEnumerator PreviewThenHideCards()
     {
@@ -530,7 +578,7 @@ public class BoardManager : MonoBehaviour
         float t = 0f;
         while (t < swapDuration)
         {
-            t += Time.deltaTime;
+            t += Time.unscaledDeltaTime;
             float k = Mathf.Clamp01(t / swapDuration);
             k = k * k * (3f - 2f * k); // ease in-out
 
@@ -914,32 +962,34 @@ public class BoardManager : MonoBehaviour
         if (currentLevel == null)
             return;
 
-        if (currentLevel.limitType == LevelLimitType.Time)
+        bool isTimeLevel =
+            currentLevel.limitType == LevelLimitType.Time;
+
+        if (limitModeText != null)
         {
-            if (limitModeText != null)
-                limitModeText.text = "THỜI\nGIAN";
+            limitModeText.text = isTimeLevel
+                ? "THỜI GIAN"
+                : "LƯỢT CÒN";
+        }
 
-            if (movesLeftText != null)
-            {
-                int totalSeconds = Mathf.CeilToInt(timeLeft);
-                int minutes = totalSeconds / 60;
-                int seconds = totalSeconds % 60;
+        if (movesLeftText == null)
+            return;
 
-                movesLeftText.text =
-                    minutes.ToString("00") + ":" +
-                    seconds.ToString("00");
-            }
+        if (isTimeLevel)
+        {
+            int totalSeconds = Mathf.CeilToInt(timeLeft);
+            int minutes = totalSeconds / 60;
+            int seconds = totalSeconds % 60;
+
+            movesLeftText.text =
+                minutes.ToString("00") + ":" +
+                seconds.ToString("00");
         }
         else
         {
-            if (limitModeText != null)
-                limitModeText.text = "LƯỢT";
-
-            if (movesLeftText != null)
-                movesLeftText.text = movesLeft.ToString();
+            movesLeftText.text = movesLeft.ToString();
         }
     }
-
     private void UpdateLimitsUI()
     {
         if (hintsLeftText != null)

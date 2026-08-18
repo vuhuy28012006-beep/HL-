@@ -49,8 +49,11 @@ public class CardVisual : MonoBehaviour
             cardName.text = eventCard.Data.eventName;
 
         if (cardImage != null)
+        {
             cardImage.sprite = eventCard.Data.image;
-
+            cardImage.color = Color.white;
+            cardImage.preserveAspect = true;
+        }
         memoryMarked = false;
         isLocked = false;
 
@@ -145,7 +148,7 @@ public class CardVisual : MonoBehaviour
         float t = 0f;
         while (t < zoomAnimDuration)
         {
-            t += Time.deltaTime;
+            t += Time.unscaledDeltaTime;
             float k = Mathf.Clamp01(t / zoomAnimDuration);
             k = k * k * (3f - 2f * k); // ease in-out, đồng bộ style với AnimateSwap
 
