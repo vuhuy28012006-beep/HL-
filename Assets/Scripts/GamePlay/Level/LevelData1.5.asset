@@ -38,4 +38,4 @@ MonoBehaviour:
   tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN"
   tutorialText: 
   tutorialImage: {fileID: 0}
-  gameplaySceneName: GamePlayConGiap
+  gameplaySceneName: GamePlay

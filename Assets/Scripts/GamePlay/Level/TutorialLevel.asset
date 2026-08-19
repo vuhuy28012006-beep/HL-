@@ -14,11 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelNumber: 0
   levelName: 0
+  chapterNumber: 1
+  chapterName: "Sinh v\u1EADt"
+  backgroundImage: {fileID: 0}
+  backgroundMusic: {fileID: 0}
   events:
   - {fileID: 11400000, guid: 28c00bbbc5c85d443a9a0a395da5789c, type: 2}
   - {fileID: 11400000, guid: 9c6335717a560274ab7c7487792d282f, type: 2}
   - {fileID: 11400000, guid: cd02aa33e25448d4e8944875b5b9a1e3, type: 2}
   sortMode: 0
+  lockFirstCard: 0
   limitType: 0
   maxMoves: 5
   timeLimitSeconds: 60
@@ -27,6 +32,9 @@ MonoBehaviour:
   revealTime: 2
   showLevelTutorial: 1
   tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN"
-  tutorialText: 
+  tutorialText: "\u1EA4n v\xE0o c\xE1c th\u1EBB b\xE0i \u0111\u1EC3 \u0111\u1ED5i
+    v\u1ECB tr\xED \nDi chuy\u1EC3n c\xE1c th\u1EBB b\xE0i sao cho th\u1EE9 t\u1EF1
+    xu\u1EA5t hi\u1EC7n t\u0103ng d\u1EA7n\nNh\u01B0: Bangiomorpha -> Haikouichthys
+    -> Eusthenopteron\n\u1EA4n v\xE0o d\u1EA5u h\u1ECFi ch\u1EA5m "
   tutorialImage: {fileID: 0}
   gameplaySceneName: GamePlay

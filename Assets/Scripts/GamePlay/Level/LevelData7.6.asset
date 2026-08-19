@@ -19,14 +19,10 @@ MonoBehaviour:
   backgroundImage: {fileID: 0}
   backgroundMusic: {fileID: 8300000, guid: 98fb7031c9f6afd4db9ae19143a59a0a, type: 3}
   events:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 5979e3880bad4ea4f9ccb117be756bfc, type: 2}
+  - {fileID: 11400000, guid: 7553fce4ec319e740a827ae5a897c867, type: 2}
+  - {fileID: 11400000, guid: adde3b28c842bae45a1495294f3ef7d1, type: 2}
+  - {fileID: 11400000, guid: 28ead82189119d048b6f186a26b94bd8, type: 2}
   sortMode: 0
   lockFirstCard: 0
   limitType: 0

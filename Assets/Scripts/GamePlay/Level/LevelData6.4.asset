@@ -17,6 +17,7 @@ MonoBehaviour:
   chapterNumber: 1
   chapterName: "Sinh v\u1EADt v\xE0 s\u1EF1 s\u1ED1ng"
   backgroundImage: {fileID: 21300000, guid: 675859abb4ed6aa43bd77af60ff6bd8e, type: 3}
+  backgroundMusic: {fileID: 0}
   events:
   - {fileID: 11400000, guid: fa610d62eb881f44fa59903b56027e94, type: 2}
   - {fileID: 11400000, guid: 1dbde018f22ff614da6716e54e1759d9, type: 2}
@@ -25,7 +26,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2f0d831cceec5ce43be3b35907f10709, type: 2}
   - {fileID: 11400000, guid: 4fc1b3b8e1b87d1419294c7b37b5d516, type: 2}
   sortMode: 0
-  lockFirstCard: 1
+  lockFirstCard: 0
   limitType: 0
   maxMoves: 7
   timeLimitSeconds: 60
