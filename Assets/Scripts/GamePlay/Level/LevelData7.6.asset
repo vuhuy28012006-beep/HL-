@@ -17,15 +17,16 @@ MonoBehaviour:
   chapterNumber: 1
   chapterName: "Sinh v\u1EADt v\xE0 s\u1EF1 s\u1ED1ng"
   backgroundImage: {fileID: 0}
+  backgroundMusic: {fileID: 8300000, guid: 98fb7031c9f6afd4db9ae19143a59a0a, type: 3}
   events:
-  - {fileID: 11400000, guid: 30f03150c10aa084692ea2422f61d8bc, type: 2}
-  - {fileID: 11400000, guid: 788ccaa489253ca4c8e1eb44e13af804, type: 2}
-  - {fileID: 11400000, guid: 1618f45c6ba98d14b85f22fef8485052, type: 2}
-  - {fileID: 11400000, guid: 2baa1b82be586954096d87863848a2c6, type: 2}
-  - {fileID: 11400000, guid: 183135b8ea7955d42a35afbe41f1694a, type: 2}
-  - {fileID: 11400000, guid: d827d32c0e997784684676a796679d82, type: 2}
-  - {fileID: 11400000, guid: 8b464bc2a1319cb47a62bde70b896711, type: 2}
-  - {fileID: 11400000, guid: b988223ed8247394a9b52cbd606cc999, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   sortMode: 0
   lockFirstCard: 0
   limitType: 0

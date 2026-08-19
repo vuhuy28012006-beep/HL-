@@ -17,6 +17,7 @@ MonoBehaviour:
   chapterNumber: 5
   chapterName: "To\xE1n h\u1ECDc"
   backgroundImage: {fileID: 21300000, guid: e88f1f6a3e88ccc4b9072870cff60830, type: 3}
+  backgroundMusic: {fileID: 8300000, guid: 1b2b5d3b2ea227f41b9e7e43c42adc48, type: 3}
   events:
   - {fileID: 11400000, guid: d1046a7d53968fe47b549a6a17d4d9f6, type: 2}
   - {fileID: 11400000, guid: 3dc920df7a64d2f4082fb792203cf632, type: 2}
