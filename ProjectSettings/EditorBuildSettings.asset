@@ -22,8 +22,11 @@ EditorBuildSettings:
     guid: 375202b6b0c18644eb7e55b01714de05
   - enabled: 1
     path: Assets/Scenes/GamePlayConGiap.unity
-    guid: 3640816b9bcd47a40b629b1a4d56ed8e
+    guid: b27dc4f9d2cea964588d8b15c91398c3
   - enabled: 1
     path: Assets/Scenes/GamePlaySolarSystem.unity
+    guid: d1d5d0a24d631174cb44973efee9b8b6
+  - enabled: 1
+    path: Assets/Scenes/GamePlaySolarSystem2.unity
     guid: b70b28325c5c68846b70c56f77994fbb
   m_configObjects: {}
