@@ -15,7 +15,7 @@ MonoBehaviour:
   levelNumber: 2
   levelName: 4.2
   chapterNumber: 4
-  chapterName: "H\xF3a h\u1ECDc"
+  chapterName: "H\xF3a h\u1ECDc v\xE0 v\u1EADt l\xFD"
   backgroundImage: {fileID: 21300000, guid: 6b87261f5cdf2c44c8c5b3989dd410fe, type: 3}
   events:
   - {fileID: 11400000, guid: ca30b90624a6dba4c8e8e5aa58fe3e2c, type: 2}
@@ -24,6 +24,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7c61267793ead0f4fab491355fb2dca3, type: 2}
   - {fileID: 11400000, guid: 760ec1286370cbf4d8c069fdd8396d0d, type: 2}
   sortMode: 1
+  lockFirstCard: 0
   limitType: 0
   maxMoves: 10
   timeLimitSeconds: 60

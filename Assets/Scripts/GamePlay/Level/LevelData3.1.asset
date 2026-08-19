@@ -15,7 +15,7 @@ MonoBehaviour:
   levelNumber: 1
   levelName: "H\u1EC7 m\u1EB7t tr\u1EDDi"
   chapterNumber: 3
-  chapterName: "V\u0169 tr\u1EE5"
+  chapterName: "V\u0169 Tr\u1EE5 v\xE0 \u0111\u1ECBa l\xFD"
   backgroundImage: {fileID: 21300000, guid: 9879c597bc8e63142b54109535059bda, type: 3}
   events:
   - {fileID: 11400000, guid: e72956f41a5b4dd43bba58596419b497, type: 2}

@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739cc9e82a30c24488246d3eca75f02e, type: 3}
   m_Name: Chapter3
   m_EditorClassIdentifier: 
-  chapterNumber: 1
-  chapterName: "V\u0169 tr\u1EE5"
+  chapterNumber: 3
+  chapterName: "V\u0169 tr\u1EE5 v\xE0 \u0111\u1ECBa l\xFD"
   description: 
   chapterIcon: {fileID: 0}
-  levelSelectBackground: {fileID: 21300000, guid: c842c9f2dd496e140bc85ad7aa41fe09, type: 3}
+  levelSelectBackground: {fileID: 0}
   levels:
   - {fileID: 11400000, guid: 52627b7761d0aec4cad444ab1ddfe0b3, type: 2}
   - {fileID: 11400000, guid: e22cf339c27701f468559d372e2c04ae, type: 2}
   - {fileID: 11400000, guid: 666cc98ae4d80754fb5431a3d5bdc3d5, type: 2}
+  - {fileID: 11400000, guid: a1b4f867de9aab740b51962797d6fa41, type: 2}
+  - {fileID: 11400000, guid: b002bd29e2cf8d64b8c939e40152d756, type: 2}
