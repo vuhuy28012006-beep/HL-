@@ -619,7 +619,33 @@ public class BoardManager : MonoBehaviour
     // theo thu tu hien tai trong boardCards. Neu khong co du slot, giu nguyen vi tri hien tai.
     private void PositionCards()
     {
-        if (cardRow == null || boardCards == null || boardCards.Count == 0)
+        if (boardCards == null || boardCards.Count == 0)
+            return;
+
+        // Uu tien dung slot thu cong (cardSlots) neu da gan du trong Inspector.
+        // Vi tri tung the se lay dung theo RectTransform cua slot tuong ung
+        // (theo thu tu hien tai trong boardCards), khong tu dong can giua nua.
+        if (cardSlots != null && cardSlots.Length >= boardCards.Count)
+        {
+            for (int i = 0; i < boardCards.Count; i++)
+            {
+                if (boardCards[i] == null || cardSlots[i] == null)
+                    continue;
+
+                RectTransform rt = boardCards[i].GetComponent<RectTransform>();
+                if (rt == null)
+                    continue;
+
+                // Neu the va slot co chung cha (parent), dung lai vi tri/kich thuoc cua slot.
+                rt.sizeDelta = cardSlots[i].sizeDelta;
+                rt.anchoredPosition = cardSlots[i].anchoredPosition;
+            }
+
+            return;
+        }
+
+        // ---- Fallback: khong du slot thu cong -> tu dong can giua nhu cu ----
+        if (cardRow == null)
             return;
 
         RectTransform rowRect = cardRow.GetComponent<RectTransform>();
