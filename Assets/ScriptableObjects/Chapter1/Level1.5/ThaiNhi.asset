@@ -16,3 +16,6 @@ MonoBehaviour:
   eventName: Thai nhi
   year: 1
   image: {fileID: 21300000, guid: 383f15715d06e034ab8322407e513131, type: 3}
+  useCustomImageLayout: 1
+  imageZoom: 1.4
+  imageOffset: {x: 0, y: 0}

@@ -16,3 +16,6 @@ MonoBehaviour:
   eventName: "Sinh v\u1EADt \u0111\u1EA7u ti\xEAn"
   year: 1
   image: {fileID: 21300000, guid: 742c9e547eabdf44c9644e91f8bd950a, type: 3}
+  useCustomImageLayout: 1
+  imageZoom: 1.5
+  imageOffset: {x: 0, y: 0}

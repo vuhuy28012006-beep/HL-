@@ -16,3 +16,6 @@ MonoBehaviour:
   eventName: "\u0110\u1ED9ng v\u1EADt l\xEAn c\u1EA1n"
   year: 4
   image: {fileID: 21300000, guid: 73f06eca378e80644be59ff8f708ae5e, type: 3}
+  useCustomImageLayout: 1
+  imageZoom: 1.5
+  imageOffset: {x: -10, y: 0}

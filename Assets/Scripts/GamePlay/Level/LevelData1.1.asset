@@ -15,7 +15,7 @@ MonoBehaviour:
   levelNumber: 1
   levelName: 01
   chapterNumber: 1
-  chapterName: "Sinh v\u1EADt v\xE0 s\u1EF1 s\u1ED1ng"
+  chapterName: "S\u1EF1 S\u1ED1ng"
   backgroundImage: {fileID: 21300000, guid: 3c313b1b91c6cba4fb537e18394dc8af, type: 3}
   backgroundMusic: {fileID: 8300000, guid: 98fb7031c9f6afd4db9ae19143a59a0a, type: 3}
   events:
@@ -34,6 +34,6 @@ MonoBehaviour:
   revealTime: 2
   showLevelTutorial: 1
   tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN"
-  tutorialText: 
+  tutorialText: "S\u1EAFp x\u1EBFp thoe th\u1EE9 t\u1EF1 ti\u1EBFn h\xF3a"
   tutorialImage: {fileID: 0}
   gameplaySceneName: GamePlay

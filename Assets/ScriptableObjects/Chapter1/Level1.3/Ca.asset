@@ -16,3 +16,6 @@ MonoBehaviour:
   eventName: "C\xE1 c\u1ED5 \u0111\u1EA1i"
   year: 3
   image: {fileID: 21300000, guid: 2d318bfde1fdce54abaf7a4f52d31e85, type: 3}
+  useCustomImageLayout: 1
+  imageZoom: 1.5
+  imageOffset: {x: 0, y: 0}

@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Fungi
   m_EditorClassIdentifier: 
   id: 646
-  eventName: "N\u1EA5m, vi sinh v\u1EADt"
+  eventName: 
   year: 6
   image: {fileID: 21300000, guid: 73c34c9c0f5e7b1419b89108f30013be, type: 3}
-  useCustomImageLayout: 0
-  imageZoom: 1
+  useCustomImageLayout: 1
+  imageZoom: 1.5
   imageOffset: {x: 0, y: 0}

@@ -16,3 +16,6 @@ MonoBehaviour:
   eventName: Australopithecus
   year: 1
   image: {fileID: 21300000, guid: ba742bcc64915cb41b1d78216903af64, type: 3}
+  useCustomImageLayout: 0
+  imageZoom: 1
+  imageOffset: {x: 0, y: 0}

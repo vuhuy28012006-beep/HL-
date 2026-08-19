@@ -16,3 +16,6 @@ MonoBehaviour:
   eventName: "Gi\xE0"
   year: 5
   image: {fileID: 21300000, guid: 0577a84aae1b0424d82e9642c83db7c1, type: 3}
+  useCustomImageLayout: 1
+  imageZoom: 1.25
+  imageOffset: {x: 0, y: 0}

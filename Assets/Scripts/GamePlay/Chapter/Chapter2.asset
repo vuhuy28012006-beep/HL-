@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Chapter2
   m_EditorClassIdentifier: 
   chapterNumber: 2
-  chapterName: "L\u1ECBch s\u1EED v\xE0 v\u0103n h\xF3a"
+  chapterName: "L\u1ECBch S\u1EED"
   description: 
   chapterIcon: {fileID: 0}
   levelSelectBackground: {fileID: 0}

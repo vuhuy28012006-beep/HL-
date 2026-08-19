@@ -15,7 +15,7 @@ MonoBehaviour:
   levelNumber: 4
   levelName: "Th\u1EE9 t\u1EF1 s\xF3ng \xE1nh s\xE1ng "
   chapterNumber: 4
-  chapterName: "H\xF3a h\u1ECDc v\xE0 v\u1EADt l\xFD"
+  chapterName: "Khoa h\u1ECDc"
   backgroundImage: {fileID: 0}
   backgroundMusic: {fileID: 8300000, guid: 9d5364f7b13431042bfe0fbdd5dc49b6, type: 3}
   events:

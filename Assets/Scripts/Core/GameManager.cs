@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
 
     [Header("Danh sach TOAN BO LevelData trong game")]
     [SerializeField] private LevelData[] allLevels;
+    [Header("Header HUD")]
+    [SerializeField] private TMPro.TMP_Text chapterTitleText;
+    [SerializeField] private TMPro.TMP_Text levelTitleText;
 
     private int currentLevelNumber;
 
@@ -42,6 +45,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         StartGame();
+        RefreshHeaderHUD();
+
     }
 
     public void StartGame()
@@ -80,6 +85,36 @@ public class GameManager : MonoBehaviour
             winPanel.SetActive(true);
 
         ShowStars(stars);
+    }
+    private void RefreshHeaderHUD()
+    {
+        ChapterData selectedChapter =
+            ChapterSession.SelectedChapter;
+
+        LevelData selectedLevel =
+            LevelSession.SelectedLevel;
+
+        if (chapterTitleText != null)
+        {
+            if (selectedChapter != null)
+            {
+                chapterTitleText.text =
+                    $"Chương {selectedChapter.chapterNumber}: " +
+                    selectedChapter.chapterName;
+            }
+            else
+            {
+                Debug.LogWarning(
+                    "Chưa có chương được chọn. Hãy chạy game từ Map."
+                );
+            }
+        }
+
+        if (levelTitleText != null && selectedLevel != null)
+        {
+            levelTitleText.text =
+                $"Level {selectedLevel.levelNumber}";
+        }
     }
 
     private int CalculateStars(int movesLeft, int maxMoves)

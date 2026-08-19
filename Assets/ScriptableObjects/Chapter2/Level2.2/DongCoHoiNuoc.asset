@@ -16,3 +16,6 @@ MonoBehaviour:
   eventName: "\u0110\u1ED9ng c\u01A1 h\u01A1i n\u01B0\u1EDBc James Watt"
   year: 2
   image: {fileID: 21300000, guid: c233eea5d7a12914aaef23a45c9ae37a, type: 3}
+  useCustomImageLayout: 1
+  imageZoom: 1.25
+  imageOffset: {x: 0, y: 0}

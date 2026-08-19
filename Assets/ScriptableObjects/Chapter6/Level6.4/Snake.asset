@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Snake
   m_EditorClassIdentifier: 
   id: 6444
-  eventName: "R\u1EAFn"
+  eventName: 
   year: 4
   image: {fileID: 21300000, guid: 224bfd81d8424cc41a01eefb2170b490, type: 3}
-  useCustomImageLayout: 0
-  imageZoom: 1
+  useCustomImageLayout: 1
+  imageZoom: 1.5
   imageOffset: {x: 0, y: 0}

@@ -16,3 +16,6 @@ MonoBehaviour:
   eventName: Choanoflagellate
   year: 1
   image: {fileID: 21300000, guid: 46f3ec4b8df780e40b41ad167639f81f, type: 3}
+  useCustomImageLayout: 1
+  imageZoom: 1
+  imageOffset: {x: -20, y: 0}

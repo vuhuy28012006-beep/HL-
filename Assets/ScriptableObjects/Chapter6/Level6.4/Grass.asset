@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Grass
   m_EditorClassIdentifier: 
   id: 641
-  eventName: "C\u1ECF"
+  eventName: 
   year: 1
   image: {fileID: 21300000, guid: 2822126d2c39aa5459b13500f2d220e2, type: 3}
-  useCustomImageLayout: 0
-  imageZoom: 1
+  useCustomImageLayout: 1
+  imageZoom: 1.5
   imageOffset: {x: 0, y: 0}
