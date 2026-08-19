@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec4d376e448d3454c81d63c5541c3e3d, type: 3}
   m_Name: ChauAu
   m_EditorClassIdentifier: 
-  id: 0
-  eventName: 
-  year: 0
-  image: {fileID: 0}
+  id: 332
+  eventName: "Ch\xE2u \xC2u"
+  year: 2
+  image: {fileID: 21300000, guid: c83e9db855b5cfa4d8e82b6f590ca2b3, type: 3}
