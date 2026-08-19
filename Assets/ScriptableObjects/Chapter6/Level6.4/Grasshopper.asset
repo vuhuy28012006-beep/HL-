@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Grasshopper
   m_EditorClassIdentifier: 
   id: 642
-  eventName: 
+  eventName: "Ch\xE2u Ch\u1EA5u"
   year: 2
   image: {fileID: 21300000, guid: edb04b2a6ae98f94499c4a31b064ba9c, type: 3}
+  useCustomImageLayout: 0
+  imageZoom: 1
+  imageOffset: {x: 0, y: 0}

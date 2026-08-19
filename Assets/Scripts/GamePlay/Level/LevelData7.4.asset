@@ -30,7 +30,7 @@ MonoBehaviour:
   lockFirstCard: 0
   limitType: 0
   maxMoves: 7
-  timeLimitSeconds: 60
+  timeLimitSeconds: 30
   useMemoryMode: 0
   previewTime: 4
   revealTime: 2

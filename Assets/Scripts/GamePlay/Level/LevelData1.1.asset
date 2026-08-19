@@ -26,8 +26,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4e34ddec57e6ab14a8465f02945ed769, type: 2}
   sortMode: 0
   lockFirstCard: 0
-  limitType: 1
-  maxMoves: 5
+  limitType: 0
+  maxMoves: 4
   timeLimitSeconds: 60
   useMemoryMode: 0
   previewTime: 4

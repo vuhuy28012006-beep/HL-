@@ -39,4 +39,4 @@ MonoBehaviour:
   tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN"
   tutorialText: "s\u1EAFp x\u1EBFp theo k\xEDch th\u01B0\u1EDBc h\xE0nh tinh"
   tutorialImage: {fileID: 0}
-  gameplaySceneName: GamePlay
+  gameplaySceneName: GamePlaySolarSystem

@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec4d376e448d3454c81d63c5541c3e3d, type: 3}
   m_Name: Neptune 1
   m_EditorClassIdentifier: 
-  id: 326
+  id: 325
   eventName: "Sao h\u1EA3i v\u01B0\u01A1ng"
-  year: 6
+  year: 5
   image: {fileID: 21300000, guid: afc666f236ceca04b906be713fdf76bb, type: 3}
+  useCustomImageLayout: 0
+  imageZoom: 1
+  imageOffset: {x: 0, y: 0}

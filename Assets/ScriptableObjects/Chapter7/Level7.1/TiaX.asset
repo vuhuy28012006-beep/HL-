@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec4d376e448d3454c81d63c5541c3e3d, type: 3}
   m_Name: TiaX
   m_EditorClassIdentifier: 
-  id: 622
-  eventName: "S\xE2u b\u01B0\u1EDBm"
-  year: 3
-  image: {fileID: 21300000, guid: f71954651c7ca61429132ac9da1dea12, type: 3}
+  id: 715
+  eventName: Tia X
+  year: 5
+  image: {fileID: 21300000, guid: 887de36b199233b4c8da833b15c13e29, type: 3}
+  useCustomImageLayout: 0
+  imageZoom: 1
+  imageOffset: {x: 0, y: 0}

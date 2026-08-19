@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Eagle
   m_EditorClassIdentifier: 
   id: 645
-  eventName: 
+  eventName: "\u0110\u1EA1i b\xE0ng"
   year: 5
   image: {fileID: 21300000, guid: dc2546f83dac1b744a33db3412b4bfa0, type: 3}
+  useCustomImageLayout: 0
+  imageZoom: 1
+  imageOffset: {x: 0, y: 0}

@@ -15,4 +15,7 @@ MonoBehaviour:
   id: 734
   eventName: TV
   year: 4
-  image: {fileID: 21300000, guid: 9eca4d4c09182474b86cb97eb38e3c66, type: 3}
+  image: {fileID: 21300000, guid: 4f6c4bcde64cda741bcbf558dc555a18, type: 3}
+  useCustomImageLayout: 0
+  imageZoom: 1
+  imageOffset: {x: 0, y: 0}

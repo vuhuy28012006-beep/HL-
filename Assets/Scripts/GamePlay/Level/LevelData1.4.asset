@@ -34,7 +34,7 @@ MonoBehaviour:
   sortMode: 0
   lockFirstCard: 0
   limitType: 0
-  maxMoves: 10
+  maxMoves: 12
   timeLimitSeconds: 60
   useMemoryMode: 0
   previewTime: 4

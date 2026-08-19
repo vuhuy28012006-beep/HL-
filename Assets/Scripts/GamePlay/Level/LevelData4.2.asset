@@ -27,8 +27,8 @@ MonoBehaviour:
   sortMode: 1
   lockFirstCard: 0
   limitType: 0
-  maxMoves: 10
-  timeLimitSeconds: 60
+  maxMoves: 9
+  timeLimitSeconds: 30
   useMemoryMode: 0
   previewTime: 4
   revealTime: 2
