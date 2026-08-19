@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec4d376e448d3454c81d63c5541c3e3d, type: 3}
-  m_Name: LyThuongKiet
+  m_Name: Gia
   m_EditorClassIdentifier: 
-  id: 234
-  eventName: "Kh\xE1ng chi\u1EBFn ch\u1ED1ng T\u1ED1ng"
-  year: 4
-  image: {fileID: 21300000, guid: ba9dc6972d94d204b9f5b8c4e89384ea, type: 3}
+  id: 155
+  eventName: "Gi\xE0"
+  year: 5
+  image: {fileID: 21300000, guid: 0577a84aae1b0424d82e9642c83db7c1, type: 3}

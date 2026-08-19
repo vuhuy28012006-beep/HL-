@@ -12,22 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12f7587fdc4da154894b5e8afcb5c5ea, type: 3}
   m_Name: LevelData2.3
   m_EditorClassIdentifier: 
-  levelNumber: 2
+  levelNumber: 3
   levelName: 
   chapterNumber: 2
   chapterName: "L\u1ECBch S\u1EED"
   backgroundImage: {fileID: 21300000, guid: 3c313b1b91c6cba4fb537e18394dc8af, type: 3}
+  backgroundMusic: {fileID: 0}
   events:
-  - {fileID: 11400000, guid: ee2dcf168d99b15488fd4b645f7c419d, type: 2}
-  - {fileID: 11400000, guid: 28104b16007a839409783cc9e7f60221, type: 2}
-  - {fileID: 11400000, guid: 7d216a43bbe71004c9a88e2d63118408, type: 2}
-  - {fileID: 11400000, guid: 9c206b836f506b7448e75e89c48c7978, type: 2}
-  - {fileID: 11400000, guid: 89907268799ba464db475a6909123c42, type: 2}
-  - {fileID: 11400000, guid: 41300ee9aaf3d8e4491a37ce8e60f88b, type: 2}
+  - {fileID: 11400000, guid: 3090e428eac9b874ca3f5f49704cf3fb, type: 2}
+  - {fileID: 11400000, guid: 0c63eda4543223945b074369ecac76c3, type: 2}
+  - {fileID: 11400000, guid: 35ca8eb6333ea3442bfa3a3345cc87b6, type: 2}
+  - {fileID: 11400000, guid: a9e6e8eb9fbca2c4db7030a446598758, type: 2}
+  - {fileID: 11400000, guid: f66994bb182944649bc3574cbb76da63, type: 2}
+  - {fileID: 11400000, guid: 8e5e28984eab7354ba605afe549466e7, type: 2}
+  - {fileID: 11400000, guid: 0aae4b78cf4b93a47bb9d9da744dc594, type: 2}
   sortMode: 0
   lockFirstCard: 0
   limitType: 0
-  maxMoves: 6
+  maxMoves: 7
   timeLimitSeconds: 60
   useMemoryMode: 0
   previewTime: 4
