@@ -13,6 +13,7 @@ public static class SaveManager
 {
     private const string HighestUnlockedKey = "HighestUnlockedLevel";
     private const string StarsKeyPrefix = "Level_Stars_";
+    private const string LastPlayedLevelKey = "LastPlayedLevel";
 
     // Level cao nhat nguoi choi da mo khoa (mac dinh = 1, vi Level 1 luon mo san)
     public static int GetHighestUnlockedLevel()
@@ -32,6 +33,24 @@ public static class SaveManager
             PlayerPrefs.SetInt(HighestUnlockedKey, levelNumber);
             PlayerPrefs.Save();
         }
+    }
+    public static void SetLastPlayedLevel(int levelNumber)
+    {
+        if (levelNumber < 1)
+            return;
+
+        PlayerPrefs.SetInt(LastPlayedLevelKey, levelNumber);
+        PlayerPrefs.Save();
+    }
+
+    public static int GetLastPlayedLevel()
+    {
+        // Với người chơi cũ chưa có dữ liệu LastPlayedLevel,
+        // sử dụng level cao nhất đã mở khóa.
+        return PlayerPrefs.GetInt(
+            LastPlayedLevelKey,
+            GetHighestUnlockedLevel()
+        );
     }
     // Them vao SaveManager.cs (dat canh cac ham khac, vd sau UnlockLevel)
  
@@ -74,6 +93,7 @@ public static class SaveManager
     {
         // Xóa level cao nhất đã mở.
         PlayerPrefs.DeleteKey(HighestUnlockedKey);
+        PlayerPrefs.DeleteKey(LastPlayedLevelKey);
 
         // Xóa số sao của các level.
         for (int level = 1;
