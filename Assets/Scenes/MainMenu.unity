@@ -208,7 +208,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 585245756}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: GoToNextLevel
+        m_MethodName: ContinueLastLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1118,7 +1118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a929f3929ba17f4a891b73fdd9a6152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundToggle: {fileID: 0}
+  soundToggle: {fileID: 1433817188}
   languageDropdown: {fileID: 0}
 --- !u!4 &479926846
 Transform:
@@ -1438,7 +1438,31 @@ MonoBehaviour:
   starImages: []
   filledStar: {fileID: 0}
   emptyStar: {fileID: 0}
-  allLevels: []
+  allLevels:
+  - {fileID: 11400000, guid: 0420558e03cba0f448fbaf2cbac5ae21, type: 2}
+  - {fileID: 11400000, guid: a6125937553dc164590b09469ee78209, type: 2}
+  - {fileID: 11400000, guid: 4292309da4f6369488cd6ad39b6124eb, type: 2}
+  - {fileID: 11400000, guid: 7f022acec03611846afebc46a662100f, type: 2}
+  - {fileID: 11400000, guid: c7161a9ce535e784180625b88be96032, type: 2}
+  - {fileID: 11400000, guid: 3ed2bc9c90454db45a58748bc913b96b, type: 2}
+  - {fileID: 11400000, guid: 52627b7761d0aec4cad444ab1ddfe0b3, type: 2}
+  - {fileID: 11400000, guid: e22cf339c27701f468559d372e2c04ae, type: 2}
+  - {fileID: 11400000, guid: 2c3216602f5634d46a085275baba1f41, type: 2}
+  - {fileID: 11400000, guid: 7449fe432f2ec5746ae85e0a1c1a6bf2, type: 2}
+  - {fileID: 11400000, guid: 57af36a702fd3a7489c8922adcbca504, type: 2}
+  - {fileID: 11400000, guid: 3d9ac79a3f7692a42b0528287d55c8cd, type: 2}
+  - {fileID: 11400000, guid: 76102ef24895c5349bb7a8ae205e8366, type: 2}
+  - {fileID: 11400000, guid: 1cacd6deb4c471f40b60a91338a55593, type: 2}
+  - {fileID: 11400000, guid: 51a16b1c33ebe85409725a1e2f2f4d0b, type: 2}
+  - {fileID: 11400000, guid: 715a4d76c8afd824dad44b25d3397d85, type: 2}
+  - {fileID: 11400000, guid: f20d031613b70e24bb78db5c063b98b5, type: 2}
+  - {fileID: 11400000, guid: 776db15d52d2ef346b2c50c41fe0ee1d, type: 2}
+  - {fileID: 11400000, guid: 48ee59626313410458fb3703616836c4, type: 2}
+  - {fileID: 11400000, guid: 22e5c7cd2245eca479644168efbe7644, type: 2}
+  - {fileID: 11400000, guid: 0878b0c9dec983246a3a068320dd1e6f, type: 2}
+  - {fileID: 11400000, guid: b002bd29e2cf8d64b8c939e40152d756, type: 2}
+  - {fileID: 11400000, guid: ac4f0fa664b6bf14581ed04a01b49ebc, type: 2}
+  - {fileID: 11400000, guid: 104fcff8bc2c3eb48a493519f8269141, type: 2}
 --- !u!4 &585245757
 Transform:
   m_ObjectHideFlags: 0
@@ -2651,7 +2675,7 @@ MonoBehaviour:
       - m_Target: {fileID: 479926845}
         m_TargetAssemblyTypeName: SettingsController, Assembly-CSharp
         m_MethodName: OnSoundToggleChanged
-        m_Mode: 6
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2869,54 +2893,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -37.5}
   m_SizeDelta: {x: -300, y: -225}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1704914284
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1704914286}
-  - component: {fileID: 1704914285}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1704914285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1704914284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79487c0b64d90d40a3e53ebb115bcf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clickSound: {fileID: 8300000, guid: fa92514c3c7dfdd4bbc0297f0aeeb288, type: 3}
-  swapSound: {fileID: 8300000, guid: abb6e2ae149091540b7b39d337903474, type: 3}
-  winSound: {fileID: 8300000, guid: c5e100661b8625045aa23b1ad3622ad0, type: 3}
-  loseSound: {fileID: 8300000, guid: 807b445c5410f4f4e8ef290a158ce78c, type: 3}
---- !u!4 &1704914286
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1704914284}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 742.7344, y: 392.97964, z: -3.311162}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1720658195
 GameObject:
   m_ObjectHideFlags: 0
@@ -3401,5 +3377,4 @@ SceneRoots:
   - {fileID: 585245757}
   - {fileID: 1720658197}
   - {fileID: 479926846}
-  - {fileID: 1704914286}
   - {fileID: 1171623281}

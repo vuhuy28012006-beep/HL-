@@ -148,7 +148,16 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         LevelSession.SkipTutorialOnce = false;
 
-        SceneManager.LoadScene("LevelSelect");
+        if (ChapterSession.SelectedChapter != null)
+        {
+            SceneManager.LoadScene("LevelSelect");
+        }
+        else
+        {
+            // Nếu vào game bằng nút Chơi Tiếp sau khi mở lại ứng dụng,
+            // ChapterSession chưa có dữ liệu nên quay về Map an toàn hơn.
+            SceneManager.LoadScene("Map");
+        }
     }
 
     public void GoToMap()
@@ -160,6 +169,57 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
+    }
+    public void ContinueLastLevel()
+    {
+        Time.timeScale = 1f;
+        LevelSession.SkipTutorialOnce = false;
+
+        if (allLevels == null || allLevels.Length == 0)
+        {
+            Debug.LogWarning(
+                "MainMenu GameManager chưa được gán All Levels. " +
+                "Chuyển người chơi đến Map."
+            );
+
+            GoToMap();
+            return;
+        }
+
+        int lastLevelNumber =
+            SaveManager.GetLastPlayedLevel();
+
+        // Phòng trường hợp dữ liệu lưu bị sai hoặc level bị khóa.
+        if (!SaveManager.IsLevelUnlocked(lastLevelNumber))
+        {
+            lastLevelNumber =
+                SaveManager.GetHighestUnlockedLevel();
+        }
+
+        foreach (LevelData level in allLevels)
+        {
+            if (level == null)
+                continue;
+
+            if (level.levelNumber != lastLevelNumber)
+                continue;
+
+            LevelSession.SelectedLevel = level;
+
+            LevelSession.LoadGameplayScene(
+                level.gameplaySceneName
+            );
+
+            return;
+        }
+
+        Debug.LogWarning(
+            "Không tìm thấy LevelData của level " +
+            lastLevelNumber +
+            ". Chuyển người chơi đến Map."
+        );
+
+        GoToMap();
     }
 
     public void GoToNextLevel()
