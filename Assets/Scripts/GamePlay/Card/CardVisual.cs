@@ -33,11 +33,23 @@ public class CardVisual : MonoBehaviour
     private Coroutine zoomRoutine;
     private bool memoryMarked;
     private bool isLocked;
+    private RectTransform cardImageRect;
+    private Vector2 defaultCardImagePosition;
+    private Vector3 defaultCardImageScale = Vector3.one;
 
     private void Awake()
     {
         eventCard = GetComponent<EventCard>();
         rectTransform = GetComponent<RectTransform>();
+
+        if (cardImage != null)
+        {
+            cardImageRect = cardImage.rectTransform;
+
+            // Lưu vị trí và kích thước đang được thiết lập trong Prefab.
+            defaultCardImagePosition = cardImageRect.anchoredPosition;
+            defaultCardImageScale = cardImageRect.localScale;
+        }
     }
 
     public void Refresh()
@@ -49,11 +61,34 @@ public class CardVisual : MonoBehaviour
             cardName.text = eventCard.Data.eventName;
 
         if (cardImage != null)
+    {
+        cardImage.sprite = eventCard.Data.image;
+        cardImage.color = Color.white;
+        cardImage.preserveAspect = true;
+
+        if (cardImageRect != null)
         {
-            cardImage.sprite = eventCard.Data.image;
-            cardImage.color = Color.white;
-            cardImage.preserveAspect = true;
+            float zoom = 1f;
+            Vector2 offset = Vector2.zero;
+
+            if (eventCard.Data.useCustomImageLayout)
+            {
+                zoom = Mathf.Max(0.1f, eventCard.Data.imageZoom);
+                offset = eventCard.Data.imageOffset;
+            }
+
+            // Offset được cộng vào vị trí mặc định trong Prefab.
+            cardImageRect.anchoredPosition =
+                defaultCardImagePosition + offset;
+
+            // Chỉ phóng ảnh, không phóng cả thẻ.
+            cardImageRect.localScale = new Vector3(
+                defaultCardImageScale.x * zoom,
+                defaultCardImageScale.y * zoom,
+                defaultCardImageScale.z
+            );
         }
+    }
         memoryMarked = false;
         isLocked = false;
 
