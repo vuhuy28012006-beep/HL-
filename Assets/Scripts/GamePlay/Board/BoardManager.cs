@@ -177,6 +177,7 @@ public class BoardManager : MonoBehaviour
         memoryCardsHidden = false;
 
         ApplyBackground(level);
+        ApplyMusic(level);
 
         history.Clear();
         insertionHistory.Clear();
@@ -1004,6 +1005,17 @@ public class BoardManager : MonoBehaviour
         background.sprite = level.backgroundImage != null
             ? level.backgroundImage
             : defaultBackgroundSprite;
+    }
+
+    // ---------------- MUSIC ----------------
+
+    // Phat nhac nen rieng cua LevelData (neu co gan). Neu khong gan,
+    // AudioManager se tu fallback ve nhac mac dinh (neu co).
+    private void ApplyMusic(LevelData level)
+    {
+        if (level == null) return;
+
+        AudioManager.Instance?.PlayMusic(level.backgroundMusic);
     }
 
     // ---------------- UI ----------------

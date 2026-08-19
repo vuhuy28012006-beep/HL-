@@ -32,6 +32,13 @@ public class LevelData : ScriptableObject
         "anh nen mac dinh dang duoc gan san trong scene GamePlay.")]
     public Sprite backgroundImage;
 
+    [Header("Music")]
+    [Tooltip("Nhac nen rieng cho man nay. Neu de trong (null), se dung " +
+        "nhac nen mac dinh dang duoc gan san trong AudioManager (neu co). " +
+        "Khi chuyen sang man co nhac khac, nhac cu se dung ngay va nhac moi " +
+        "phat ngay lap tuc (khong fade).")]
+    public AudioClip backgroundMusic;
+
     [Header("Cards")]
     public List<EventData> events = new List<EventData>();
 
