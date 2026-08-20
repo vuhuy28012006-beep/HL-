@@ -35,6 +35,7 @@ MonoBehaviour:
   tutorialText: "\u1EA4n v\xE0o c\xE1c th\u1EBB b\xE0i \u0111\u1EC3 \u0111\u1ED5i
     v\u1ECB tr\xED \nDi chuy\u1EC3n c\xE1c th\u1EBB b\xE0i sao cho th\u1EE9 t\u1EF1
     xu\u1EA5t hi\u1EC7n t\u0103ng d\u1EA7n\nNh\u01B0: Bangiomorpha -> Haikouichthys
-    -> Eusthenopteron\n\u1EA4n v\xE0o d\u1EA5u h\u1ECFi ch\u1EA5m "
+    -> Eusthenopteron\n\u1EA4n v\xE0o d\u1EA5u h\u1ECFi ch\u1EA5m \u0111\u1EC3 nh\u1EADn
+    g\u1EE3i \xFD"
   tutorialImage: {fileID: 0}
   gameplaySceneName: GamePlay

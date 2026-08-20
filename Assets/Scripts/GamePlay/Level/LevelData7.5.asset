@@ -36,6 +36,6 @@ MonoBehaviour:
   showLevelTutorial: 1
   tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN"
   tutorialText: "S\u1EAFp x\u1EBFp theo s\u1ED1 l\u01B0\u1EE3ng ch\xE2n t\u0103ng
-    d\u1EA7n"
+    d\u1EA7n c\u1EE7a c\xE1c con v\u1EADt sau."
   tutorialImage: {fileID: 0}
   gameplaySceneName: GamePlay
