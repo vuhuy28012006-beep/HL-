@@ -1550,6 +1550,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b002bd29e2cf8d64b8c939e40152d756, type: 2}
   - {fileID: 11400000, guid: ac4f0fa664b6bf14581ed04a01b49ebc, type: 2}
   - {fileID: 11400000, guid: 104fcff8bc2c3eb48a493519f8269141, type: 2}
+  chapterTitleText: {fileID: 0}
+  levelTitleText: {fileID: 0}
 --- !u!4 &585245757
 Transform:
   m_ObjectHideFlags: 0
@@ -3202,8 +3204,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -17.5}
-  m_SizeDelta: {x: -180, y: -105}
+  m_AnchoredPosition: {x: 30, y: -17.5}
+  m_SizeDelta: {x: -240, y: -105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1872773216
 MonoBehaviour:
@@ -3225,10 +3227,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '  OrderVerse'
+  m_text: SEQERAN
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6a565daf3a912154588736922b3ef3ba, type: 2}
-  m_sharedMaterial: {fileID: 3189119457126975030, guid: 6a565daf3a912154588736922b3ef3ba, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a330059d17673a542b513367dac989d5, type: 2}
+  m_sharedMaterial: {fileID: -8731302699436223513, guid: a330059d17673a542b513367dac989d5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3258,7 +3260,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535

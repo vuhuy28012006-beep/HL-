@@ -493,7 +493,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -666,7 +666,6 @@ GameObject:
   - component: {fileID: 201976241}
   - component: {fileID: 201976240}
   - component: {fileID: 201976239}
-  - component: {fileID: 201976242}
   m_Layer: 5
   m_Name: PanelHintOptions
   m_TagString: Untagged
@@ -733,39 +732,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &201976242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 201976238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 294f9f09941612f49a28aad8846ef83f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cardRow: {fileID: 0}
-  cardPrefab: {fileID: 0}
-  currentLevel: {fileID: 0}
-  tutorialManager: {fileID: 0}
-  chapterTitleText: {fileID: 0}
-  levelTitleText: {fileID: 0}
-  slotsContainer: {fileID: 0}
-  cardSlots: []
-  movesLeftText: {fileID: 0}
-  limitModeText: {fileID: 0}
-  background: {fileID: 0}
-  swapDuration: 0.25
-  maxHints: 2
-  maxUndos: 1
-  hintsLeftText: {fileID: 0}
-  undosLeftText: {fileID: 0}
-  hintOptionsPanel: {fileID: 0}
-  slotCountToGenerate: 6
-  slotSpacingX: 200
-  slotWidth: 170
-  slotHeight: 240
 --- !u!1 &230895450
 GameObject:
   m_ObjectHideFlags: 0
@@ -3788,7 +3754,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &858298029
 MonoBehaviour:
@@ -3810,7 +3776,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "CH\u1ECDn 2 th\u1EBB \u0111\u1ED5i v\u1ECB tr\xED"
+  m_text: "Ch\u1ECDn 2 th\u1EBB \u0111\u1ED5i v\u1ECB tr\xED"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3820,7 +3786,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3844,8 +3810,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
