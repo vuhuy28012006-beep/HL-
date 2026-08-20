@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMPro.TMP_Text levelTitleText;
 
     private int currentLevelNumber;
+    private int currentChapterNumber;
 
     private void Awake()
     {
@@ -60,19 +61,41 @@ public class GameManager : MonoBehaviour
             losePanel.SetActive(false);
     }
 
-    public void WinGame(int movesLeft, int maxMoves, int levelNumber)
+    public void WinGame(
+        int movesLeft,
+        int maxMoves,
+        int levelNumber
+    )
     {
         CurrentState = GameState.Win;
-        currentLevelNumber = levelNumber;
 
-        int stars = CalculateStars(movesLeft, maxMoves);
+        currentLevelNumber =
+            levelNumber;
 
-        SaveManager.SetStars(levelNumber, stars);
-        SaveManager.UnlockLevel(levelNumber + 1);
+        currentChapterNumber =
+            GetCurrentChapterNumber();
 
-        // Neu scene hien tai la scene Tutorial_Swap thi danh dau da hoc xong
-        // tutorial, de lan sau bam Play se vao thang Map, khong hien lai nua.
-        if (SceneManager.GetActiveScene().name == "Tutorial_Swap")
+        int stars = CalculateStars(
+            movesLeft,
+            maxMoves
+        );
+
+        SaveManager.SetStars(
+            currentChapterNumber,
+            levelNumber,
+            stars
+        );
+
+        // Chỉ mở level tiếp theo
+        // trong chính chapter hiện tại.
+        SaveManager.UnlockLevel(
+            currentChapterNumber,
+            levelNumber + 1
+        );
+
+        if (SceneManager
+                .GetActiveScene()
+                .name == "Tutorial_Swap")
         {
             SaveManager.SetTutorialCompleted();
         }
@@ -80,11 +103,45 @@ public class GameManager : MonoBehaviour
         if (starsText != null)
             starsText.text = stars + " sao";
 
-        // Bật panel trước để các Image ngôi sao hoạt động.
         if (winPanel != null)
             winPanel.SetActive(true);
 
         ShowStars(stars);
+    }
+    private int GetCurrentChapterNumber()
+    {
+        if (LevelSession.SelectedChapterNumber > 0)
+        {
+            return LevelSession
+                .SelectedChapterNumber;
+        }
+
+        if (ChapterSession.SelectedChapter != null &&
+            ChapterSession
+                .SelectedChapter
+                .chapterNumber > 0)
+        {
+            return ChapterSession
+                .SelectedChapter
+                .chapterNumber;
+        }
+
+        if (LevelSession.SelectedLevel != null &&
+            LevelSession
+                .SelectedLevel
+                .chapterNumber > 0)
+        {
+            return LevelSession
+                .SelectedLevel
+                .chapterNumber;
+        }
+
+        Debug.LogWarning(
+            "Không xác định được chapter. " +
+            "Tạm sử dụng Chapter 1."
+        );
+
+        return 1;
     }
     private void RefreshHeaderHUD()
     {
@@ -102,10 +159,17 @@ public class GameManager : MonoBehaviour
                     $"Chương {selectedChapter.chapterNumber}: " +
                     selectedChapter.chapterName;
             }
+            else if (selectedLevel != null)
+            {
+                // Trường hợp vào bằng nút Chơi tiếp.
+                chapterTitleText.text =
+                    $"Chương {GetCurrentChapterNumber()}: " +
+                    selectedLevel.chapterName;
+            }
             else
             {
                 Debug.LogWarning(
-                    "Chưa có chương được chọn. Hãy chạy game từ Map."
+                    "Chưa có chương hoặc level được chọn."
                 );
             }
         }
@@ -210,10 +274,11 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         LevelSession.SkipTutorialOnce = false;
 
-        if (allLevels == null || allLevels.Length == 0)
+        if (allLevels == null ||
+            allLevels.Length == 0)
         {
             Debug.LogWarning(
-                "MainMenu GameManager chưa được gán All Levels. " +
+                "Chưa gán All Levels. " +
                 "Chuyển người chơi đến Map."
             );
 
@@ -221,14 +286,22 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        int lastChapterNumber =
+            SaveManager.GetLastPlayedChapter();
+
         int lastLevelNumber =
             SaveManager.GetLastPlayedLevel();
 
-        // Phòng trường hợp dữ liệu lưu bị sai hoặc level bị khóa.
-        if (!SaveManager.IsLevelUnlocked(lastLevelNumber))
+        if (!SaveManager.IsLevelUnlocked(
+                lastChapterNumber,
+                lastLevelNumber
+            ))
         {
             lastLevelNumber =
-                SaveManager.GetHighestUnlockedLevel();
+                SaveManager
+                    .GetHighestUnlockedLevel(
+                        lastChapterNumber
+                    );
         }
 
         foreach (LevelData level in allLevels)
@@ -236,10 +309,28 @@ public class GameManager : MonoBehaviour
             if (level == null)
                 continue;
 
-            if (level.levelNumber != lastLevelNumber)
-                continue;
+            bool correctChapter =
+                level.chapterNumber ==
+                lastChapterNumber;
 
-            LevelSession.SelectedLevel = level;
+            bool correctLevel =
+                level.levelNumber ==
+                lastLevelNumber;
+
+            if (!correctChapter ||
+                !correctLevel)
+            {
+                continue;
+            }
+
+            ChapterSession.SelectedChapter =
+                null;
+
+            LevelSession.SelectedLevel =
+                level;
+
+            LevelSession.SelectedChapterNumber =
+                lastChapterNumber;
 
             LevelSession.LoadGameplayScene(
                 level.gameplaySceneName
@@ -249,9 +340,11 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.LogWarning(
-            "Không tìm thấy LevelData của level " +
+            "Không tìm thấy Chapter " +
+            lastChapterNumber +
+            ", Level " +
             lastLevelNumber +
-            ". Chuyển người chơi đến Map."
+            ". Chuyển đến Map."
         );
 
         GoToMap();
@@ -259,16 +352,24 @@ public class GameManager : MonoBehaviour
 
     public void GoToNextLevel()
     {
-        int nextLevelNumber = currentLevelNumber + 1;
+        int nextLevelNumber =
+            currentLevelNumber + 1;
 
-        if (allLevels == null || allLevels.Length == 0)
+        if (currentChapterNumber < 1)
+        {
+            currentChapterNumber =
+                GetCurrentChapterNumber();
+        }
+
+        if (allLevels == null ||
+            allLevels.Length == 0)
         {
             Debug.LogError(
-                "Chua gan All Levels trong Inspector cua GameManager."
+                "Chưa gán All Levels " +
+                "trong GameManager."
             );
 
             return;
-            
         }
 
         foreach (LevelData level in allLevels)
@@ -276,18 +377,43 @@ public class GameManager : MonoBehaviour
             if (level == null)
                 continue;
 
-            if (level.levelNumber == nextLevelNumber)
+            bool correctChapter =
+                level.chapterNumber ==
+                currentChapterNumber;
+
+            bool correctLevel =
+                level.levelNumber ==
+                nextLevelNumber;
+
+            if (!correctChapter ||
+                !correctLevel)
             {
-                Time.timeScale = 1f;
-                LevelSession.SkipTutorialOnce = false;
-                LevelSession.SelectedLevel = level;
-                LevelSession.LoadGameplayScene(level.gameplaySceneName);
-                return;
+                continue;
             }
+
+            Time.timeScale = 1f;
+
+            LevelSession.SkipTutorialOnce =
+                false;
+
+            LevelSession.SelectedLevel =
+                level;
+
+            LevelSession.SelectedChapterNumber =
+                currentChapterNumber;
+
+            LevelSession.LoadGameplayScene(
+                level.gameplaySceneName
+            );
+
+            return;
         }
 
         Debug.LogWarning(
-            "Khong tim thay LevelData cua level " + nextLevelNumber
+            "Không tìm thấy Chapter " +
+            currentChapterNumber +
+            ", Level " +
+            nextLevelNumber
         );
     }
 

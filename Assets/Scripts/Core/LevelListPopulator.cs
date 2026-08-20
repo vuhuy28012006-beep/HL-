@@ -269,7 +269,10 @@ public class LevelListPopulator : MonoBehaviour
 
             if (levelButton != null)
             {
-                levelButton.Setup(levelData);
+                levelButton.Setup(
+                    levelData,
+                    chapter.chapterNumber
+                );
             }
             else
             {

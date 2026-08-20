@@ -18,6 +18,7 @@ public class LevelSelectButton : MonoBehaviour
     [SerializeField] private Sprite emptyStar;
 
     private Button button;
+    private int chapterNumber;
 
     private void Awake()
     {
@@ -26,57 +27,130 @@ public class LevelSelectButton : MonoBehaviour
 
     private void Start()
     {
-        // Dung cho nut duoc gan LevelData san trong Inspector
+        // Dùng cho button được gán LevelData
+        // trực tiếp trong Inspector.
         if (levelData != null)
+        {
+            chapterNumber =
+                ResolveChapterNumber();
+
             RefreshState();
+        }
     }
 
-    // Duoc LevelListPopulator goi khi tao nut
-    public void Setup(LevelData data)
+    public void Setup(
+        LevelData data,
+        int owningChapterNumber
+    )
     {
         levelData = data;
 
+        chapterNumber = Mathf.Max(
+            1,
+            owningChapterNumber
+        );
+
         if (levelNumberText != null)
-            levelNumberText.text = data.levelNumber.ToString();
+        {
+            levelNumberText.text =
+                data.levelNumber.ToString();
+        }
 
         RefreshState();
     }
 
-    private void RefreshState()
+    // Giữ lại để các prefab hoặc code cũ
+    // chưa bị lỗi ngay lập tức.
+    public void Setup(LevelData data)
     {
-        if (levelData == null)
-            return;
+        int fallbackChapter =
+            data != null
+                ? data.chapterNumber
+                : 1;
 
-        if (button == null)
-            button = GetComponent<Button>();
-
-        bool unlocked =
-            SaveManager.IsLevelUnlocked(levelData.levelNumber);
-
-        if (button != null)
-            button.interactable = unlocked;
-
-        if (lockIcon != null)
-            lockIcon.SetActive(!unlocked);
-
-        int earnedStars =
-            SaveManager.GetStars(levelData.levelNumber);
-
-        bool isCurrentLevel =
-            unlocked &&
-            earnedStars == 0 &&
-            levelData.levelNumber ==
-                SaveManager.GetHighestUnlockedLevel();
-
-        if (currentMarker != null)
-            currentMarker.SetActive(isCurrentLevel);
-
-        // Neu van muon hien chu 2/3
-        if (starsText != null)
-            starsText.text = unlocked ? earnedStars + "/3" : "";
-
-        RefreshStarImages(earnedStars);
+        Setup(
+            data,
+            fallbackChapter
+        );
     }
+
+    private int ResolveChapterNumber()
+    {
+        if (chapterNumber > 0)
+            return chapterNumber;
+
+        if (ChapterSession.SelectedChapter != null &&
+            ChapterSession
+                .SelectedChapter
+                .chapterNumber > 0)
+        {
+            return ChapterSession
+                .SelectedChapter
+                .chapterNumber;
+        }
+
+        if (levelData != null &&
+            levelData.chapterNumber > 0)
+        {
+            return levelData.chapterNumber;
+        }
+
+        return 1;
+    }
+    private void RefreshState()
+{
+    if (levelData == null)
+        return;
+
+    if (button == null)
+        button = GetComponent<Button>();
+
+    chapterNumber =
+        ResolveChapterNumber();
+
+    bool unlocked =
+        SaveManager.IsLevelUnlocked(
+            chapterNumber,
+            levelData.levelNumber
+        );
+
+    if (button != null)
+        button.interactable = unlocked;
+
+    if (lockIcon != null)
+        lockIcon.SetActive(!unlocked);
+
+    int earnedStars =
+        SaveManager.GetStars(
+            chapterNumber,
+            levelData.levelNumber
+        );
+
+    bool isCurrentLevel =
+        unlocked &&
+        earnedStars == 0 &&
+        levelData.levelNumber ==
+            SaveManager.GetHighestUnlockedLevel(
+                chapterNumber
+            );
+
+    if (currentMarker != null)
+    {
+        currentMarker.SetActive(
+            isCurrentLevel
+        );
+    }
+
+    if (starsText != null)
+    {
+        starsText.text =
+            unlocked
+                ? earnedStars + "/3"
+                : "";
+    }
+
+    RefreshStarImages(earnedStars);
+}
 
     private void RefreshStarImages(int earnedStars)
     {
@@ -109,25 +183,39 @@ public class LevelSelectButton : MonoBehaviour
     }
 
     public void LoadLevel()
+{
+    if (levelData == null)
     {
-        if (levelData == null)
-        {
-            Debug.LogError(
-                "LevelSelectButton: chua co LevelData!"
-            );
-
-            return;
-        }
-
-        if (!SaveManager.IsLevelUnlocked(levelData.levelNumber))
-        {
-            Debug.Log("Level nay dang bi khoa!");
-            return;
-        }
-
-        LevelSession.SelectedLevel = levelData;
-        LevelSession.LoadGameplayScene(
-            levelData.gameplaySceneName
+        Debug.LogError(
+            "LevelSelectButton: chưa có LevelData!"
         );
+
+        return;
     }
+
+    chapterNumber =
+        ResolveChapterNumber();
+
+    if (!SaveManager.IsLevelUnlocked(
+            chapterNumber,
+            levelData.levelNumber
+        ))
+    {
+        Debug.Log(
+            "Level này đang bị khóa!"
+        );
+
+        return;
+    }
+
+    LevelSession.SelectedLevel =
+        levelData;
+
+    LevelSession.SelectedChapterNumber =
+        chapterNumber;
+
+    LevelSession.LoadGameplayScene(
+        levelData.gameplaySceneName
+    );
+}
 }
