@@ -31,16 +31,13 @@ MonoBehaviour:
   limitType: 1
   maxMoves: 77
   timeLimitSeconds: 60
-  useMemoryMode: 1
+  useMemoryMode: 0
   previewTime: 3
   revealTime: 1.5
   showLevelTutorial: 1
   tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN M\xC0N 3"
   tutorialText: "S\u1EAFp x\u1EBFp theo th\u1EE9 t\u1EF1 d\xF2ng th\u1EDDi gian t\u0103ng
-    d\u1EA7n\nTh\u1EDDi gian 3s \u0111\u1EC3 ng\u01B0\u1EDDi ch\u01A1i ghi nh\u1EDB
-    c\xE1c h\xECnh \u1EA3nh sau th\u1EBB s\u1EBD \xFAp. Ng\u01B0\u1EDDi ch\u01A1i
-    \u1EA5n l\u1EA7n 1 ch\u1ECDn th\u1EBB l\u1EA7n 2 l\u1EADt th\u1EBB , l\u01B0\u1EE3t
-    k\u1EBF \u1EA5n v\xE0o th\u1EBB kh\xE1c t\u01B0\u01A1ng t\u1EF1 2 l\u1EA7n th\xEC
-    s\u1EBD swap 2 th\u1EBB cho nhau."
+    d\u1EA7n\nCh\u1ECDn 2 th\u1EBB ng\u1EABu nhi\xEAn \u0111\u1EC3 \u0111\u1ED5i
+    v\u1ECB tr\xED 2 th\u1EBB"
   tutorialImage: {fileID: 0}
   gameplaySceneName: GamePlay
