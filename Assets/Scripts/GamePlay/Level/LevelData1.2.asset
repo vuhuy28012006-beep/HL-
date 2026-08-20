@@ -24,7 +24,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c362aa1425cefdf42bd8e6d02140a020, type: 2}
   - {fileID: 11400000, guid: 7e07a2eeca37d6747af3fa9af3e53451, type: 2}
   - {fileID: 11400000, guid: d27db6c783746b241a400739e675519c, type: 2}
-  sortMode: 0
+  sortMode: 1
   lockFirstCard: 0
   limitType: 0
   maxMoves: 6
@@ -33,7 +33,9 @@ MonoBehaviour:
   previewTime: 4
   revealTime: 2
   showLevelTutorial: 1
-  tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN M\xC0N 2"
-  tutorialText: "Ch\u1ECDn l\u1EA7n l\u01B0\u1EE3t 2 th\u1EBB s\u1EF1 ki\u1EC7n"
+  tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN "
+  tutorialText: "S\u1EAFp x\u1EBFp theo d\xF2ng s\u1EF1 ki\u1EC7n ph\xE1t tri\u1EC3n\nNg\u01B0\u1EDDi
+    ch\u01A1i ch\u1ECDn 2 th\u1EBB c\u1EA1nh nhau m\u1EDBi swap \u0111\u01B0\u1EE3c(
+    BubleSort)"
   tutorialImage: {fileID: 0}
   gameplaySceneName: GamePlay

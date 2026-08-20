@@ -26,7 +26,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f66994bb182944649bc3574cbb76da63, type: 2}
   - {fileID: 11400000, guid: 8e5e28984eab7354ba605afe549466e7, type: 2}
   - {fileID: 11400000, guid: 0aae4b78cf4b93a47bb9d9da744dc594, type: 2}
-  sortMode: 0
+  sortMode: 2
   lockFirstCard: 0
   limitType: 0
   maxMoves: 8
@@ -36,6 +36,8 @@ MonoBehaviour:
   revealTime: 2
   showLevelTutorial: 1
   tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN"
-  tutorialText: 
+  tutorialText: "S\u1EAFp x\u1EBFp theo d\xF2ng l\u1ECBch s\u1EED\nM\u1ED7i l\u01B0\u1EE3t
+    ch\u1ECDn 1 v\u1ECB tr\xED \"ch\u1ED1t\", \u0111\u1ED5i ph\u1EA7n t\u1EED nh\u1ECF
+    nh\u1EA5t trong ph\u1EA7n c\xF2n l\u1EA1i v\xE0o \u0111\xF3"
   tutorialImage: {fileID: 0}
   gameplaySceneName: GamePlay

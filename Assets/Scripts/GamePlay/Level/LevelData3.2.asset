@@ -37,6 +37,7 @@ MonoBehaviour:
   revealTime: 2
   showLevelTutorial: 1
   tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN"
-  tutorialText: "s\u1EAFp x\u1EBFp theo k\xEDch th\u01B0\u1EDBc h\xE0nh tinh"
+  tutorialText: "S\u1EAFp x\u1EBFp theo k\xEDch th\u01B0\u1EDBc h\xE0nh tinh.\nCh\u1ECDn
+    2 th\u1EBB ng\u1EABu nhi\xEAn \u0111\u1EC3 swap ch\xFAng"
   tutorialImage: {fileID: 0}
   gameplaySceneName: GamePlaySolarSystem

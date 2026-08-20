@@ -470,7 +470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.5882353}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.9411765}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1256,8 +1256,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 154, y: 119}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -150, y: 119}
+  m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &563116093
 MonoBehaviour:
@@ -1279,9 +1279,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: HELP ME !!!!!!!!!!!!
+  m_text: "Game l\xE0 m\u1ED9t tr\xF2 ch\u01A1i puzzle gi\xE1o d\u1EE5c ph\xE1t tri\u1EC3n
+    tr\u1EF1c ti\u1EBFp t\u1EEB nh\xE1nh Sorting Game c\u1EE7a ch\u1EE7 \u0111\u1EC1
+    cu\u1ED9c thi \u201CConveyor Belt / Sorting Game\u201D. Nhi\u1EC7m v\u1EE5 c\u1EE7a
+    ng\u01B0\u1EDDi ch\u01A1i l\xE0 quan s\xE1t, so s\xE1nh v\xE0 s\u1EAFp x\u1EBFp
+    c\xE1c th\u1EBB ki\u1EBFn th\u1EE9c v\u1EC1 \u0111\xFAng tr\xECnh t\u1EF1 th\u1EDDi
+    gian ho\u1EB7c logic trong th\u1EDDi gian/ s\u1ED1 l\u01B0\u1EE3t quy \u0111\u1ECBnh.\n\nIcon
+    m\u0169i t\xEAn: Quay l\u1EA1i menu\nD\u1EA5u restart : reset m\xE0n ch\u01A1i\nIcon
+    \u0111\xE8n : Hint - G\u1EE3i \xFD\nIcon s\xE1ch: H\u01B0\u1EDBng d\u1EABn -
+    Y\xEAu c\u1EA7u c\u1EE7a m\xE0n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a330059d17673a542b513367dac989d5, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1313,8 +1321,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1345,7 +1353,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: -303.46716, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &563116094

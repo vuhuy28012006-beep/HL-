@@ -41,6 +41,7 @@ MonoBehaviour:
   revealTime: 2
   showLevelTutorial: 1
   tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN"
-  tutorialText: 
+  tutorialText: "S\u1EAFp x\u1EBFp th\u1EE9 t\u1EF1 theo 12 con gi\xE1p t\u1EEB tr\xE1i
+    qua ph\u1EA3i "
   tutorialImage: {fileID: 0}
   gameplaySceneName: GamePlayConGiap

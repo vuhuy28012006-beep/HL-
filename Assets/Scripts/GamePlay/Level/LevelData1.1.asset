@@ -32,8 +32,10 @@ MonoBehaviour:
   useMemoryMode: 0
   previewTime: 4
   revealTime: 2
-  showLevelTutorial: 1
+  showLevelTutorial: 0
   tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN"
-  tutorialText: "S\u1EAFp x\u1EBFp thoe th\u1EE9 t\u1EF1 ti\u1EBFn h\xF3a"
+  tutorialText: "S\u1EAFp x\u1EBFp theo th\u1EE9 t\u1EF1 ti\u1EBFn h\xF3a c\u1EE7a
+    lo\xE0i ng\u01B0\u1EDDi\nNg\u01B0\u1EDDi ch\u01A1i \u0111\u1ED5i ch\u1ED7 2 th\u1EBB
+    b\u1EA5t k\xEC cho \u0111\u1EBFn khi ho\xE0n th\xE0nh m\xE0n ch\u01A1i"
   tutorialImage: {fileID: 0}
   gameplaySceneName: GamePlay

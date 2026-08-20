@@ -34,6 +34,8 @@ MonoBehaviour:
   revealTime: 2
   showLevelTutorial: 1
   tutorialTitle: "H\u01AF\u1EDANG D\u1EAAN"
-  tutorialText: Bubble Sort
+  tutorialText: "S\u1EAFp x\u1EBFp theo th\u1EE9 t\u1EF1 r\u0103ng d\u1EA7n c\xE1c
+    electron\nCh\u1ECDn 2 th\u1EBB li\xEAn ti\u1EBFp \u0111\u1EC3 \u0111\u1ED5i v\u1ECB
+    tr\xED ch\xFAng"
   tutorialImage: {fileID: 0}
   gameplaySceneName: GamePlay
